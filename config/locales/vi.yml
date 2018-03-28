@@ -1677,6 +1677,7 @@ vi:
     confirm_del: "Bạn muốn xóa người dùng này"
     club: "Câu lạc bộ tham gia"
     search: "Tên hoặc email"
+    all_organization: "Tất cả tổ chức"
     org:
       name: "Tên tổ chức"
       email: "Email"
@@ -1697,6 +1698,16 @@ vi:
       size_member: "Thành viên"
       organization: "Tổ chức"
       manager: "Quản lý"
+    member:
+      success: "Thành công"
+      errors: "Có lỗi xảy ra, vui lòng thử lại."
+      not_find_member: "Không tìm thấy thành viên"
+      success_destroy: "Xóa thành công"
+      members: "Thành viên"
+      add_member: " Thêm thành viên"
+      date_join: "Ngày tham gia"
+      confirm_down_admin: "Bạn muốn đưa quản trị viên này xuống thành viên"
+  remove_admin: "Xóa người này khỏi admin"
   export_reports:
     total: "Tổng"
     detail: "Nội dung"

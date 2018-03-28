@@ -1,0 +1,47 @@
+<div class="row block-title">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <%= search_form_for @q, url: admin_organization_user_organizations_path(
+      tab_admin: tab_admin, organization_id: @organization.slug),
+      remote: true do |f| %>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+      <div class="input-group pad-5">
+        <%= f.text_field :full_name_or_email_cont, placeholder: t("admin_manage.search"),
+          class: "form-control" %>
+        <span class="input-group-btn">
+        <%= f.button :submit, class: "btn btn-primary" do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+        </span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% if members.present? %>
+  <div class="table-responsive">
+    <table class="table table-vcenter table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center"><i class="fa fa-user-o"></i></th>
+          <th class="text-center"><%= t "full_name" %></th>
+          <th class="text-center"><%= t "email" %></th>
+          <th class="text-center"><%= t "admin_manage.member.date_join" %></th>
+          <th class="text-center"><%= t "phone" %></th>
+          <th class="text-center"><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody id="tab-admin-<%= tab_admin %>">
+        <%= render partial: "admin/user_organizations/member", collection: members, as: :member %>
+      </tbody>
+    </table>
+    <%= paginate members, params: {controller: "admin/user_organizations",
+      organization_id: @organization.slug, action: "index",
+      tab_admin: tab_admin}, remote: true  %>
+  </div>
+<% else %>
+  <h4 class="center"><%= t "no_data" %></h4>
+<% end %>

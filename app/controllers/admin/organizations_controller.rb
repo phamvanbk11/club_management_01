@@ -8,7 +8,10 @@ class Admin::OrganizationsController < Admin::AdminController
       .newest.page(params[:page]).per Settings.per_page_user
   end
 
-  def show; end
+  def show
+    @q = User.search params[:q]
+    @support = Support::OrganizationSupport.new @organization, Settings.one, @q
+  end
 
   def new
     @organization = Organization.new

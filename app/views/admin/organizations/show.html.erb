@@ -1,61 +1,92 @@
-<div id="page-content">
-  <ul class="breadcrumb breadcrumb-top">
-    <li><%= t "show_organization" %></li>
-    <li><%= link_to @organization.name, t("do_nothing") %></a></li>
+<%= javascript_include_tag "manager/select_tag",
+  "data-turbolinks-track" => true %>
+<div class="media-container media-container_custom height-350">
+  <section class="site-section site-section-light site-section-top">
+    <div class="container text-infomation bottom-25-percentage">
+      <h1 class="animation-slideDown">
+        <strong><%= @organization.name %>
+        </strong>
+      </h1>
+      <p class="h4 animation-slideUp hidden-xs">
+        <%= @organization.description.html_safe %>
+      </p>
+    </div>
+    <div class="container"></div>
+  </section>
+  <%= image_tag @organization.logo, class: "media-image animation-pulseSlow" %>
+</div>
+<div class="col-md-12 tab_custom">
+  <div class="col-md-6">
+    <div class="join-cancel-toggle-container">
+      <div class="pull-left">
+        <%= form_tag admin_import_user_organizations_path(organization_id:
+          @organization.slug), multipart: true, method: :post do %>
+          <%= file_field_tag :file %>
+          <%= submit_tag t("import_user"), class: "btn btn-success", title: t("title_import") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 text-right">
+    <%= link_to edit_admin_organization_path(id: @organization.slug), remote: true,
+      class: "btn btn-sm btn-primary btton-edit-organization animation-fadeIn360" do %>
+      <i class="fa fa-pencil "></i> <%= t "edit_organization" %>
+    <% end %>
+  </div>
+  <ul class="nav nav-tabs col-md-10 col-md-offset-2" role="tablist">
+    <li>
+      <%= link_to "#clubs", data: {toggle: "tab"} do %>
+        <%= t("club") %>
+        <span class="label label-primary label-indicator
+          animation-floating">
+          <%= @support.clubs.size %>
+        </span>
+      <% end %>
+    </li>
+    <li role="presentation">
+      <%= link_to "#members_organization", data: {toggle: "tab"} do %>
+        <%= t("members") %>
+        <span class="label label-primary label-indicator
+          animation-floating" id="size-members">
+          <%= @support.size_members %>
+        </span>
+      <% end %>
+    </li>
+    <li role="presentation">
+      <%= link_to "#manager_organization", data: {toggle: "tab"} do %>
+        <%= t("manager") %>
+        <span class="label label-primary label-indicator
+          animation-floating" id="size-admins">
+          <%= @support.size_admins %>
+        </span>
+      <% end %>
+    </li>
   </ul>
+</div>
+<div id="page-content">
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-      <div class="block full">
-        <div class="block-title">
-          <h2><strong><%= link_to @organization.name, t("do_nothing") %></strong></h2>
+    <div class="col-md-12">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="clubs">
+          <div class="row block">
+            <%= render partial: "clubs", locals: {clubs: @organization.clubs} %>
+          </div>
         </div>
-        <div class="block-content">
-          <div class="center"><%= image_tag @organization.logo,
-            class: "circle-profile" %></div><hr>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">
-              <strong class="pull-right"><%= t "name" %></strong>
-            </div>
-            <div class="col-md-6 center"><%= @organization.name %></div>
-            <div class="col-md-1"></div>
-          </div><hr>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">
-              <strong class="pull-right"><%= t "email" %></strong>
-            </div>
-            <div class="col-md-6 center"><%= @organization.email %></div>
-            <div class="col-md-1"></div>
-          </div><hr>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">
-              <strong class="pull-right"><%= t "phone" %></strong>
-            </div>
-            <div class="col-md-6 center"><%= @organization.phone %></div>
-            <div class="col-md-1"></div>
-          </div><hr>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">
-              <strong class="pull-right"><%= t "location" %></strong>
-            </div>
-            <div class="col-md-6 center"><%= @organization.location %></div>
-            <div class="col-md-1"></div>
-          </div><hr>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">
-              <strong class="pull-right"><%= t "description" %></strong>
-            </div>
-            <div class="col-md-6 center"><%= @organization.description %></div>
-            <div class="col-md-1"></div>
-          </div><hr>
+        <div role="tabpanel" class="tab-pane fade in" id="members_organization">
+          <div class="row block" id="content-tab-members">
+            <%= render partial: "admin/user_organizations/list_member",
+              locals: {members: @support.members, tab_admin: false} %>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade in" id="manager_organization">
+          <div class="row block" id="content-tab-admins">
+            <%= render partial: "admin/user_organizations/list_member",
+              locals: {members: @support.admins, tab_admin: true} %>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-1"></div>
   </div>
+</div>
+<div id="modal-organization" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 </div>

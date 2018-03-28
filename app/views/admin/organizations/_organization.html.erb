@@ -4,7 +4,7 @@
   </td>
   <td>
     <%= image_tag organization.logo, class: "centered-and-cropped avt-small" %>&nbsp;&nbsp;
-    <%= organization.name %>
+    <%= link_to organization.name, admin_organization_path(id: organization.slug) %>
   </td>
   <td><%= organization.email %></td>
   <td><%= organization.location %></td>

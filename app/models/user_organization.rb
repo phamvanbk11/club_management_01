@@ -13,6 +13,7 @@ class UserOrganization < ApplicationRecord
   scope :newest, ->{order created_at: :desc}
   scope :load_user_organization, ->organization_id{where organization_id: organization_id}
   scope :except_me, ->(user_id){where "user_id != ?", user_id}
+  scope :by_user_ids, ->user_ids{where user_id: user_ids}
 
   delegate :full_name, :avatar, :email, :phone, to: :user, prefix: :user, allow_nil: :true
   delegate :name, :description, :phone, :email, :logo, to: :organization, allow_nil: :true
