@@ -1,0 +1,135 @@
+<div id="page-content">
+  <ul class="breadcrumb breadcrumb-top">
+    <li><%= link_to t("show_organization"), admin_organizations_path %></li>
+    <li><%= link_to @organization.name, admin_organization_path(@organization) %></li>
+    <li><%= link_to t("list_clubs"), admin_organization_clubs_path(@organization) %></li>
+    <li><%= link_to @club.name, t("do_nothing") %></a></li>
+    <li><%= link_to t("edit"), t("do_nothing") %></a></li>
+  </ul>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="block">
+        <div class="block-title">
+          <h2><strong><%= t "edit_club" %></strong></h2>
+        </div>
+        <%= form_for [:admin, @organization, @club],
+          html: {class: "form-horizontal form-bordered"} do |f| %>
+          <div class="form-group">
+            <%= f.label :name, class: "col-md-3 control-label", for: "example-text-input" %>
+            <div class="col-md-6">
+              <%= f.text_field :name, class: "form-control",
+                placeholder: t("organization_name") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :member, class: "col-md-3 control-label", for: "example-text-input" %>
+            <div class="col-md-6">
+              <%= f.number_field :member, class: "form-control",
+                placeholder: t("member_count") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :content, class: "col-md-3 control-label", for: "example-textarea-input" %>
+            <div class="col-md-6">
+              <%= f.text_area :content, class: "form-control", rows: 9,
+                placeholder: t("content") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :goal, class: "col-md-3 control-label", for: "example-textarea-input" %>
+            <div class="col-md-6">
+              <%= f.text_area :goal, class: "form-control", rows: 9,
+                placeholder: t("goal") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :plan, class: "col-md-3 control-label", for: "example-textarea-input" %>
+            <div class="col-md-6">
+              <%= f.text_area :plan, class: "form-control", rows: 9,
+                placeholder: t("plan") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "activities_connect" %>
+            </label>
+            <div class="col-md-6">
+              <%= f.text_area :activities_connect, class: "form-control", rows: 9,
+                placeholder: t("activities_connect") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "local_club" %>
+            </label>
+            <div class="col-md-6">
+              <%= f.text_area :local, class: "form-control", rows: 9,
+                placeholder: t("local_club") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "rules_club" %>
+            </label>
+            <div class="col-md-6">
+              <%= f.text_area :rules, class: "form-control", rows: 9,
+                placeholder: t("rules_club") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "rule_finance" %>
+            </label>
+            <div class="col-md-6">
+              <%= f.text_area :rule_finance, class: "form-control", rows: 9,
+                placeholder: t("rule_finance") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "time_member_join" %>
+            </label>
+            <div class="col-md-6">
+              <%= f.text_area :time_join, class: "form-control", rows: 9,
+                placeholder: t("time_member_join") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label", for="example-textarea-input">
+              <%= t "time_club" %>
+            </label>
+            <div class="col-md-9">
+              <div class="col-md-12 row">
+                <% for day in I18n.t("date.day_names") %>
+                  <%= check_box_tag "club[time_activity][]", day, check_date_club(@club.time_activity, day) %>
+                  <label><%= day %></label>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :logo, class: "col-md-3 control-label", for: "example-file-input" %>
+            <div class="col-md-6">
+            <%= f.file_field :logo %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :image, class: "col-md-3 control-label", for: "example-file-input" %>
+            <div class="col-md-6">
+            <%= f.file_field :image %>
+            </div>
+          </div>
+          <div class="form-group form-actions">
+            <div class="col-md-9 col-md-offset-5">
+              <%= f.submit t("submit"), class: "btn btn-sm btn-primary" %>
+              <%= button_tag t("reset"), type: :reset,
+                class: "btn btn-sm btn-warning" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>

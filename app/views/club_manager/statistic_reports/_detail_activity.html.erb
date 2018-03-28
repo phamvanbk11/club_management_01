@@ -17,7 +17,11 @@
             <% end %>
           </td>
           <td><%= detail.name_event %></td>
-          <td><%= raw(detail.detail) %></td>
+          <td>
+            <div class="scroll-user-event">
+              <%= raw(detail.detail) %>
+            </div>
+          </td>
           <td>
             <% if detail.user_events.is_a? Array %>
               <ul class="<%= "scroll-user-event" if is_size_more_eight?(detail) %>">

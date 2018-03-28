@@ -3,6 +3,6 @@ class Admin::FeedBacksController < ApplicationController
   before_action :admin_signed_in
 
   def index
-    @feed_backs = FeedBack.newest
+    @feed_backs = FeedBack.includes(:user).newest.page(params[:page]).per Settings.per_page_criteria
   end
 end

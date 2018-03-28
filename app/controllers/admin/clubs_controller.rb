@@ -1,6 +1,6 @@
 class Admin::ClubsController < Admin::AdminController
   before_action :load_organization
-  before_action :load_club, only: [:show, :destroy]
+  before_action :load_club, only: [:show, :destroy, :edit, :update]
 
   def index
     @q = @organization.clubs.search params[:q]
@@ -9,6 +9,17 @@ class Admin::ClubsController < Admin::AdminController
   end
 
   def show
+  end
+
+  def update
+    @club_update = @club.update_attributes club_params
+    if @club_update
+      flash[:success] = t "club_manager.club.success_update"
+      redirect_to admin_organization_clubs_path(@organization)
+    else
+      flash_error @club
+      redirect_to edit_admin_organization_clubs_path(@organization, @club)
+    end
   end
 
   def destroy
@@ -20,6 +31,12 @@ class Admin::ClubsController < Admin::AdminController
   end
 
   private
+  def club_params
+    params.require(:club).permit :name, :content, :goal, :logo, :rules,
+      :rule_finance, :time_join, :image, :tag_list, :plan, :punishment, :member,
+      :local, :activities_connect, time_activity: []
+  end
+
   def load_organization
     @organization = Organization.friendly.find_by slug: params[:organization_id]
     return if @organization
