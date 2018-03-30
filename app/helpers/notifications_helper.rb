@@ -17,7 +17,7 @@ module NotificationsHelper
 
   def option_image notification
     img = set_img notification
-    image_tag img, class: "img-responsive" if img
+    image_tag img, class: "img-responsive centered-and-cropped" if img
   end
 
   def url_notification notification

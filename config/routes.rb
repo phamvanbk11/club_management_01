@@ -151,4 +151,5 @@ Rails.application.routes.draw do
     resources :post_galleries, only: :index
   end
   resources :set_sponsor_events, except: %i(new destroy)
+  resources :export_reports, only: :index
 end

@@ -22,6 +22,10 @@
                 <%= t "notification_event.#{notification.trackable.event_category}" %>
                 <a href="#" class="notification-link"><%= notification.trackable_name %></a>
                 <%= t "in_the" %>
+              <% elsif notification.trackable_type == Settings.album_class %>
+                <%= t "gallery" %>
+                <a href="#" class="notification-link"><%= notification.trackable_name %></a>
+                <%= t "in_the" %>
               <% end %>
               <% if notification.container %>
                 <%= t notification.container_type.try(:downcase) %>
