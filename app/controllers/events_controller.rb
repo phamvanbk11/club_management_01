@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_club
-  before_action :load_event, only: [:show, :edit, :update, :destroy]
+  before_action :load_event, only: [:show, :edit, :update]
   before_action :check_is_admin, only: [:new, :edit, :destroy]
   before_action :replace_string_in_money, only: [:create, :update]
   before_action :set_gon_varible, only: :new
@@ -71,6 +71,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    load_event
     if @event && @event.destroy
       flash.now[:success] = t "event_notifications.success_process"
     else
