@@ -7,32 +7,8 @@
     <div class="block-title">
       <h2><strong><%= t "feed_back" %></strong></h2>
     </div>
-    <div class="table-responsive">
-      <table id="example-datatable"
-        class="table table-vcenter table-condensed table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center"><%= t "no" %></th>
-            <th class="text-center"><i class="gi gi-user"></i></th>
-            <th><%= t "user_name" %></th>
-            <th><%= t "email" %></th>
-            <th><%= t "content" %></th>
-            <th class="text-center"><%= t "type" %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @feed_backs.each_with_index do |feed_back, index| %>
-            <tr>
-              <td><%= index +1 %></td>
-              <td><%= image_tag feed_back.user.avatar, class: "img-responsive img-budgets-member" %></td>
-              <td><%= feed_back.user.full_name %></td>
-              <td><%= feed_back.user.email %></td>
-              <td><%= feed_back.description %></td>
-              <td><%= t "feed_back.type_feed_back" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div id="table-list-feedback">
+      <%= render "list_feedback" %>
     </div>
   </div>
 </div>
