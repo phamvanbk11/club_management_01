@@ -1182,7 +1182,7 @@ vi:
     get_money_member: "Thu tiền thành viên"
   user_organization_not_remove: "Bạn là quản lý duy nhất của tổ chức. Vui lòng chọn một thành viên khác làm quản lý để được rời khỏi tổ chức."
   user_club_not_remove: "Bạn là quản lý duy nhất của câu lạc bộ. Vui lòng chọn một thành viên khác làm quản lý để được rời khỏi câu lạc bộ."
-  pause_club: "Tạm dừng hoạt động"
+  pause_club: "Tạm ngừng hoạt động"
   activated: "Kích hoạt"
   club_not_active: "Xin lỗi! CLB tạm ngừng hoạt động bạn không thể vào CLB này."
   activated_success: "Xử lý thành công"

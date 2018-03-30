@@ -1,5 +1,5 @@
 <% if @clubs.any? %>
-  $("#list-club-search_other").html('<%= j render "clubs/clubs", collection: @clubs %>');
+  $("#list-club-search_other").html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs.active} %>');
 <% else %>
   $('#list-club-search_other').html('<h6 class="notifi-join text-center"><%= t "no_data" %></h6>');
 <% end %>

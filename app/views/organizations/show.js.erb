@@ -1,5 +1,5 @@
 <% if params[:club] %>
-  $('#organization_club').html('<%= j render "clubs/clubs", collection: @clubs %>');
+  $('#organization_club').html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs.active} %>');
   <% if params[:q].blank? %>
     $('#search-organization').html('<%= j render "search_club" %>');
   <% end %>
@@ -7,4 +7,3 @@
   $('#organization_club').html('<%= j render partial: "timeline",
     locals: {events: @organization_event} %>');
 <% end %>
-

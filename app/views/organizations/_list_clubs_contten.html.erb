@@ -14,7 +14,7 @@
   <ul class="organization-list-infor widget w-personal-info item-block">
     <li>
       <div class="row">
-        <% @organization.clubs.each do |club| %>
+        <% @organization.clubs.active.each do |club| %>
           <div class="tag-name">
             <%= link_to organization_club_path(club.organization.slug, club) do %>
               <span><%= club.name %></span>
