@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_club
   before_action :load_event, only: [:show, :edit, :update, :destroy]
-  before_action :event_is_inprocess, only: [:destroy, :edit]
   before_action :check_is_admin, only: [:new, :edit, :destroy]
   before_action :replace_string_in_money, only: [:create, :update]
   before_action :set_gon_varible, only: :new
@@ -104,13 +103,6 @@ class EventsController < ApplicationController
     unless @club.is_admin? current_user
       flash[:danger] = t "not_correct_manager"
       redirect_to root_url
-    end
-  end
-
-  def event_is_inprocess
-    if @event.finished?
-      flash[:danger] = t "event_is_finish"
-      redirect_to organization_club_path @club.organization.slug, @club
     end
   end
 
