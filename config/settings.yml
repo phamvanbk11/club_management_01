@@ -310,3 +310,49 @@ namespace_admin: "Admin"
 class_admin: "Admin"
 action_new: "new"
 action_create: "create"
+export_report:
+  bg_title: "F16ecd0"
+  fg_title: "#FF000000"
+  fg_manager: "Fff5e3a"
+  sz_title: 14
+  sz_head: 13
+export_report_money:
+  marge_cell_head: "A1:F2"
+  height: 80
+  width_colums:
+    a: 5
+    b: 15
+    c: 25
+    d: 25
+    e: 20
+    f: 40
+export_report_activity:
+  marge_cell_head: "A1:E2"
+  height: 100
+  width_colums:
+    a: 5
+    b: 25
+    c: 25
+    d: 50
+    e: 30
+export_report_member:
+  marge_cell_head: "A1:C2"
+  height: 100
+  width_colums:
+    a: 5
+    b: 25
+    c: 25
+export_report_other:
+  marge_cell_head: "A1:C2"
+  height: 100
+  width_colums:
+    a: 5
+    b: 25
+    c: 100
+export_plan:
+  marge_cell_head: "A1:B2"
+  height: 100
+  width_colums:
+    a: 25
+    b: 100
+album_class: "Album"

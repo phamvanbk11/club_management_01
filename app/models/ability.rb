@@ -85,7 +85,7 @@ class Ability
       end
 
       can [:create, :destroy], UserEvent do |user_event|
-        user_event.event.club.user_clubs.pluck(:user_id).include?(user.id)
+        user_event.event.club.user_clubs.joined.pluck(:user_id).include?(user.id)
       end
 
       can [:show], Event do |event|

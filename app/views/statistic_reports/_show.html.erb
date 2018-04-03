@@ -13,6 +13,13 @@
               year: @statistic_report.year %>,
           </h6>
         <% end %>
+        <%= link_to export_reports_path(format: :xlsx, report_id: @statistic_report.id,
+          club_id: @statistic_report.club.id),
+          class: "pull-right", title: t("export_report") do %>
+          <span class = "export-member primary">
+            <i class="fa fa-download"></i>
+          </span>
+        <% end %>
         <%= button_tag type: "submit", class: "close", data: {dismiss: "modal"} do %>
           &times;
         <% end %>
