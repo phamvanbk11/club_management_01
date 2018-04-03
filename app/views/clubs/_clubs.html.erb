@@ -1,4 +1,4 @@
-<% @clubs.each do |club| %>
+<% clubs.each do |club| %>
   <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 list-club">
     <div class="ui-block">
       <div class="friend-item">
@@ -25,7 +25,16 @@
             </div>
           </div>
           <div class="swiper-container cutom_hard_height">
-            <p> <%= club.content.truncate(Settings.truncate.club.description).html_safe unless club.content.nil? %></p>
+            <% if club.is_active? %>
+              <p>
+                <%= club.content.truncate(Settings.truncate.club.description).html_safe unless club.content.nil? %>
+              </p>
+            <% else %>
+              <%= link_to organization_club_path(club.organization.slug, club),
+                class: "btn btn-breez" do %>
+                <%= t "pause_club" %>
+              <% end %>
+            <% end %>
           </div>
           <% if params[:controller] == "organizations" %>
             <%= link_to club_evaluates_path(club_id: club.slug), remote: true,

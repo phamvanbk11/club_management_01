@@ -12,7 +12,7 @@
         current_user.user_clubs.joined.any? %>
         <% if @clubs.any? %>
           <div class="row" id="list-club-search">
-            <%= render "clubs/clubs", collection: @clubs %>
+            <%= render partial: "clubs/clubs", locals: {clubs: @clubs} %>
           </div>
         <% else %>
           <h6 class="notifi-join center"><%= t "no_data" %></h6 >

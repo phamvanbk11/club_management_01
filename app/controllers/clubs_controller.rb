@@ -18,7 +18,8 @@ class ClubsController < ApplicationController
       @club_joined
     )
     @q = clubs.search(params[:q])
-    @clubs = @q.result.includes(:organization).newest.page(params[:page]).per Settings.club_per_page
+    @clubs = @q.result.includes(:organization).newest.active
+      .page(params[:page]).per Settings.club_per_page
     @user_organizations = current_user.user_organizations.joined
     @organizations = Organization.by_user_organizations(
       current_user.user_organizations.joined
