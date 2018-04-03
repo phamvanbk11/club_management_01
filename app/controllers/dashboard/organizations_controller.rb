@@ -1,25 +1,15 @@
 class Dashboard::OrganizationsController < BaseDashboardController
-  before_action :load_organization, only: [:show, :edit, :update]
-  before_action :verify_manager_organization, only: [:show, :edit, :update]
-
-  def show
-    @members = @organization.user_organizations.includes(:user)
-    @requests = @organization.club_requests.pending.order_date_desc
-    @clubs = @organization.clubs.newest
-  end
-
-  def edit
-  end
+  before_action :load_organization, only: :update
+  before_action :verify_manager_organization, only: :update
 
   def update
     set_crop
     if @organization.update_attributes organization_parmas
       flash[:success] = t("update_organization_success")
-      redirect_to organization_path(@organization)
     else
       flash[:danger] = t "error_update"
-      render :edit
     end
+    redirect_to organization_path(@organization)
   end
 
   private
