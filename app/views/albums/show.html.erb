@@ -13,7 +13,7 @@
                     <%= link_to club_path(@club), title: t("back"),
                       class: "btn btn-sm btn-primary" do %>
                       <i class="fa fa-arrow-left"></i>
-                    <% end %>  
+                    <% end %>
                   </div>
                   <h4 class=" col-md-8 text-center"><%= @album.name %></h4>
                   <% if @club.is_admin? current_user %>
@@ -39,7 +39,7 @@
                         <div class="col-sm-12 col-md-2 portfolio-item img-<%= image.id %>"
                           data-category="">
                           <%= link_to "#{image.url}", class: "list-image lightbox" do  %>
-                            <%= image_tag image.url, class: "centered-and-cropped" %>
+                            <%= image_tag image.url, class: "centered-and-cropped js-img" %>
                           <% end %>
                           <% if @club.is_admin? current_user %>
                             <div class="middle">

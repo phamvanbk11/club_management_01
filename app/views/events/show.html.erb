@@ -102,7 +102,7 @@
                   </div>
                   <% if @event.is_public %>
                     <div class="place inline-items">
-                      <%= social_share_button_tag @event.name, desc: @event.description, image: @event.image %>
+                      <%= social_share_button_tag @event.name, desc: description_share(@event), image: @event.image %>
                     </div>
                   <% end %>
                 <% end %>

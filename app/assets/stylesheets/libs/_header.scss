@@ -1782,16 +1782,15 @@
   padding: 0px 12px;
 }
 .time-line-description img {
-  width: 80%;
+  width: 100%;
   height: 200px;
   margin-top: 10px;
 }
-.time-line-description p {
+.time-line-description .bgr-body {
   margin-top: 10px;
   background-color: $body-bg !important;
-  border-left: 2px solid #ccc;
   padding-left: 10px;
-  width: 80%;
+  width: 100%;
 }
 .table-content {
   width: 45%;

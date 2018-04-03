@@ -1,9 +1,9 @@
 <div class="notification-event">
   <div class="notification-value">
-    <a href="#" class="h6 notification-friend"><%= notification.owner_full_name %></a>
+    <span class="h6 notification-friend"><%= notification.owner_full_name %></span>
     <%= t "notification_report", status: t(notification.key.try(:downcase)) %>
-    <a href="#" class="h6 notification-friend">
-      <%= t notification.trackable_type.try(:downcase) %></a>
+    <span class="h6 notification-friend">
+      <%= t notification.trackable_type.try(:downcase) %></span>
     <% if notification.container %>
       <%= t "of_club" %>
       <%= t notification.container_type.try(:downcase) %>

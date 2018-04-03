@@ -1,0 +1,20 @@
+<div class="col-md-10">
+  <div class="column">
+    <div class="title time-line-event">
+      <%= image_tag event.club_logo, class: "centered-and-cropped" %>
+      <span class="h5"><%= t "#{event.event_category}" %>:</span>&nbsp;
+      <%= link_to event.name , club_event_path(event.club_slug, event.id), class: "h5" %>
+      <span class="h5"><%= t "in_the_club" %></span>
+      <%= link_to event.club_name , club_path(event.club_slug), class: "h5" %><br>
+      <%= l event.created_at, format: :short %></i>
+    </div>
+  </div>
+  <div class="time-line-description">
+    <% unless event.image.nil? %>
+      <%= image_tag event.image, class: "centered-and-cropped" %><br>
+      <div class="text-left bgr-body">
+        <%= raw(event.description.truncate(Settings.event_truncate)) unless event.description.nil? %>
+      </div>
+    <% end %>
+  </div>
+</div>
