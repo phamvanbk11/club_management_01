@@ -141,7 +141,7 @@ class ExportReportService
       bg_color: Settings.export_report.bg_title, fg_color: Settings.export_report.fg_title,
       sz: Settings.export_report.sz_title, border: Axlsx::STYLE_THIN_BORDER,
       alignment: {horizontal: :center, vertical: :center})
-    @percent = wb.styles.add_style(
+    @percent = @wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, alignment: {horizontal: :left, vertical: :center})
     @important = @wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, fg_color: Settings.export_report.fg_manager,

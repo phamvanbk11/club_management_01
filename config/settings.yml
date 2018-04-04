@@ -182,9 +182,10 @@ export_member:
   sz_head: 13
   with_colums:
     a: 5
-    b: 40
-    c: 50
-    d: 20
+    b: 20
+    c: 40
+    d: 40
+    e: 20
   number: 1
 notifications:
   nothing_to_read: 0
