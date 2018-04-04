@@ -5,6 +5,7 @@
     <table class="table ui-block table-bordered results list-scroll">
       <thead>
         <tr>
+          <th class="col-width-10"><%= t "employee_code" %></th>
           <th><%= t "name" %></th>
           <th class="table-content"><%= t "event_participation" %></th>
         </tr>
@@ -12,6 +13,7 @@
       <tbody>
         <% @club.user_clubs.each do |user_club| %>
           <tr>
+            <td><%= user_club.user.employee_code %></td>
             <td><%= user_club.user.full_name %></td>
             <td class="check-user">
               <%= LastMoney.count_event(user_club.user_id, events) %>

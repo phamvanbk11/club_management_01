@@ -317,6 +317,9 @@ export_report:
   sz_title: 14
   sz_head: 13
 export_report_money:
+  merge_cell_first_title: "A3:C3"
+  merge_cell_last_title: "A4:C4"
+  merge_cell_null: "A5:F5"
   marge_cell_head: "A1:F2"
   height: 80
   width_colums:
@@ -336,12 +339,13 @@ export_report_activity:
     d: 50
     e: 30
 export_report_member:
-  marge_cell_head: "A1:C2"
+  marge_cell_head: "A1:D2"
   height: 100
   width_colums:
     a: 5
-    b: 25
+    b: 20
     c: 25
+    d: 20
 export_report_other:
   marge_cell_head: "A1:C2"
   height: 100

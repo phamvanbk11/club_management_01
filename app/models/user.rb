@@ -113,6 +113,7 @@ class User < ApplicationRecord
       user = find_or_initialize_by email: auth.info.email
       if user.present?
         user.full_name = auth.info.name
+        user.employee_code = auth.info.employee_code
         user.password = User.generate_unique_secure_token if user.new_record?
         if auth.info.avatar.present?
           user.remote_avatar_url = auth.info.avatar.gsub("http://", "https://")

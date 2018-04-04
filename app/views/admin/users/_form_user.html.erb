@@ -8,6 +8,19 @@
       <%= form_for [:admin, @user], html: {class: "form-horizontal form-bordered"},
         remote: true do |f| %>
         <div class="form-group">
+          <%= f.label :employee_code, class: "col-md-3 control-label" do %>
+            <%= t "employee_code" %>
+            <span class="text-danger">*</span>
+          <% end %>
+          <div class="col-md-6">
+            <div class="input-group">
+              <%= f.text_field :employee_code, class: "form-control",
+                placeholder: t("employee_code") %>
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <%= f.label :full_name, class: "col-md-3 control-label" do %>
             <%= t "activerecord.attributes.user.full_name" %>
             <span class="text-danger">*</span>

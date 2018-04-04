@@ -25,7 +25,9 @@ module ClubManager::StatisticReportHelper
 
   def content_detail_member content_hash
     if content_hash.is_a?(Hash) && content_hash[:name] && content_hash[:size]
-      content_tag(:td, content_hash[:name]) << content_tag(:td, content_hash[:size])
+      content_tag(:td, content_hash[:employee_code]) <<
+      content_tag(:td, content_hash[:name]) <<
+      content_tag(:td, content_hash[:size])
     end
   end
 
