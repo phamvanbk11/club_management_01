@@ -50,18 +50,9 @@ Rails.application.routes.draw do
     get "/" => "static_pages#index"
     resources :clubs do
       resources :statistic_reports
-      resources :members, only: [:index, :show]
       resources :club_budgets
-      resources :events do
-        resources :news
-      end
-      resources :albums do
-        resources :images
-      end
       resources :user_clubs
-      resources :requests
     end
-    resources :budgets
     resources :evaluates, only: [:index, :show]
   end
 

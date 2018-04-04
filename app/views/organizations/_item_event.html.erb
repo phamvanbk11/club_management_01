@@ -2,7 +2,7 @@
   <div class="column">
     <div class="title time-line-event">
       <%= image_tag event.club_logo, class: "centered-and-cropped" %>
-      <span class="h5"><%= t "#{event.event_category}" %>:</span>&nbsp;
+      <span class="h5"><%= t "notification_event.#{event.event_category}" %>:</span>&nbsp;
       <%= link_to event.name , club_event_path(event.club_slug, event.id), class: "h5" %>
       <span class="h5"><%= t "in_the_club" %></span>
       <%= link_to event.club_name , club_path(event.club_slug), class: "h5" %><br>
