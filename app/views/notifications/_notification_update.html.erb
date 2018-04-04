@@ -15,11 +15,11 @@
       <% else %>
         <div class="notification-event">
           <div class="notification-value">
-            <a href="#" class="h6 notification-friend"><%= notification.owner_full_name %></a>
+            <span class="h6 notification-friend"><%= notification.owner_full_name %></span>
             <%= t "has_been" %><%= t notification.key.try(:downcase) %>
             <% if notification.trackable_type == Settings.event %>
               <%= t "notification_event.#{notification.trackable.event_category}" %>
-              <a href="#" class="notification-link"><%= notification.trackable_name %></a>
+              <span class="notification-link"><%= notification.trackable_name %></span>
               <%= t "in_the" %>
             <% end %>
             <% if notification.container %>

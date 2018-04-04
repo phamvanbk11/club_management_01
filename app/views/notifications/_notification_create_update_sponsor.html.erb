@@ -1,11 +1,10 @@
 <div class="notification-event">
   <div class="notification-value">
-    <a href="#" class="h6 notification-friend"><%= notification.owner_full_name %></a>
+    <span class="h6 notification-friend"><%= notification.owner_full_name %></span>
     <%= t "notification_report", status: t("sponsors.#{notification.key.try(:downcase)}") %>
-    <a href="#" class="h6 notification-friend">
     <% if notification.container %>
       <%= t "of_club_title" %>
-      <a href="#" class="h6 notification-friend"><%= notification.trackable.club_name %></a>,
+      <span class="h6 notification-friend"><%= notification.trackable.club_name %></span>,
       <%= t notification.container_type.try(:downcase) %>
       <strong><%= notification.container_name %></strong>
       </br><i class="fa fa-clock-o time_create" aria-hidden="true">

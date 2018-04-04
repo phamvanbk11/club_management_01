@@ -1,32 +1,13 @@
 <div class="ui-block">
-  <div id="list-events">
-    <div class="timeline">
-      <% events.each do |event| %>
-        <div class="column">
-          <div class="title">
-            <%= image_tag event.club_logo, class: "centered-and-cropped" %>
-            <%= link_to club_event_path(event.club_slug, event.id) do %>
-              <span class="h6"><%= t "event" %>: <%= event.name %></span> <%= t "in_the" %>
-              <span class="h6"><%= event.club_name %></span><br/>
-            <% end %>
-            <%= l event.created_at, format: :short %></i>
-          </div>
-        </div>
-        <div class="time-line-description">
-          <% unless event.image.nil? %>
-            <%= image_tag event.image, class: "centered-and-cropped" %><br>
-            <div class="text-left">
-              <%= raw(event.description.truncate(Settings.event_truncate)) unless event.description.nil? %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+  <div>
+    <div class="timeline" id="list-events">
+      <%= render partial: "item_event", collection: events, as: :event %>
     </div>
   </div>
   <div class="text-center">
     <% unless events.current_page == events.total_pages %>
       <%= link_to organization_events_path(page: events.next_page, id: @organization.slug),
-        remote: true, id: "load-event-organization" do %>
+        remote: true, id: "load-event-organization", class: "hide-div" do %>
         <span>
           <%= t("more") %>
         </span>
@@ -34,3 +15,4 @@
     <% end %>
   </div>
 </div>
+<%= javascript_include_tag "next_page_time_line" %>

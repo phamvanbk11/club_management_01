@@ -138,4 +138,8 @@ module EventsHelper
   def is_member_of_club? club
     current_user.user_clubs.joined.of_club(club)
   end
+
+  def description_share event
+    ActionView::Base.full_sanitizer.sanitize(event.description)
+  end
 end

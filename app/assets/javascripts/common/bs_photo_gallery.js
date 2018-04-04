@@ -1,7 +1,6 @@
 (function($) {
   "use strict";
   $.fn.bsPhotoGallery = function(options) {
-
       var settings = $.extend({}, $.fn.bsPhotoGallery.defaults, options);
       var id = generateId();
       var classesString = settings.classes;

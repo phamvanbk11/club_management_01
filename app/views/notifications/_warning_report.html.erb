@@ -7,10 +7,10 @@
       </div>
       <div class="notification-event">
         <div class="notification-value">
-          <a href="#" class="h6 notification-friend"><%= warning.club_name %></a>
+          <span class="h6 notification-friend"><%= warning.club_name %></span>
           <%= t("of_manager") + t("warning_reports.msg_not_report") %>
-          <a href="#" class="notification-link"><%= type_report warning %>-
-            <%= t "year" %> <%= warning.year %></a>
+          <span class="notification-link"><%= type_report warning %>-
+            <%= t "year" %> <%= warning.year %></span>
             <% if warning.deadline.present? %>
               <%= t "warning_reports.deadline" %>
               <%= l warning.deadline, format: :short %>

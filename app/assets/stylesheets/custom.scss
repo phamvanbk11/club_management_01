@@ -1263,3 +1263,25 @@ a.pull-right.add_fields {
 .error-messages {
   color: red;
 }
+.time-line-event a {
+  color: #ad2e3e;
+}
+.time-line-event a:hover, a:focus {
+  color: #F55050;
+}
+.bt-rotate-left {
+  transition: .5s ease;
+  position: absolute;
+  bottom: 0%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.bt-rotate-right {
+  transition: .5s ease;
+  position: absolute;
+  bottom: 0%;
+  right: 44%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}

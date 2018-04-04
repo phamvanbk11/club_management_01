@@ -1,5 +1,5 @@
-$('#list-events').append('<%= j render partial: "list_event",
-  locals: {events: @organization_event} %>')
+$('#list-events').append('<%= j render partial: "organizations/item_event",
+  collection: @organization_event, as: :event %>')
 <% if @organization_event.current_page == @organization_event.total_pages %>
   $('#load-event-organization').remove();
 <% else %>
