@@ -1,7 +1,8 @@
 require "rubygems"
 require "axlsx"
 col_widths= [Settings.export_member.with_colums.a, Settings.export_member.with_colums.b,
-  Settings.export_member.with_colums.c, Settings.export_member.with_colums.d]
+  Settings.export_member.with_colums.c, Settings.export_member.with_colums.d,
+  Settings.export_member.with_colums.e]
 wb = xlsx_package.workbook
 
 title = wb.styles.add_style(
@@ -27,18 +28,18 @@ head = wb.styles.add_style(
   :alignment=>{:horizontal => :center})
 
 wb.add_worksheet(name: "Budgets") do |sheet|
-  sheet.merge_cells "A1:D3"
+  sheet.merge_cells "A1:E3"
   sheet.add_row [@club.organization.name + "\n" + t("list_member") + ": " +
     @club.name + "\n" + t("total") + ": #{@manager.size + @members.size} " +
     t("total_member") ], :style=>title
-  sheet.add_row ["", "", "", ""]
-  sheet.add_row ["", "", "", ""]
-  sheet.add_row [t("stt"), t("full_name"), t("email"), t("phone")], :style=>head
+  sheet.add_row ["", "", "", "", ""]
+  sheet.add_row ["", "", "", "", ""]
+  sheet.add_row [t("stt"), t("employee_code"), t("full_name"), t("email"), t("phone")], :style=>head
   @manager.each.with_index(Settings.export_member.number) do |member, index|
-    sheet.add_row [index, member.full_name, member.email, member.phone], :style=>manager
+    sheet.add_row [index, member.user.employee_code, member.full_name, member.email, member.phone], :style=>manager
   end
   @members.each.with_index(@manager.size + Settings.export_member.number) do |member, index|
-    sheet.add_row [index, member.full_name, member.email, member.phone], :style=>percent
+    sheet.add_row [index, member.user.employee_code, member.full_name, member.email, member.phone], :style=>percent
   end
   sheet.column_widths *col_widths
 end
