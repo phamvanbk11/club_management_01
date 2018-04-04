@@ -27,10 +27,12 @@ Rails.application.routes.draw do
     get "/" => "static_pages#index"
     resources :users
     resources :organizations do
+      resources :user_organizations
       resources :clubs
     end
     resources :feed_backs, only: :index
     resources :organization_requests
+    resources :import_user_organizations
   end
 
   namespace :manager do

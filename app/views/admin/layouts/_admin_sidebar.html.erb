@@ -61,25 +61,31 @@
           <% end %>
         </li>
         <li>
-          <%= link_to admin_organizations_path do %>
-            <i class="gi gi-check sidebar-nav-icon"></i>
-            <span class="sidebar-nav-mini-hide">
-              <%= t "organizations.organization" %></span>
-          <% end %>
+          <a class="sidebar-nav-menu menu_dropdown" href="javascript:void(0)">
+            <i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+            <i class="gi gi-user sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide"><%= t "organizations.organization" %></span>
+          </a>
+          <ul class="menu_load hide-div">
+            <li><%= link_to t("admin_manage.all_organization"), admin_organizations_path %></li>
+            <% @organizations.each do |organization| %>
+              <li>
+                <%= link_to organization.name, admin_organization_path(id: organization.slug) %>
+              </li>
+            <% end %>
+          </ul>
         </li>
         <li>
-          <%= link_to t("do_nothing"), class: "sidebar-nav-menu" do %>
+          <a class="sidebar-nav-menu menu_dropdown" href="javascript:void(0)">
             <i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-            <i class="gi gi-building sidebar-nav-icon"></i>
-            <span class="sidebar-nav-mini-hide"><%= t "club" %></span></a>
-          <% end %>
-          <ul>
-            <% if @organizations.present? %>
-              <% @organizations.each do |organization| %>
-                <li>
-                  <%= link_to organization.name, admin_organization_clubs_path(organization) %>
-                </li>
-              <% end %>
+            <i class="gi gi-user sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide"><%= t "club" %></span>
+          </a>
+          <ul class="menu_load hide-div">
+            <% @organizations.each do |organization| %>
+              <li>
+                <%= link_to organization.name, admin_organization_clubs_path(organization_id: organization.slug) %>
+              </li>
             <% end %>
           </ul>
         </li>

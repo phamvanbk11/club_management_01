@@ -1,0 +1,33 @@
+<div class="table-responsive">
+  <table class="table table-vcenter datatable-public table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center"><%= t "id" %></th>
+        <th class="text-center"><i class="gi gi-user"></i></th>
+        <th><%= t "name_club" %></th>
+        <th class="col-md-5"><%= t "description" %></th>
+        <th class="text-center"><%= t "view" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% clubs.each do |club| %>
+        <tr>
+          <td class="text-center"><%= club.id %></td>
+          <td class="text-center"><%= image_tag club.logo,
+            class: "circle-profile-list centered-and-cropped" %></td>
+          <td>
+            <%= link_to admin_organization_club_path(organization_id: club.organization.slug,
+              id: club.slug) do %>
+              <%= club.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= club.content.truncate(Settings.event_truncate).html_safe unless club.content.nil? %>
+          </td>
+          <td class="text-center">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

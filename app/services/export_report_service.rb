@@ -9,25 +9,25 @@ class ExportReportService
     @report = report
     @report_details = report.report_details
     init_worksheet
-    init_style_row @wb
+    init_style_row
     init_width_columns
   end
 
   def create_xlsx_report
     if @report_details.money.present?
-      sheet_report_money @wb
+      sheet_report_money
     end
     if @report_details.active.present?
-      sheet_report_activity @wb
+      sheet_report_activity
     end
     if @report_details.member.present?
-      sheet_report_member @wb
+      sheet_report_member
     end
     if @report_details.other.present?
-      sheet_report_other @wb
+      sheet_report_other
     end
     if @report.plan_next_month.present? || @report.note.present? || @report.others.present?
-      sheet_plan_and_note @wb
+      sheet_plan_and_note
     end
   end
 
@@ -45,8 +45,8 @@ class ExportReportService
     @wb = @package.workbook
   end
 
-  def sheet_report_money wb
-    wb.add_worksheet(name: I18n.t("export_reports.spent_report")) do |sheet|
+  def sheet_report_money
+    @wb.add_worksheet(name: I18n.t("export_reports.spent_report")) do |sheet|
       sheet.merge_cells Settings.export_report_money.marge_cell_head
       sheet.add_row [I18n.t("export_reports.detail_money", time: time_report(@report), year: @report.year), "", "", "", "", ""], style: @title
       sheet.add_row ["", "", "", "", "", ""]
@@ -71,8 +71,8 @@ class ExportReportService
     end
   end
 
-  def sheet_report_activity wb
-    wb.add_worksheet(name: I18n.t("export_reports.activity_report")) do |sheet|
+  def sheet_report_activity
+    @wb.add_worksheet(name: I18n.t("export_reports.activity_report")) do |sheet|
       sheet.merge_cells Settings.export_report_activity.marge_cell_head
       sheet.add_row [I18n.t("export_reports.detail_activity", time: time_report(@report),
         year: @report.year)], style: @title
@@ -89,8 +89,8 @@ class ExportReportService
     end
   end
 
-  def sheet_report_member wb
-    wb.add_worksheet(name: I18n.t("export_reports.member_report")) do |sheet|
+  def sheet_report_member
+    @wb.add_worksheet(name: I18n.t("export_reports.member_report")) do |sheet|
       sheet.merge_cells Settings.export_report_member.marge_cell_head
       sheet.add_row [I18n.t("export_reports.detail_member", time: time_report(@report),
         year: @report.year)], style: @title
@@ -108,8 +108,8 @@ class ExportReportService
     end
   end
 
-  def sheet_report_other wb
-    wb.add_worksheet(name: I18n.t("export_reports.other")) do |sheet|
+  def sheet_report_other
+    @wb.add_worksheet(name: I18n.t("export_reports.other")) do |sheet|
       @report_details.other.each.with_index do |detail, index|
         sheet.merge_cells Settings.export_report_other.marge_cell_head
         sheet.add_row [I18n.t("export_reports.detail_other", time: time_report(@report),
@@ -124,8 +124,8 @@ class ExportReportService
     end
   end
 
-  def sheet_plan_and_note wb
-    wb.add_worksheet(name: I18n.t("export_reports.plan_and_note")) do |sheet|
+  def sheet_plan_and_note
+    @wb.add_worksheet(name: I18n.t("export_reports.plan_and_note")) do |sheet|
       sheet.merge_cells Settings.export_plan.marge_cell_head
         sheet.add_row [I18n.t("export_reports.plan_and_note")], style: @title
         sheet.add_row ["", ""]
@@ -136,20 +136,20 @@ class ExportReportService
     end
   end
 
-  def init_style_row wb
-    @title = wb.styles.add_style(
+  def init_style_row
+    @title = @wb.styles.add_style(
       bg_color: Settings.export_report.bg_title, fg_color: Settings.export_report.fg_title,
       sz: Settings.export_report.sz_title, border: Axlsx::STYLE_THIN_BORDER,
       alignment: {horizontal: :center, vertical: :center})
     @percent = wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, alignment: {horizontal: :left, vertical: :center})
-    @important = wb.styles.add_style(
+    @important = @wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, fg_color: Settings.export_report.fg_manager,
       alignment: {horizontal: :center}, sz: 13)
-    @head = wb.styles.add_style(
+    @head = @wb.styles.add_style(
       fg_color: Settings.export_report.fg_title, sz: Settings.export_report.sz_head,
       border: Axlsx::STYLE_THIN_BORDER, alignment: {horizontal: :center})
-    @row_money = wb.styles.add_style(
+    @row_money = @wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, sz: 11,
       alignment: {horizontal: :left, vertical: :center, wrap_text: true})
   end

@@ -1370,6 +1370,7 @@ en:
     confirm_del: "You want to delete this user"
     club: "Clubs"
     search: "Name or email"
+    all_organization: "All organizations"
     org:
       name: "Name organization"
       email: "Email"
@@ -1389,6 +1390,16 @@ en:
       update_success: "Updated"
       size_member: "Member"
       manager: "Manager"
+    member:
+      success: "Successfully"
+      errors: "Errors in processing, please try again."
+      not_find_member: "Can't find member"
+      success_destroy: "Deleted"
+      members: "Members"
+      add_member: " New member"
+      date_join: "Date join"
+      confirm_down_admin: "You want to delete this admin"
+  remove_admin: "Delete this "
   export_reports:
     total: "Total"
     detail: "Details"

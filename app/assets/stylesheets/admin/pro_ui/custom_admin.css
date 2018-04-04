@@ -89,3 +89,12 @@
   width: 100%;
   height: 350px;
 }
+.hide-div {
+  display: none;
+}
+.bottom-25-percentage {
+  bottom: 25% !important;
+}
+.height-350 {
+  height: 350px !important;
+}

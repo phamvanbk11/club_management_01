@@ -1,0 +1,14 @@
+<% if flash[:success] %>
+  $('.member-<%= @member.id %>').remove();
+  <% if params[:add_admin] == Settings.string_true %>
+    $('#tab-admin-true').prepend('<%= j render partial: "member", locals: {member: @member} %>')
+    $('#size-members').text(parseInt($('#size-members').text()) - 1);
+    $('#size-admins').text(parseInt($('#size-admins').text()) + 1);
+  <% else %>
+    $('#tab-admin-false').prepend('<%= j render partial: "member", locals: {member: @member} %>')
+    $('#size-members').text(parseInt($('#size-members').text()) + 1);
+    $('#size-admins').text(parseInt($('#size-admins').text()) - 1);
+  <% end %>
+<% end %>
+$('#main-container').append('<%= j render partial: "shared/flash_warning" %>');
+$('.notify').slideUp(3000);

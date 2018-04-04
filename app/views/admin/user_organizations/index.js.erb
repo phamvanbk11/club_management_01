@@ -1,0 +1,7 @@
+<% if params[:tab_admin].== Settings.string_true %>
+  $('#content-tab-admins').html('<%= j render partial: "list_member",
+    locals: {members: @support.admins, tab_admin: true} %>');
+<% else %>
+  $('#content-tab-members').html('<%= j render partial: "list_member",
+    locals: {members: @support.members, tab_admin: false} %>');
+<% end %>

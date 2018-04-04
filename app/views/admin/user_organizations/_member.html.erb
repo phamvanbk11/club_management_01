@@ -1,0 +1,40 @@
+<tr class="member-<%= member.id %>">
+  <td><%= image_tag member.user_avatar,
+    class: "img-responsive img-budgets-member" %></td>
+  <td><%= member.user_full_name %></td>
+  <td><%= member.user_email %></td>
+  <td><%= l member.updated_at, format: :short %></td>
+  <td><%= member.user_phone %></td>
+  <td class="center">
+    <h6 class="center">
+      <% if member.joined? && !member.is_admin? %>
+        <%= link_to admin_organization_user_organization_path(id: member.id,
+          organization_id: @organization.slug, add_admin: true), method: :put,
+          title: t("add_admin"), remote: true,
+          data: {confirm: t("answer_admin_organization")} do %>
+          <i class="fa fa-key btn btn-danger"></i>
+        <% end %>
+        <%= link_to admin_organization_user_organization_path(id: member.id,
+          organization_id: @organization.slug), method: :delete,
+          title: t("delete_member"), remote: true,
+          data: {confirm: t("answer_delete_member")} do %>
+          <i class="fa fa-remove btn btn-default"></i>
+        <% end %>
+      <% end %>
+      <% if member.joined? && member.is_admin? %>
+        <%= link_to admin_organization_user_organization_path(id: member.id,
+          organization_id: @organization.slug, add_admin: false), method: :put,
+          title: t("remove_admin"), remote: true,
+          data: {confirm: t("admin_manage.member.confirm_down_admin")} do %>
+          <i class="fa fa-unlock btn btn-danger"></i>
+        <% end %>
+        <%= link_to admin_organization_user_organization_path(id: member.id,
+          organization_id: @organization.slug), method: :delete,
+          title: t("delete_member"), remote: true,
+          data: {confirm: t("answer_delete_member")} do %>
+          <i class="fa fa-remove btn btn-default"></i>
+        <% end %>
+      <% end %>
+    </h6>
+  </td>
+</tr>

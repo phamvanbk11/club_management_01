@@ -360,3 +360,4 @@ export_plan:
     a: 25
     b: 100
 album_class: "Album"
+string_true: "true"
