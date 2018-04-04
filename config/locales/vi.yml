@@ -1698,6 +1698,10 @@ vi:
       organization: "Tổ chức"
       manager: "Quản lý"
   export_reports:
+    total: "Tổng"
+    detail: "Nội dung"
+    first_money: "Số dư đầu kì"
+    last_money: "Số dư cuối kì"
     cant_find_report: "Không tìm thấy hoặc báo cáo không có nội dung"
     cant_find_club: "Không tìm thấy câu lạc bộ"
     get: "Thu"
@@ -1727,3 +1731,4 @@ vi:
     plan: "Kế hoạch"
     note: "Ghi chú"
   export_report: "Xuất báo cáo"
+  employee_code: "Mã nhân viên"

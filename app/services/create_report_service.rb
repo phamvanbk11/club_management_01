@@ -61,7 +61,8 @@ class CreateReportService
   def save_report_member events, report_category
     detail = {};
     @club.user_clubs.each do |user_club|
-      detail.merge!({user_club.user_id.to_s.to_sym => {name: "#{user_club.user.full_name}",
+      detail.merge!({user_club.user_id.to_s.to_sym => {employee_code: user_club.user.employee_code,
+        name: "#{user_club.user.full_name}",
         size: LastMoney.count_event(user_club.user_id, events)}})
     end
     return detail.merge!(count_event: events.size)

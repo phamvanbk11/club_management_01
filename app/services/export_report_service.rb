@@ -48,8 +48,14 @@ class ExportReportService
   def sheet_report_money wb
     wb.add_worksheet(name: I18n.t("export_reports.spent_report")) do |sheet|
       sheet.merge_cells Settings.export_report_money.marge_cell_head
-      sheet.add_row [I18n.t("export_reports.detail_money", time: time_report(@report), year: @report.year)], style: @title
-      sheet.add_row ["", "", "", ""]
+      sheet.add_row [I18n.t("export_reports.detail_money", time: time_report(@report), year: @report.year), "", "", "", "", ""], style: @title
+      sheet.add_row ["", "", "", "", "", ""]
+      sheet.merge_cells Settings.export_report_money.merge_cell_first_title
+      sheet.add_row [I18n.t("export_reports.first_money"), "", "", first_money(@report_details.money), "", ""], style: @important
+      sheet.merge_cells Settings.export_report_money.merge_cell_last_title
+      sheet.add_row [I18n.t("export_reports.last_money"), "", "", last_money(@report_details.money), "", ""], style: @important
+      sheet.merge_cells Settings.export_report_money.merge_cell_null
+      sheet.add_row ["", "", "", "", "", ""]
       sheet.add_row [I18n.t("stt"), I18n.t("export_reports.date"), I18n.t("export_reports.pay"),
         I18n.t("export_reports.get"), I18n.t("export_reports.has"),
         I18n.t("export_reports.content")], style: @head
@@ -60,6 +66,7 @@ class ExportReportService
           number_to_currency(last_money_of_event(detail), locals: :vi),
           detail.name_event], style: @row_money, height: Settings.export_report_money.height
       end
+      sheet.add_row ["", I18n.t("export_reports.total"), pay_total(@report_details.money), get_total(@report_details.money), "", ""], style: @important
       sheet.column_widths *@col_width_money
     end
   end
@@ -88,13 +95,13 @@ class ExportReportService
       sheet.add_row [I18n.t("export_reports.detail_member", time: time_report(@report),
         year: @report.year)], style: @title
       sheet.add_row ["", "", "", ""]
-      sheet.add_row ["", I18n.t("total_event"), size_event(@report_details)],
-      style: @important
-      sheet.add_row [I18n.t("stt"), I18n.t("export_reports.full_name"),
+      sheet.add_row ["", I18n.t("total_event"), size_event(@report_details), ""],
+        style: @important
+      sheet.add_row [I18n.t("stt"), I18n.t("employee_code"), I18n.t("export_reports.full_name"),
         I18n.t("export_reports.size_activity_join")], style: @head
         @report_details.member.first.detail.each_with_index do |(key, value), index|
           if value.is_a? Hash
-            sheet.add_row [index, value[:name], value[:size]], style: @row_money
+            sheet.add_row [index, value[:employee_code], value[:name], value[:size]], style: @row_money
           end
         end
       sheet.column_widths *@col_width_member
@@ -133,7 +140,7 @@ class ExportReportService
     @title = wb.styles.add_style(
       bg_color: Settings.export_report.bg_title, fg_color: Settings.export_report.fg_title,
       sz: Settings.export_report.sz_title, border: Axlsx::STYLE_THIN_BORDER,
-      alignment: {horizontal: :center})
+      alignment: {horizontal: :center, vertical: :center})
     @percent = wb.styles.add_style(
       border: Axlsx::STYLE_THIN_BORDER, alignment: {horizontal: :left, vertical: :center})
     @important = wb.styles.add_style(
@@ -157,8 +164,7 @@ class ExportReportService
       Settings.export_report_activity.width_colums.e]
     @col_width_member = [Settings.export_report_member.width_colums.a,
       Settings.export_report_member.width_colums.b,
-      Settings.export_report_member.width_colums.c, Settings.export_report_member.width_colums.d,
-      Settings.export_report_member.width_colums.e]
+      Settings.export_report_member.width_colums.c, Settings.export_report_member.width_colums.d]
     @col_width_other = [Settings.export_report_other.width_colums.a,
       Settings.export_report_other.width_colums.b,
       Settings.export_report_other.width_colums.c]

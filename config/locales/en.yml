@@ -1390,6 +1390,10 @@ en:
       size_member: "Member"
       manager: "Manager"
   export_reports:
+    total: "Total"
+    detail: "Details"
+    first_money: "First money"
+    last_money: "Last money"
     cant_find_report: "Can't find report or report is null"
     cant_find_club: "Can't find club"
     get: "Get"
@@ -1419,3 +1423,4 @@ en:
     plan: "Plan"
     note: "Note"
   export_report: "Export report"
+  employee_code: "Employee code"
