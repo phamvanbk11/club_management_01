@@ -1,4 +1,4 @@
-class Dashboard::ClubExportMembersController < ApplicationController
+class ClubManager::ClubExportMembersController < ApplicationController
   before_action :load_club, only: :index
   def index
     @manager = @club.user_clubs.manager.newest

@@ -1,7 +1,7 @@
 <% if params[:edit] == 'infor' %>
-  $('#edit_organization').html('<%= j render 'edit_organization_detail' %>');
+  $('#edit_organization').html('<%= j render "edit_organization_detail" %>');
   $('#edit_organization').modal('show');
 <% else %>
-  $('#edit_image').html('<%= j render 'edit_organization_images' %>');
+  $('#edit_image').html('<%= j render "edit_organization_images" %>');
   $('#edit_image').modal('show');
 <% end %>

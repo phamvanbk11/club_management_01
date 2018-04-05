@@ -86,28 +86,18 @@ class ClubsController < ApplicationController
     redirect_to request.referer || root_url
   end
 
-  def edit
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+  def edit; end
 
   def update
     set_crop
-    if club_params
-      @organizations = current_user.user_organizations.joined
-      if @club.update_attributes club_params
-        create_acivity @club, Settings.update, @club, current_user,
-          Activity.type_receives[:club_member]
-        flash[:success] = t "club_manager.club.success_update"
-      else
-        flash_error @club
-      end
+    if @club.update_attributes club_params
+      create_acivity @club, Settings.update, @club, current_user,
+        Activity.type_receives[:club_member]
+      flash[:success] = t "club_manager.club.success_update"
     else
-      flash[:danger] = t("params_image_blank")
+      flash_error @club
     end
-    redirect_to organization_club_path @organization, @club
+    redirect_to organization_club_path(@club) unless request.xhr?
   end
 
   protected
@@ -143,7 +133,9 @@ class ClubsController < ApplicationController
   end
 
   def club_params
-    params.require(:club).permit :logo, :image if params[:club].present?
+    params.require(:club).permit(:logo, :image, :name, :content, :goal, :logo, :rules,
+      :rule_finance, :time_join, :image, :tag_list, :plan, :punishment, :member,
+      :local, :activities_connect, time_activity: []) if params[:club].present?
   end
 
   def crop_params_logo
