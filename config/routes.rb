@@ -36,18 +36,10 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
-    get "/" => "static_pages#index"
-    resources :requests
-    resources :members
-    resources :clubs
-    resources :organizations
-    resources :import_users, only: :create
-    resources :request_members
     resources :import_user_clubs, only: :create
   end
 
   namespace :club_manager do
-    get "/" => "static_pages#index"
     resources :clubs do
       resources :statistic_reports
       resources :club_budgets
@@ -57,25 +49,10 @@ Rails.application.routes.draw do
   end
 
   namespace :dashboard do
-    get "/" => "static_pages#index"
-    resources :requests
-    resources :members
     resources :organizations, only: :update
-    resources :import_users, only: :create
-    resources :request_members
-    resources :clubs do
-      resources :members, only: [:index, :show]
-      resources :club_budgets
-      resources :events do
-        resources :news
-      end
-      resources :user_clubs
-      resources :requests
-    end
-    resources :budgets
+    resources :clubs
     resources :export_history_budgets
     resources :club_export_members
-    resources :request_clubs
   end
 
   resources :users do

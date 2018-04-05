@@ -1,4 +1,4 @@
-class Dashboard::OrganizationsController < BaseDashboardController
+class Dashboard::OrganizationsController < ApplicationController
   before_action :load_organization, only: :update
   before_action :verify_manager_organization, only: :update
 

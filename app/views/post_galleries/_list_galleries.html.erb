@@ -7,7 +7,7 @@
             <% galleries.image.each do |image| %>
               <div class="portfolio-item img-<%= image.id %>">
                 <%= link_to "#{image.url}", class: "list-image lightbox" do  %>
-                  <%= image_tag image.url, class: "centered-and-cropped" %>
+                  <%= image_tag image.url, class: "centered-and-cropped js-img" %>
                 <% end %>
               </div>
             <% end %>
