@@ -60,7 +60,7 @@
                             <% take_image(post, Settings.image_view_post_concat).each_with_index do |image, index| %>
                               <div class="portfolio-item img-<%= image.id %>">
                                 <%= link_to "#{image.url}", class: "list-image lightbox" do  %>
-                                  <%= image_tag image.url, class: "centered-and-cropped" %>
+                                  <%= image_tag image.url, class: "centered-and-cropped js-img" %>
                                 <% end %>
                                 <% if last_index(post, index) && is_have_rest_gallery?(post) %>
                                   <div class="btn-show-more-image">

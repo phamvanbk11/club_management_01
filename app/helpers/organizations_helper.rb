@@ -36,4 +36,8 @@ module OrganizationsHelper
       image_tag org.logo_url, class: "img-cover", title: t("image_cover")
     end
   end
+
+  def take_member org, limit
+    org.user_organizations.joined.includes(:user).take limit
+  end
 end

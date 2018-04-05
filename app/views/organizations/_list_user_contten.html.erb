@@ -14,7 +14,7 @@
   <ul class="organization-list-infor widget w-personal-info item-block">
     <li>
       <div class="row">
-        <% @organization.user_organizations.joined.take(Settings.max_display_member_organization).each do |member| %>
+        <% take_member(@organization, Settings.max_display_member_organization).each do |member| %>
           <div class="col-md-2 avarta-memeber">
             <%= link_to user_path(member.id) do %>
               <%= image_tag member.user_avatar, class: "member-organization-view",

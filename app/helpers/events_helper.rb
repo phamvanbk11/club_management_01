@@ -27,7 +27,7 @@ module EventsHelper
   end
 
   def view_case_money_event_after event, club
-    members_done = club.users.done_by_ids(event.budgets.map(&:user_id))
+    members_done = User.done_by_ids(event.budgets.pluck :user_id)
     case event.event_category
     when Settings.get_money_member
       after_money = event.amount.to_i + (members_done.size.to_i * event.expense.to_i)

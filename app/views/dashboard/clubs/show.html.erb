@@ -1,5 +1,0 @@
-<% if club_manager_verify? %>
-  <%= render "club_manager" %>
-<% else %>
-  <%= render partial: "list_members", locals: {users: @club.users, organization: @organization} %>
-<% end %>
