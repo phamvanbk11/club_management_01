@@ -54,6 +54,7 @@ db/schema.rb
 
 #Igrone public/uploads
 public/uploads
+public/upload
 #Igrone public/assets
 public/assets
 
