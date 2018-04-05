@@ -35,22 +35,14 @@ Rails.application.routes.draw do
     resources :import_user_organizations
   end
 
-  namespace :manager do
-    resources :import_user_clubs, only: :create
-  end
-
   namespace :club_manager do
+    resources :import_user_clubs, only: :create
     resources :clubs do
       resources :statistic_reports
       resources :club_budgets
       resources :user_clubs
     end
     resources :evaluates, only: [:index, :show]
-  end
-
-  namespace :dashboard do
-    resources :organizations, only: :update
-    resources :clubs
     resources :export_history_budgets
     resources :club_export_members
   end

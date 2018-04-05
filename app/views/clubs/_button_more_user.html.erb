@@ -1,7 +1,7 @@
 <h5 class="title-modal-member text-center">
   <%= t "member_detail" %>
   <% if current_user.user_clubs.joined.of_club(@club) %>
-    <%= link_to dashboard_club_export_members_path(format: :xlsx, id: @club),
+    <%= link_to club_manager_club_export_members_path(format: :xlsx, id: @club),
       class: "pull-right", title: t("export_member") do %>
       <span class = "export-member primary">
         <i class="fa fa-download"></i>
@@ -67,7 +67,7 @@
 </div>
 <% if @club.is_admin? current_user %>
   <div class = "import_user_club collapse">
-    <%= form_tag manager_import_user_clubs_path(club_id: @club.id), multipart: true,
+    <%= form_tag club_manager_import_user_clubs_path(club_id: @club.id), multipart: true,
       method: :post do %>
       <%= file_field_tag :file, class: "input-file" %>
       <%= submit_tag t("import_user_club"), class: "btn btn-success btn_import",

@@ -1,4 +1,4 @@
-class Manager::ImportUserClubsController < BaseClubManagerController
+class ClubManager::ImportUserClubsController < BaseClubManagerController
   before_action :load_club, only: :create
 
   def create

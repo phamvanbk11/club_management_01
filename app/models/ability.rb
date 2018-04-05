@@ -26,8 +26,10 @@ class Ability
       end
 
       can :manage, [Organization] do |organization|
-        organization.user_organizations.are_admin.map(&:user_id).include? user.id
+        organization.user_organizations.are_admin.pluck(:user_id).include? user.id
       end
+
+      can :read, Organization
 
       can [:update, :read], [StatisticReport] do |statistic|
         organization = Organization.find_by id: statistic.club.organization.id

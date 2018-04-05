@@ -6,7 +6,7 @@
           <div class="row edit-organization">
             <h2 class="text-center col-md-12"><%= @organization.name %></h2>
             <div class="col-md-12 col-md-offset-1">
-              <%= form_for [:dashboard, @organization], html: {multipart: true} do |f| %>
+              <%= form_for [@organization], html: {multipart: true} do |f| %>
                 <%= render "shared/error_messages", object: f.object %>
                 <div class="form-group col-md-12 logo-organization text-center" id="myfileupload">
                   <%= f.hidden_field :status, value: Organization.statuses["#{@organization.status}"] %>

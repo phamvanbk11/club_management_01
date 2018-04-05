@@ -1,4 +1,4 @@
-class Dashboard::ExportHistoryBudgetsController < ApplicationController
+class ClubManager::ExportHistoryBudgetsController < ApplicationController
   before_action :load_club, only: :index
   def index
     if params[:first_date].present? && params[:second_date].present?

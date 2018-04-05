@@ -8,8 +8,9 @@
           <div class="row edit-organization">
             <h2 class="text-center col-md-12"><%= @club.name %></h2>
             <div class="col-md-12 col-md-offset-1">
-              <%= form_for @club, url: dashboard_club_path(@club, tab: "infor"),
+              <%= form_for [@club.organization, @club],
                 remote: :true, html: {multipart: true} do |f| %>
+                <%= hidden_field_tag :tab, :infor %>
                 <div class="album-errors"></div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"><%= t "name" %></label>
