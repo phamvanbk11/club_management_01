@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get "/" => "static_pages#index"
     resources :requests
     resources :members
-    resources :organizations
+    resources :organizations, only: :update
     resources :import_users, only: :create
     resources :request_members
     resources :clubs do
@@ -68,9 +68,6 @@ Rails.application.routes.draw do
       resources :club_budgets
       resources :events do
         resources :news
-      end
-      resources :albums do
-        resources :images
       end
       resources :user_clubs
       resources :requests
