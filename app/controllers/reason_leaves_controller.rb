@@ -14,7 +14,7 @@ class ReasonLeavesController < ApplicationController
         flash_error reason_leave
       end
     end
-    redirect_to :back
+    redirect_back fallback_location: root_path
   end
 
   private
@@ -31,7 +31,7 @@ class ReasonLeavesController < ApplicationController
     @user_club = current_user.user_clubs.find_by club_id: params[:reason_leave][:club_id]
     unless @user_club
       flash[:danger] = t("not_found_user_club")
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
   end
 end

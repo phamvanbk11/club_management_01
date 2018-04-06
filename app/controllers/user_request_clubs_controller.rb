@@ -32,7 +32,7 @@ class UserRequestClubsController < ApplicationController
     @member = UserClub.find_by id: params[:id]
     unless @member
       flash[:danger] = t "club_manager.cant_fount"
-      redirect_to dashboard_path
+      redirect_to root_url
     end
   end
 end

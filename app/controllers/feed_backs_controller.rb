@@ -12,7 +12,7 @@ class FeedBacksController < ApplicationController
       redirect_to root_url
     else
       flash[:danger] = t "error_create"
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
   end
 

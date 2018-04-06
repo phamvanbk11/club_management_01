@@ -1,9 +1,9 @@
 class ReportCategoriesController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource
   before_action :load_organization
   before_action :all_report_categories, except: %i(show new)
   before_action :load_report_category, only: %i(destroy edit update)
+  authorize_resource
 
   def index; end
 

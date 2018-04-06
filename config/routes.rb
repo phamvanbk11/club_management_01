@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   resources :user_events, only: :create
   resources :ratings, only: :create
   resources :organizations do
-    resources :club_types, except: %(index new)
+    resources :club_types, except: %(show new)
     resources :clubs, except: %i(destroy edit)
     resources :rules, except: :new
   end
@@ -94,10 +94,10 @@ Rails.application.routes.draw do
   resources :user_request_clubs
   resources :set_user_organizations
   resources :user_request_organizations
-  resources :club_request_organizations
+  resources :club_request_organizations, only: %i(index edit update)
   resources :set_image_clubs
   resources :set_logo_clubs
-  resources :set_active_clubs, only: :edit
+  resources :set_active_clubs, only: :update
   resources :statistic_reports, except: %i(new destroy create)
   resources :warning_reports, except: %i(new destroy)
   resources :report_categories, except: %i(show new)

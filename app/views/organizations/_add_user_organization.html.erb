@@ -24,7 +24,7 @@
         <div class="table-responsive">
           <table class="table ui-block table-pricing results">
             <tbody>
-              <% if user_organizations.any? %>
+              <% if user_organizations.present? %>
                 <% user_organizations.each do |user_organization| %>
                   <tr class="add-user-member">
                     <td class="check-user">

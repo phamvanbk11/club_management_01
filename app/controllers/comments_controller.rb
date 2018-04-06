@@ -21,8 +21,7 @@ class CommentsController < ApplicationController
 
   def destroy
     unless @comment.destroy
-      flash[:danger] = t("error_process")
-      redirect_to :back
+      flash.now[:danger] = t("error_process")
     end
     @comments = @comment.target.comments.newest.take(Settings.limit_comments)
     respond_to do |format|
@@ -53,7 +52,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by id: params[:id]
     unless @comment
       flash[:danger] = t("not_found_comment")
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
   end
 end

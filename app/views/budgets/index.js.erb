@@ -1,1 +1,6 @@
-$('#data-event').html('<%= j render partial: "clubs/list_budget", locals: {events: @events} %>');
+<% if @events %>
+  $('#data-event').html('<%= j render partial: "clubs/list_budget", locals: {events: @events} %>');
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% end %>

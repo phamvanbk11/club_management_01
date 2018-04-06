@@ -20,7 +20,7 @@ class Admin::OrganizationRequestsController < Admin::AdminController
     end
   rescue
     flash[:danger] = t("cant_approve")
-    redirect_to :back
+    redirect_to redirect_back fallback_location: admin_path
   end
 
   def destroy
@@ -37,7 +37,7 @@ class Admin::OrganizationRequestsController < Admin::AdminController
     @organization_requests = OrganizationRequest.pending
     unless @organization_requests
       flash_error @organization_requests
-      redirect_to :back
+      redirect_back fallback_location: admin_path
     end
   end
 
@@ -53,7 +53,7 @@ class Admin::OrganizationRequestsController < Admin::AdminController
     @user = User.find_by id: organization.user_id
     unless @user
       flash[:danger] = t("can_not_found_user")
-      redirect_to :backs
+      redirect_back fallback_location: admin_path
     end
     AdminMailer.mail_to_user_request(@user, organization).deliver_later
   end

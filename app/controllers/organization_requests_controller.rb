@@ -19,7 +19,7 @@ class OrganizationRequestsController < ApplicationController
       redirect_to root_path
     else
       flash_error request
-      redirect_to :back
+      redirect_back fallback_location: new_user_organization_request_path(user_id: current_user.id)
     end
   end
 

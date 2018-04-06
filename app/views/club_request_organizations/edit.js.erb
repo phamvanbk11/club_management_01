@@ -1,2 +1,7 @@
-$('#modal-club-request').modal('show');
-$('#modal-club-request').html('<%= j render partial: "infor_club", locals: {request: @request} %>');
+<% if @request %>
+  $('#modal-club-request').modal('show');
+  $('#modal-club-request').html('<%= j render partial: "infor_club", locals: {request: @request} %>');
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% end %>

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       redirect_to user_url(current_user)
     else
       flash_error current_user
-      redirect_to :back
+      redirect_back fallback_location: user_path(id: current_user.id)
     end
   end
 

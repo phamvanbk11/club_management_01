@@ -93,7 +93,12 @@ class ClubManager::StatisticReportsController < ApplicationController
   def load_club
     @club = Club.friendly.find_by slug: params[:club_id]
     return if @club
-    flash.now[:danger] = t "error_load_club"
+    if request.xhr?
+      flash.now[:danger] = t "error_load_club"
+    else
+      flash[:danger] = t "error_load_club"
+      redirect_back fallback_location: root_path
+    end
   end
 
   def gon_variable
@@ -129,16 +134,18 @@ class ClubManager::StatisticReportsController < ApplicationController
   end
 
   def new_statistic
-    @statistic_report = current_user.statistic_reports.new statistic_report_params
-    case params[:statistic_report][:style]
-    when Settings.style_statistic.month
-      @statistic_report.time = params[:month]
-    when Settings.style_statistic.quarter
-      @statistic_report.time = params[:quarter]
+    if @club
+      @statistic_report = current_user.statistic_reports.new statistic_report_params
+      case params[:statistic_report][:style]
+      when Settings.style_statistic.month
+        @statistic_report.time = params[:month]
+      when Settings.style_statistic.quarter
+        @statistic_report.time = params[:quarter]
+      end
+      @statistic_report.fund = @club.money
+      @statistic_report.members = @club.member
+      @statistic_report.status = :pending
     end
-    @statistic_report.fund = @club.money
-    @statistic_report.members = @club.member
-    @statistic_report.status = :pending
   end
 
   def statistic_report_params

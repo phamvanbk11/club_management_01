@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Dashboard::ExportHistoryBudgetsController, type: :controller do
+RSpec.describe ClubManager::ExportHistoryBudgetsController, type: :controller do
   let(:user){create :user}
   let(:organization){create :organization}
   let!(:user_organization) do

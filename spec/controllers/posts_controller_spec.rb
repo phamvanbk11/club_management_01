@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe PostsController, type: :controller do
-  let(:user){create :user}
-  let(:organization){create :organization}
+  let!(:user){create :user}
+  let!(:organization){create :organization}
   let!(:club) do
     create :club, organization: organization
   end
@@ -19,12 +19,12 @@ RSpec.describe PostsController, type: :controller do
   describe "GET #index" do
     context "when params present" do
       it "get success with valid params" do
-        xhr :get, :index, params: {event_id: event.id}
+        get :index, xhr: true, params: {event_id: event.id}
         expect(response).to be_ok
       end
 
       it "get success with invalid params" do
-        xhr :get, :index, params: {event_id: event.id + 1}
+        get :index, xhr: true, params: {event_id: event.id + 1}
         expect(response).to be_ok
         expect(flash[:danger]).to be_present
       end

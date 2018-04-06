@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
       .find_by organization_id: @organization.id
     @q = @organization.clubs.search(params[:q])
     @clubs = @q.result.page(params[:page]).per Settings.club_per_page
-    @add_user_club = User.without_user_ids(@organization.user_organizations.map(&:user_id))
+    @add_user_club = User.without_user_ids(@organization.user_organizations.pluck :user_id)
     @organization_event = @organization.events.includes(:club).status_public(true)
       .newest.page(params[:page]).per Settings.club_per_page
   end
@@ -26,14 +26,14 @@ class OrganizationsController < ApplicationController
     if @organization.update_attributes organization_params
       flash[:success] = t("update_organization_success")
     else
-      flash[:danger] = t "error_update"
+      flash_error @organization
     end
     redirect_to organization_path(@organization)
   end
 
   private
   def load_organization
-    @organization = Organization.friendly.find_by slug: params[:id]
+    @organization = Organization.find_by slug: params[:id]
     return if @organization
     flash[:danger] = t("organization_not_found")
     redirect_to root_url

@@ -1,9 +1,10 @@
-<% if params[:club] %>
+<% if @clubs %>
   $('#organization_club').html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs.active} %>');
-  <% if params[:q].blank? %>
+  if ($('#search-organization').find('#organization_club_form').length === 0){
     $('#search-organization').html('<%= j render "search_club" %>');
-  <% end %>
+  }
 <% else %>
   $('#organization_club').html('<%= j render partial: "timeline",
     locals: {events: @organization_event} %>');
 <% end %>
+$('#club_report_form').remove();

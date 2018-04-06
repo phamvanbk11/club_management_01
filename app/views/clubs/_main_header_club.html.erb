@@ -125,12 +125,14 @@
                       </li>
                       <li>
                         <% if @club.is_active %>
-                          <%= link_to edit_set_active_club_path(@club, active: Settings.club.not_active), class: "set-image-club" do %>
+                          <%= link_to set_active_club_path(@club, active: Settings.club.not_active),
+                            method: :patch, class: "set-image-club" do %>
                             <i class="fa fa-pause-circle-o"></i>
                             <%= t "pause_club" %>
                           <% end %>
                         <% else %>
-                          <%= link_to edit_set_active_club_path(@club, active: Settings.club.is_active), class: "set-image-club" do %>
+                          <%= link_to set_active_club_path(@club, active: Settings.club.is_active),
+                            method: :patch, class: "set-image-club" do %>
                             <i class="fa fa-play"></i>
                             <%= t "activated" %>
                           <% end %>

@@ -17,7 +17,7 @@ class ClubTypesController < ApplicationController
     end
   end
 
-  def show; end
+  def index; end
 
   def edit; end
 
