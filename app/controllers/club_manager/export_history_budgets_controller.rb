@@ -1,5 +1,7 @@
 class ClubManager::ExportHistoryBudgetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_club, only: :index
+
   def index
     if params[:first_date].present? && params[:second_date].present?
       @events = @club.events.newest.event_category_activity_money(Event.array_style_event_money_except_activity,

@@ -9,11 +9,25 @@ class Ability
       can :manage, StatisticReport do |report|
         report.club.user_clubs.manager.pluck(:user_id).include? user.id
       end
+
       can :read, StatisticReport do |report|
         report.club.user_clubs.pluck(:user_id).include? user.id
       end
+
       can :read, Evaluate do |evaluate|
         evaluate.club.user_clubs.manager.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, :club_budget do |club|
+        club.keys.first.user_clubs.manager.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, :import_user_club do |club|
+        club.keys.first.user_clubs.manager.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, :user_club do |club|
+        club.keys.first.user_clubs.manager.pluck(:user_id).include?(user.id)
       end
     else
       can :is_admin, Club do |club|

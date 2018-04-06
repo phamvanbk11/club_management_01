@@ -1,6 +1,4 @@
-class Admin::OrganizationRequestsController < ApplicationController
-  layout "admin_layout"
-  before_action :admin_signed_in
+class Admin::OrganizationRequestsController < Admin::AdminController
   before_action :load_organization_request, except: :index
   before_action :load_unapprove
 

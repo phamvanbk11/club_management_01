@@ -639,6 +639,10 @@ vi:
       rule_detail:
         content: "Nội dung"
         points: "Điểm"
+      statistic_report:
+        time: ""
+        year: "Năm"
+        style: "Loại"
     errors:
       messages:
         record_invalid: "Bản ghi không hợp lệ"
@@ -824,6 +828,11 @@ vi:
           attributes:
             time:
               taken: "Đã có báo cáo của thời gian này !"
+              blank: "Thời gian không được để trống"
+            year:
+              blank: "không được để trống"
+            style:
+              blank: "không được để trống"
         report_category:
           attributes:
             name:

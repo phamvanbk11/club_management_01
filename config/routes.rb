@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :import_user_clubs, only: :create
     resources :clubs do
       resources :statistic_reports
-      resources :club_budgets
+      resources :club_budgets, only: [:destroy, :create]
       resources :user_clubs
     end
     resources :evaluates, only: [:index, :show]
@@ -91,7 +91,6 @@ Rails.application.routes.draw do
   resources :user_clubs
   resources :user_organizations, only: [:create, :destroy]
   resources :notifications
-  resources :set_user_clubs
   resources :user_request_clubs
   resources :set_user_organizations
   resources :user_request_organizations
@@ -99,7 +98,7 @@ Rails.application.routes.draw do
   resources :set_image_clubs
   resources :set_logo_clubs
   resources :set_active_clubs, only: :edit
-  resources :statistic_reports, except: %i(new destroy)
+  resources :statistic_reports, except: %i(new destroy create)
   resources :warning_reports, except: %i(new destroy)
   resources :report_categories, except: %i(show new)
   resources :organization_events, only: :index

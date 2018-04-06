@@ -1,5 +1,7 @@
-class ClubManager::ImportUserClubsController < BaseClubManagerController
+class ClubManager::ImportUserClubsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_club, only: :create
+  authorize_resource class: false, through: :club
 
   def create
     if params[:file].present?

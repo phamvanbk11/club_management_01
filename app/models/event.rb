@@ -66,6 +66,8 @@ class Event < ApplicationRecord
 
   accepts_nested_attributes_for :albums
 
+  attr_accessor :size_budgets
+
   def self.group_by_quarter
     quarters = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
     array = Array.new
@@ -119,18 +121,9 @@ class Event < ApplicationRecord
 
   def update_money
     if in_type_money_event?
-      self.club.update_attributes money: self.club.money - self.expense
-      list_event_after_event_update = self.club.events
-        .event_category_activity_money(Event.array_style_event_money_except_activity,
-        Event.event_categories[:activity_money]).more_id_event self.id
-      events = []
-      list_event_after_event_update.each do |event|
-        if event.amount
-          event.amount -= self.expense
-          events << event
-        end
-      end
-      Event.import events, on_duplicate_key_update: [:amount]
+      update_money_club_and_more_event self.expense
+    elsif self.get_money_member?
+      update_money_club_and_more_event(self.expense * self.size_budgets)
     end
   end
 
@@ -163,5 +156,20 @@ class Event < ApplicationRecord
     if date_end < date_start
       errors.add(:date_end, I18n.t("date_end_errors"))
     end
+  end
+
+  def update_money_club_and_more_event money_change
+    self.club.update_attributes money: self.club.money - money_change
+    list_event_after_event_update = self.club.events
+      .event_category_activity_money(Event.array_style_event_money_except_activity,
+      Event.event_categories[:activity_money]).more_id_event self.id
+    events = []
+    list_event_after_event_update.each do |event|
+      if event.amount
+        event.amount -= money_change
+        events << event
+      end
+    end
+    Event.import events, on_duplicate_key_update: [:amount]
   end
 end

@@ -3,16 +3,6 @@ module EventsHelper
     html_safe? "#{amount} <sup>vnđ</sup>"
   end
 
-  def view_case_money_after event
-    if event.subsidy?
-      event.amount.to_i + event.expense.to_i
-    elsif event.pay_money?
-      event.amount.to_i - event.expense.to_i
-    elsif event.get_money?
-      event.amount.to_i + (@members_done.size.to_i * event.expense.to_i)
-    end
-  end
-
   def view_notification event
     case event.event_category
     when Settings.get_money
@@ -27,10 +17,9 @@ module EventsHelper
   end
 
   def view_case_money_event_after event, club
-    members_done = User.done_by_ids(event.budgets.pluck :user_id)
     case event.event_category
     when Settings.get_money_member
-      after_money = event.amount.to_i + (members_done.size.to_i * event.expense.to_i)
+      after_money = event.amount.to_i + get_money_expense(event, club)
     when Settings.money, Settings.activity_money, Settings.subsidy, Settings.donate
       after_money = event.amount.to_i + event.expense.to_i
     else

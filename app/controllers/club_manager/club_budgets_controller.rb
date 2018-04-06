@@ -1,62 +1,70 @@
-class ClubManager::ClubBudgetsController < BaseClubManagerController
+class ClubManager::ClubBudgetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_club
+  authorize_resource class: false, through: :club
   before_action :load_event
+  before_action :load_budget, only: :destroy
 
-  def index
-    if params[:users].present?
+  def create
+    if params[:users].present? && @event
       ActiveRecord::Base.transaction do
+        budgets = []
         params[:users].each do |user_id|
-          @budget = Budget.create event_id: params[:event_id], user_id: user_id
+          budgets << @event.budgets.new(user_id: user_id)
         end
+        Budget.import! budgets
         @club.calculate_get_budget(@event, params[:users].size)
         params_money = {expense: @event.expense * params[:users].size * Settings.negative}
         create_service_and_update_money params_money
-        flash[:success] = t("success_process")
+        flash.now[:success] = t "success_process"
+        load_member_done_and_yet
       end
     end
-    redirect_to :back
-  end
-
-  def create
-    if @event
-      @users = @club.users.yet_by_ids(@event.budgets.map(&:user_id))
-    else
-      @users = @club.users
-    end
-    respond_to do |format|
-      format.js
-    end
+  rescue
+    flash[:danger] = t "error_in_process"
   end
 
   def destroy
-    @budget_user = Budget.find_by event_id: params[:event_id],
-      user_id: params[:user_id]
-    if @budget_user
-      if @budget_user.destroy
-        @club.calculate_change_budget(@event)
-        params_money = {expense: @event.expense}
-        create_service_and_update_money params_money
-        flash[:success] = t "success_process"
-      else
-        flash[:danger] = t "error_process"
-      end
-    else
-      flash[:danger] = t("not_found_user_budget")
+    if @budget_user && @budget_user.destroy
+      @club.calculate_change_budget(@event)
+      params_money = {expense: @event.expense}
+      create_service_and_update_money params_money
+      flash.now[:success] = t "success_process"
+      load_member_done_and_yet
+    elsif @budget_user
+      flash.now[:danger] = t "error_process"
     end
-    redirect_to :back
   end
 
   private
   def load_event
-    @event = Event.find_by id: params[:event_id]
-    unless @event
-      flash[:danger] = t("event_not_found")
-      redirect_to :back
+    if @club
+      @event = Event.find_by id: params[:event_id]
+      return if @event
+      flash.now[:danger] = t("event_not_found")
     end
   end
 
   def create_service_and_update_money params_money
     service_money = UpdateClubMoneyService.new @event, @event.club, params_money
     service_money.update_first_money_of_event_get_money_member
+  end
+
+  def load_club
+    @club = Club.find_by id: params[:club_id]
+    return if @club
+    flash.now[:danger] = t "club_not_found"
+  end
+
+  def load_budget
+    @budget_user = Budget.find_by event_id: params[:event_id],
+      user_id: params[:id]
+    return if @budget_user
+    flash.now[:danger] = t("not_found_user_budget")
+  end
+
+  def load_member_done_and_yet
+    @members_done = @club.users.done_by_ids @event.budgets.pluck(:user_id)
+    @members_yet = @club.users.yet_by_ids @event.budgets.pluck(:user_id)
   end
 end

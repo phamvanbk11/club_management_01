@@ -3,8 +3,7 @@
     <h6 class="title col-md-12"><%= t "add_member" %></h6>
   </div>
   <div id="data-event">
-    <%= form_tag set_user_clubs_path, method: :post do %>
-      <%=hidden_field_tag "id", @club.id %>
+    <%= form_tag club_manager_club_user_clubs_path(club_id: @club.slug), method: :post do %>
       <div class="form-search">
         <div class="row">
           <div class="col-md-12">
@@ -28,7 +27,7 @@
                 <% user_clubs.each do |user_club| %>
                   <tr class="add-user-member">
                     <td class="check-user">
-                      <%= check_box_tag("user_id[]", user_club.user_id, false,
+                      <%= check_box_tag("user_ids[]", user_club.user_id, false,
                       class: "checkbox") %>
                     </td>
                     <td>
