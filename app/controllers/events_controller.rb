@@ -71,6 +71,7 @@ class EventsController < ApplicationController
 
   def destroy
     load_event
+    @event.size_budgets = @event.budgets.size
     if @event && @event.destroy
       flash.now[:success] = t "event_notifications.success_process"
     else

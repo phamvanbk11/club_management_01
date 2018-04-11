@@ -1,5 +1,5 @@
 <%= form_tag club_manager_club_club_budgets_path(
-  club_id: @club.id), class: "col-md-12", method: :get do %>
+  club_id: @club.id), class: "col-md-12", method: :post, remote: true do %>
   <div class="modal-dialog ui-block window-popup event-private-public private-event custom_budget_popup">
     <div class="ui-block">
       <div class="ui-block-title ui-block-title-small">
@@ -27,7 +27,7 @@
           <tbody>
             <% if @members_yet.any? %>
               <% @members_yet.each do |user| %>
-                <tr>
+                <tr id="member-yet-<%= user.id %>">
                   <td><%= link_to user.full_name, user_path(user.id), target: :blank %></td>
                   <td><%= user.email %></td>
                   <% if @club.is_admin? current_user %>

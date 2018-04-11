@@ -1,10 +1,11 @@
 class ClubManager::StatisticReportsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource
   before_action :load_club
+  before_action :new_statistic, only: :create
   before_action :load_report, only: %i(show edit update)
   before_action :load_report_categories, only: %i(index edit new)
   before_action :load_static_report, only: :destroy
+  authorize_resource
 
   def index
     gon_variable
@@ -12,9 +13,6 @@ class ClubManager::StatisticReportsController < ApplicationController
       @statistic_report = current_user.statistic_reports.build club_id: @club.id
       @statistic_report.report_details.build
       all_report
-    end
-    respond_to do |format|
-      format.js
     end
   end
 
@@ -32,9 +30,6 @@ class ClubManager::StatisticReportsController < ApplicationController
         flash[:danger] = t "error_process"
       end
     end
-    respond_to do |format|
-      format.js
-    end
   end
 
   def update
@@ -44,15 +39,27 @@ class ClubManager::StatisticReportsController < ApplicationController
     elsif @report
       flash.now[:danger] = t "update_report_error"
     end
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new
     @statistic_report = current_user.statistic_reports.build club_id: @club.id
     @statistic_report.report_details.build
     all_report
+  end
+
+  def create
+    ActiveRecord::Base.transaction do
+      if @statistic_report.save!
+        create_detail_report @statistic_report
+        flash.now[:success] = t "create_statistic_report_success"
+        create_acivity @statistic_report, Settings.create_report,
+          @club.organization, current_user, Activity.type_receives[:organization_manager]
+      else
+        flash.now[:danger] = t "create_statistic_report_fail"
+      end
+    end
+  rescue
+    flash.now[:danger] = t "create_statistic_report_fail"
   end
 
   private
@@ -110,6 +117,46 @@ class ClubManager::StatisticReportsController < ApplicationController
       @static_report = StatisticReport.find_by(id: params[:id])
       return if @static_report
       flash.now[:danger] = t "error_find_report"
+    end
+  end
+
+  def create_detail_report static_report
+    @report_categorys = ReportCategory.load_category.active.by_category(@club.organization_id)
+    if @report_categorys
+      service = CreateReportService.new @report_categorys, static_report, @club
+      ReportDetail.import service.create_report
+    end
+  end
+
+  def new_statistic
+    @statistic_report = current_user.statistic_reports.new statistic_report_params
+    case params[:statistic_report][:style]
+    when Settings.style_statistic.month
+      @statistic_report.time = params[:month]
+    when Settings.style_statistic.quarter
+      @statistic_report.time = params[:quarter]
+    end
+    @statistic_report.fund = @club.money
+    @statistic_report.members = @club.member
+    @statistic_report.status = :pending
+  end
+
+  def statistic_report_params
+    params.require(:statistic_report).permit(:time,
+      :item_report, :detail_report, :plan_next_month, :note, :others,
+      report_details_attributes: [:report_category_id, :detail, :style])
+      .merge! style: params_style, club_id: @club.id, year: params_date
+  end
+
+  def params_style
+    if params[:statistic_report] && params[:statistic_report][:style]
+      params[:statistic_report][:style].to_i
+    end
+  end
+
+  def params_date
+    if params[:date] && params[:date][:year]
+      params[:date][:year].to_i
     end
   end
 end

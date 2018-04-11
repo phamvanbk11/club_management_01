@@ -1,6 +1,6 @@
 <%= hidden_field_tag :club_id, @club.id %>
 <div class="col-sm-10 col-md-10 push-md-1" id="new_report">
-  <%= form_for @statistic_report, html: {id: "form-contact"}, remote: true do |f|%>
+  <%= form_for [:club_manager, @club, @statistic_report], html: {id: "form-contact"}, remote: true do |f|%>
     <div class="col-md-12">
       <div class="form-group row">
         <div class="col-md-3">

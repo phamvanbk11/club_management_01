@@ -117,7 +117,7 @@
             <p><%= raw(@event.description) %></p>
           <% end %>
           <% case when @event.get_money_member? %>
-            <div class="content-event col-md-12 site-block border panel-collapse collapse"
+            <div class="content-event col-md-12 site-block border panel-collapse collapse list-budget"
               id="collapse1">
               <%= render partial: "view_get_money" %>
             </div>

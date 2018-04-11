@@ -7,11 +7,11 @@
   </td>
   <td>
     <%= select_tag "roles[]", options_for_select(user_role_club, check_role_club(user_club)), class: "role_user" %>
-    <%= hidden_field_tag "user_id[]", user_club.id %>
+    <%= hidden_field_tag "ids[]", user_club.id %>
   </td>
   <td>
     <%= link_to club_manager_club_user_club_path(id: user_club.id,
-      club_id: @club.id), method: :delete,
+      club_id: @club.slug), method: :delete,
       title: t("delete_member"), remote: true,
       data: {confirm: t("answer_delete_member")} do %>
       <i class="fa fa-remove"></i>

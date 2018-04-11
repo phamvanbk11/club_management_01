@@ -362,3 +362,4 @@ export_plan:
     b: 100
 album_class: "Album"
 string_true: "true"
+num_boolean_true: "1"

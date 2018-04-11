@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_club
-    @club = Club.friendly.find params[:club_id]
+    @club = Club.find_by slug: params[:club_id]
     return if @club
     flash[:danger] = t("not_found_club")
     redirect_to :back
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
   def load_warnimg_report
     @warning = WarningReport.includes(:club)
-      .by_club(@current_user_clubs.manager.map(&:club_id)).newest
+      .by_club(@current_user_clubs.manager.pluck :club_id).newest
   end
 
   rescue_from CanCan::AccessDenied do |exception|

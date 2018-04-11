@@ -1,5 +1,5 @@
 <% if flash[:success] %>
-  $('#member-<%= @user_club.id %>').fadeOut('fast');
+  $('.list-budget').html('<%= j render partial: "events/view_get_money.html.erb" %>')
 <% end %>
 $('.container').append('<%= j render "shared/flash_warning" %>')
 $('.notify').slideUp(3000);

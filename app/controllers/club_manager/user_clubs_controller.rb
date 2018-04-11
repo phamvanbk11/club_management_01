@@ -1,53 +1,74 @@
-class ClubManager::UserClubsController < BaseClubManagerController
-  before_action :load_userclub, only: [:update, :destroy]
+class ClubManager::UserClubsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_club
-
-  def index
-    @club = Club.find_by id: params[:club_id]
-    unless @club
-      flash[:danger] = t "cant_found_club"
-      redirect_to club_manager_path
-    end
-    @user_clubs = @club.user_clubs.unactive
-  end
+  authorize_resource class: false, through: :club
+  before_action :load_userclub, only: [:destroy]
 
   def update
-    if @user_club.joined!
-      flash[:success] = t "club_manager.user_club.success_update"
-    else
-      flash_error @club
+    ActiveRecord::Base.transaction do
+      user_club_update = []
+      roles = params[:roles]
+      ids = params[:ids]
+      @members = @club.user_clubs.joined
+      if @members.present? && ids.present? && roles.present?
+        ids.each.with_index(Settings.user_club.number) do |id, index|
+          member = @members.select{|member| member.id == id.to_i}.first
+          if member && member.is_manager != get_boollean?(roles[index])
+            member.is_manager = get_boollean?(roles[index])
+            user_club_update << member
+          end
+        end
+        UserClub.import! user_club_update, on_duplicate_key_update: [:is_manager]
+        flash[:success] = t "success_process"
+      else
+        flash[:danger] = t "cant_not_update"
+      end
+      redirect_to club_path @club
     end
-    redirect_back fallback_location: club_manager_path(@club)
+  rescue
+    flash[:danger] = t "cant_not_update"
+    redirect_to club_path @club
   end
 
   def create
     ActiveRecord::Base.transaction do
-      params[:users].each do |user_id|
-        UserClub.create user_id: user_id, club_id: @club.id, status: :joined
+      user_clubs = []
+      user_ids = params[:user_ids]
+      if user_ids.present?
+        user_ids.each do |user_id|
+          user_clubs << UserClub.new(user_id: user_id, club_id: @club.id,
+            is_manager: Settings.user_club.member, status: Settings.user_club.join)
+        end
+        UserClub.import user_clubs
+        flash[:success] = t "success_process"
+      else
+        flash[:danger] = t "error_in_process"
       end
-      flash[:success] = t("add_user_successfully")
-      redirect_back fallback_location: club_manager_path(@club)
+      redirect_to club_path @club
     end
   rescue
-    flash[:danger] = t("error_in_processing")
-    redirect_to :back
+    flash[:danger] = t "error_in_process"
+    redirect_to club_path @club
   end
 
   def destroy
-    if @user_club.destroy
+    if @user_club && @user_club.destroy
       flash.now[:success] = t("deleted_successfull")
     else
       flash.now[:danger] = t("error_process")
     end
-    redirect_back(fallback_location: club_manager_path(@club)) unless request.xhr?
   end
 
   private
   def load_userclub
-    @user_club = UserClub.find_by id: params[:id]
-    unless @user_club
-      flash[:danger] = t "cant_found_request"
-      redirect_to(club_manager_path) unless request.xhr?
+    if @club
+      @user_club = UserClub.find_by id: params[:id]
+      return if @user_club
+      flash.now[:danger] = t "cant_found_request"
     end
+  end
+
+  def get_boollean? role
+    role == Settings.num_boolean_true
   end
 end
