@@ -1,3 +1,8 @@
-$('div.report-un_read').removeClass('report-un_read');
-$('.size_unread_report').fadeOut();
-$('.size-report-unread').prepend('<%= j render "update_read_all" %>');
+<% if flash[:danger] %>
+  $('.container').append('<%= j render partial: "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% else %>
+  $('div.report-un_read').removeClass('report-un_read');
+  $('.size_unread_report').fadeOut();
+  $('.size-report-unread').prepend('<%= j render "update_read_all" %>');
+<% end %>

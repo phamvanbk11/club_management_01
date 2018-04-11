@@ -152,6 +152,13 @@ class Ability
           org.keys.first.user_organizations.are_admin.pluck(:user_id).include? user.id
         end
       end
+
+      can :read, Album
+
+      can :manage, Album do |album|
+        album.club.user_clubs.manager.pluck(:user_id)
+          .include?(user.id)
+      end
     end
   end
 end

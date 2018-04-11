@@ -1142,6 +1142,7 @@ vi:
   plan_active: "Kế hoạch & Hoạt động"
   albums_club:
     image: "ảnh"
+    video: "video"
     other_album: "Album khác"
   edit_infor_club: "Chỉnh sửa thông tin"
   edit_member:
@@ -1327,6 +1328,7 @@ vi:
   remind_report_mail: "Nhắc nhở báo cáo cho câu lạc bộ"
   of_manager_not_report: "do bạn quản lý vẫn chưa có báo cáo tháng %{month}! "
   warning_reports:
+    errors: "Xảy ra lỗi trong quá trình xử lý, vui lòng thử lại!"
     msg_not_report: " chưa hoàn thành báo cáo"
     deadline: "thời gian hết hạn vào ngày"
     messenger_report_success: "Gửi thông báo thành công "
@@ -1753,3 +1755,9 @@ vi:
   export_report: "Xuất báo cáo"
   employee_code: "Mã nhân viên"
   in_the_club: "câu lạc bộ"
+  flash_not_found:
+    club: "Không tìm thấy câu lạc bộ!"
+    album: "Không tìm thấy bộ sưu tập!"
+    image: "Không tìm thấy ảnh!"
+    user: "Không tìm thấy người dùng!"
+    user_org: "Không tìm thấy!"

@@ -5,10 +5,6 @@ class WarningReportsController < ApplicationController
 
   def index
     @warnings = @warning.page(params[:page]).per Settings.notification_per_page
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def create
@@ -20,26 +16,24 @@ class WarningReportsController < ApplicationController
           year: params[:report_year], style: params[:report_style],
           deadline: params[:date_deadline])
       end
-      WarningReport.import warning_report
-      flash[:success] = t ".messenger_report_success"
+      WarningReport.import! warning_report
+      flash.now[:success] = t ".messenger_report_success"
     end
-    respond_to do |format|
-      format.js
-    end
+  rescue
+    flash.now[:danger] = t ".errors"
   end
 
   def edit
-    @warning.each do |warning_report|
-      arr_read_all = warning_report.user_read
-      if arr_read_all.blank?
-        arr_read_all = [current_user.id]
-      elsif !arr_read_all.include?(current_user.id)
-        arr_read_all << arr_read_all.push(current_user.id)
+    if @user_club && @warning
+      @warning.each do |warning_report|
+        arr_read_all = warning_report.user_read
+        if arr_read_all.blank?
+          arr_read_all = [current_user.id]
+        elsif !arr_read_all.include?(current_user.id)
+          arr_read_all << arr_read_all.push(current_user.id)
+        end
+        warning_report.update_attributes user_read: arr_read_all
       end
-      warning_report.update_attributes user_read: arr_read_all
-    end
-    respond_to do |format|
-      format.js
     end
   end
 
@@ -65,8 +59,7 @@ class WarningReportsController < ApplicationController
 
   def load_user_club
     @user_club = current_user.user_clubs.joined
-    return if @user_club
-    flash[:danger] = t "no_notification"
-    redirect_to notifications_path
+    return if @user_club.present?
+    flash.now[:danger] = t "no_notification"
   end
 end

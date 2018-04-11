@@ -1,5 +1,5 @@
-class ImagesController < AlbumsController
-  before_action :user_signed_in
+class ImagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_album, only: [:destroy, :create]
   before_action :load_image, except: :create
 
@@ -22,25 +22,20 @@ class ImagesController < AlbumsController
     else
       flash[:error] = t "club_manager.image.cant_delete"
     end
-    respond_to do |format|
-      format.js
-    end
   end
 
   private
   def load_image
     @image = Image.find_by id: params[:id]
-    unless @image
-      flash[:danger] = t "not_found_image"
-      redirect_to club_album_path @album
-    end
+    return if @image
+    flash[:danger] = t "flash_not_found.image"
+    redirect_to club_album_path @album
   end
 
   def load_album
     @album = Album.find_by id: params[:album_id]
-    unless @album
-      flash[:danger] = t "not_found_album"
-      redirect_to root_path
-    end
+    return if @album
+    flash[:danger] = t "flash_not_found.album"
+    redirect_to root_path
   end
 end

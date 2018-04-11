@@ -1,3 +1,8 @@
-$(".edit-album-club").html('<%= j render "albums/edit_album" %>');
-$('#modal-edit-album').modal('show');
-$('.edit-album input').val('<%= @album.name %>')
+<% if @album %>
+  $(".edit-album-club").html('<%= j render "albums/edit_album" %>');
+  $('#modal-edit-album').modal('show');
+  $('.edit-album input').val('<%= @album.name %>')
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% end %>

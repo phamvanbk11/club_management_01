@@ -111,7 +111,7 @@ class ClubsController < ApplicationController
   def load_club
     @club = Club.find_by slug: params[:id]
     return if @club
-    flash[:danger] = t("not_found")
+    flash[:danger] = t("flash_not_found.club")
     redirect_to root_path
   end
 

@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe ClubRequestsController, type: :controller do
-  let(:user){FactoryGirl.create :user}
-  let(:organization){FactoryGirl.create :organization}
+  let!(:user){FactoryGirl.create :user}
+  let!(:organization){FactoryGirl.create :organization}
   let!(:user_organization) do
     FactoryGirl.create :user_organization, user_id: user.id, organization_id: organization.id
   end

@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe ImagesController, type: :controller do
-  let(:user){create :user}
-  let(:organization){create :organization}
-  let(:club) do
+  let!(:user){create :user}
+  let!(:organization){create :organization}
+  let!(:club) do
     create :club, organization: organization
   end
-  let(:album) do
+  let!(:album) do
     create :album, club: club
   end
   let(:image) do
@@ -41,11 +41,11 @@ RSpec.describe ImagesController, type: :controller do
     end
     context "when params[:id] not present" do
       before{delete :destroy, xhr: true, params: {album_id: album.id, club_id: club.id, id: 1}}
-      it{expect(flash[:danger]).to eq I18n.t("not_found_image")}
+      it{expect(flash[:danger]).to eq I18n.t("flash_not_found.image")}
     end
     context "when params[:album_id] not present" do
       before{delete :destroy, xhr: true, params: {album_id: 0, club_id: club.id, id: image}}
-      it{expect(flash[:danger]).to eq I18n.t("not_found_album")}
+      it{expect(flash[:danger]).to eq I18n.t("flash_not_found.album")}
     end
   end
 end
