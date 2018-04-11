@@ -16,7 +16,7 @@ RSpec.describe RulesController, type: :controller do
     context "when params present" do
       it "create success with valid params" do
         attributes = {content: "abcs", points: 5}
-        rule_params = FactoryGirl.attributes_for(:rule, a: attributes)
+        rule_params = FactoryBot.attributes_for(:rule, a: attributes)
         expect do
           post :create, xhr: true, params: {
             rule: rule_params, organization_id: organization.slug

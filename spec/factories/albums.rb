@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :album do
     name{Faker::Name.name}
     club_id club

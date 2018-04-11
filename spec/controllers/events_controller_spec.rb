@@ -17,7 +17,7 @@ RSpec.describe EventsController, type: :controller do
   describe "POST #create" do
     context "with params present" do
       it "create success" do
-        event_params = FactoryGirl.attributes_for(:event, club_id: club.id, user_id: user.id)
+        event_params = FactoryBot.attributes_for(:event, club_id: club.id, user_id: user.id)
         post :create, params: {club_id: club, event: event_params}
           expect(flash[:success]).to eq I18n.t("club_manager.event.success_create")
       end

@@ -68,7 +68,7 @@ group :development, :test do
   gem "pry"
   gem "rspec-rails", "~> 3.4"
   gem "capybara"
-  gem "factory_girl_rails", require: false
+  gem "factory_bot_rails", require: false
 end
 
 group :development do

@@ -1,1 +1,6 @@
-$('.modal-user').html('<%= j render "edit_user_club" %>');
+<% if @user_clubs %>
+  $('.modal-user').html('<%= j render "edit_user_club" %>');
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% end %>

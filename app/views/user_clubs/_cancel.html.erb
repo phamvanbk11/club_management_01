@@ -1,4 +1,4 @@
-<%= link_to user_club_path(id: 1, club_id: @club.id),
+<%= link_to user_club_path(id: @club.slug, club_id: @club.id), remote: true,
   method: :delete, class: "join-club-button btn btn-breez group-btn btn-sm",
   title: t("cancel") do %>
   <span class="animation-fadeIn360">

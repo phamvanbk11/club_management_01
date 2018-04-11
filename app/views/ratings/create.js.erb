@@ -1,4 +1,5 @@
 $('#rating-container-club').html('<%= j render "rating" %>');
 $('.rating').rating();
 $('.glyphicon').css('pointer-events', 'none');
-$('#page-container').append('<%= j render "shared/flash_warning" %>');
+$('.container').append('<%= j render "shared/flash_warning" %>');
+$('.notify').delay(4000).slideUp(300);

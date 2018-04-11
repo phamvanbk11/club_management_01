@@ -30,29 +30,29 @@ RSpec.describe Organization, type: :model do
         .is_at_most Settings.max_name
     end
     it "is valid with a valid name" do
-      expect(FactoryGirl.build(:organization,
+      expect(FactoryBot.build(:organization,
         name: "a" * Settings.max_name)).to be_valid
     end
     it "is invalid without name" do
-      expect(FactoryGirl.build(:organization, name: nil)).not_to be_valid
+      expect(FactoryBot.build(:organization, name: nil)).not_to be_valid
     end
     it "is invalid with a long name" do
-      expect(FactoryGirl.build(:organization,
+      expect(FactoryBot.build(:organization,
         name: "a" * (Settings.max_name + 1)))
         .not_to be_valid
     end
   end
 
   context "scope" do
-    let!(:organization1){FactoryGirl.create :organization}
-    let!(:organization2){FactoryGirl.create :organization}
-    let!(:user1){FactoryGirl.create :user}
+    let!(:organization1){FactoryBot.create :organization}
+    let!(:organization2){FactoryBot.create :organization}
+    let!(:user1){FactoryBot.create :user}
     let!(:user_organization1) do
-      FactoryGirl.create :user_organization, user_id: user1.id,
+      FactoryBot.create :user_organization, user_id: user1.id,
         organization_id: organization1.id
     end
     let!(:user_organization2) do
-      FactoryGirl.create :user_organization, user_id: user1.id,
+      FactoryBot.create :user_organization, user_id: user1.id,
         organization_id: organization2.id
     end
     it "by_user_organizations" do

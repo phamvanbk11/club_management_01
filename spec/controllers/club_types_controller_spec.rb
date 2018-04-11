@@ -15,7 +15,7 @@ RSpec.describe ClubTypesController, type: :controller do
   describe "Post #create" do
     context "when params present" do
       it "create success with valid params" do
-        club_type_params = FactoryGirl.attributes_for(:club_type)
+        club_type_params = FactoryBot.attributes_for(:club_type)
         expect do
           post :create, xhr: true, params: {
             club_type: club_type_params, organization_id: organization.slug

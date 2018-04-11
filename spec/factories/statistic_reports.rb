@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :statistic_report do
     user_id user
     style 2

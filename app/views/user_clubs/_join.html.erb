@@ -1,7 +1,4 @@
-<%= form_for UserClub.new do |f| %>
-  <%= f.hidden_field :club_id, value: @club.id %>
-<% end %>
-<%= link_to "javascript:void(0)", class: "join-club-button btn btn-breez group-btn btn-sm",
+<%= link_to user_clubs_path(id: @club.slug), class: "join-club-button btn btn-breez group-btn btn-sm", method: :post, remote: true,
   title: t("join_club") do %>
   <span class="animation-fadeIn360">
     <%= t "join" %>

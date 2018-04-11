@@ -50,7 +50,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe "POST #create" do
     it "create success with valid params" do
-      request_params = FactoryGirl.attributes_for(:post, user_id: user.id,
+      request_params = FactoryBot.attributes_for(:post, user_id: user.id,
         target_id: event.id, target_type: event.class.to_s)
       attribute = {url: "url/....", style: 1}
       post :create, params: {event_id: event.id, post: request_params, post_galleries_attributes: attribute}

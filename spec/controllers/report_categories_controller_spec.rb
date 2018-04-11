@@ -15,7 +15,7 @@ RSpec.describe ReportCategoriesController, type: :controller do
   describe "Post #create" do
     context "when params present" do
       it "create success with valid params" do
-        report_category_params = FactoryGirl.attributes_for(:report_category)
+        report_category_params = FactoryBot.attributes_for(:report_category)
         expect do
           post :create, xhr: true, params: {
             report_category: report_category_params, organization_slug: organization.slug,
