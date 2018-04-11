@@ -1,6 +1,6 @@
 class Activity < ApplicationRecord
   belongs_to :trackable, polymorphic: true
-  belongs_to :owner, polymorphic: true
+  belongs_to :owner, ->{with_deleted}, polymorphic: true
   belongs_to :container, polymorphic: true
 
   has_many :comments, as: :target, dependent: :destroy

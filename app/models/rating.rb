@@ -1,6 +1,6 @@
 class Rating < ApplicationRecord
   belongs_to :rateable, polymorphic: true
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
 
   has_many :activities, as: :trackable, dependent: :destroy
 

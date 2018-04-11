@@ -5,28 +5,30 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
     :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:framgia]
-  has_many :ratings, as: :rateable
-  has_many :user_organizations, dependent: :destroy
-  has_many :organizations, through: :user_organizations
-  has_many :user_clubs, dependent: :destroy
-  has_many :user_events, dependent: :destroy
-  has_many :events, dependent: :destroy
-  has_many :club_requests, dependent: :destroy
-  has_many :organization_requests, dependent: :destroy
+  has_many :ratings
+  has_many :user_events
+  has_many :events
   has_many :images
-  has_many :comments, dependent: :destroy
+  has_many :comments
+  has_many :donates
+  has_many :statistic_reports
+  has_many :posts
+  has_many :sponsors
+  has_many :evaluates
+  has_many :messages
+  has_many :videos
+  has_many :budgets
+  has_many :activities, as: :owner
   has_many :reasons, dependent: :destroy
   has_many :news, dependent: :destroy
+  has_many :user_organizations, dependent: :destroy
+  has_many :user_clubs, dependent: :destroy
+  has_many :target_hobbies_tags, as: :target, dependent: :destroy
+  has_many :club_requests, dependent: :destroy
+  has_many :organization_requests, dependent: :destroy
+  has_many :organizations, through: :user_organizations
   has_many :clubs, through: :user_clubs
   has_many :events, through: :user_events
-  has_many :target_hobbies_tags, as: :target, dependent: :destroy
-  has_many :activities, as: :owner, dependent: :destroy
-  has_many :messages, dependent: :destroy
-  has_many :donate, dependent: :destroy
-  has_many :statistic_reports, dependent: :destroy
-  has_many :posts, dependent: :destroy
-  has_many :sponsors, dependent: :destroy
-  has_many :evaluates, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 

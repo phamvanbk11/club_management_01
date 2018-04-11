@@ -2,7 +2,7 @@ class StatisticReport < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :club, required: true
-  belongs_to :user, required: true
+  belongs_to :user, ->{with_deleted}, required: true
   has_many :report_details, dependent: :destroy, inverse_of: :statistic_report
   has_many :report_categories, through: :report_details
   has_many :activities, as: :trackable, dependent: :destroy

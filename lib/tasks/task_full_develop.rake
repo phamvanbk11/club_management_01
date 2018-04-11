@@ -318,5 +318,8 @@ namespace :db do
       status: 1,
       is_manager: 1
     )
+    1.upto(100).each do |i|
+      User.create!(full_name: "name user #{i}", email: "mail_#{i}@gmail.com", password: "123456")
+    end
   end
 end

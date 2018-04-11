@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   has_many :budgets, dependent: :destroy
   has_many :notifications, as: :target
   has_many :activities, as: :trackable, dependent: :destroy
-  has_many :donate, dependent: :destroy
+  has_many :donates, dependent: :destroy
   has_many :albums, dependent: :destroy
   has_many :event_details, dependent: :destroy
 
@@ -18,7 +18,7 @@ class Event < ApplicationRecord
     reject_if: proc {|attributes| attributes[:description].blank?}
 
   belongs_to :club
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
   belongs_to :organization
 
   after_destroy :update_money

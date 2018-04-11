@@ -33,10 +33,9 @@ class EventsController < ApplicationController
 
   def show
     @donate = Donate.new
-    @expense_pending = @event.donate.pending.expense_pending
-    @members = @event.users
-    @members_done = @club.users.done_by_ids(@event.budgets.map(&:user_id))
-    @members_yet = @club.users.yet_by_ids(@event.budgets.map(&:user_id))
+    @expense_pending = @event.donates.pending.expense_pending
+    @members_done = User.with_deleted.done_by_ids(@event.budgets.pluck :user_id)
+    @members_yet = @club.users.yet_by_ids(@event.budgets.pluck :user_id)
     if params[:comment_status] == "all"
       @comments = @event.comments.newest
       respond_to do |format|
