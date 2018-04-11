@@ -2,7 +2,7 @@ class Message < ApplicationRecord
   acts_as_paranoid
 
   attr_accessor :owner_id
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
   belongs_to :club
 
   after_create :send_message

@@ -1,7 +1,7 @@
 <% if @request %>
   $('#cofirm-<%= params[:id] %>').html('<span class="btn btn-success"><%= t("donate.confirmed") %></span>');
   $('.total_money').html('<%= number_to_currency(@donate.event.expense, locale: :vi) %>');
-  $('.pending_money').html('<%= number_to_currency(@event.donate.pending.expense_pending, locale: :vi) %>');
+  $('.pending_money').html('<%= number_to_currency(@event.donates.pending.expense_pending, locale: :vi) %>');
   $('#action-<%= params[:id] %>').html('<td></td>');
 <% else %>
   $('#page-container').append('<%= j render "shared/flash_warning" %>');

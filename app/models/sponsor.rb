@@ -9,7 +9,7 @@ class Sponsor < ApplicationRecord
 
   belongs_to :organization
   belongs_to :club
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
 
   enum status: {pending: 0, accept: 1, rejected: 2}
 

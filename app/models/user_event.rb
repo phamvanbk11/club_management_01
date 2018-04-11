@@ -1,5 +1,5 @@
 class UserEvent < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
   belongs_to :event
 
   has_many :activities, as: :trackable, dependent: :destroy

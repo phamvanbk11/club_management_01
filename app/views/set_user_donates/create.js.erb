@@ -1,7 +1,7 @@
 <% if @donate %>
-  $('.content-donate').html('<%= j render partial: "events/view_donate", locals: {donates: @event.donate.newest} %>');
+  $('.content-donate').html('<%= j render partial: "events/view_donate", locals: {donates: @event.donates.newest} %>');
   $('.total_money').html('<%= number_to_currency(@donate.event.expense, locale: :vi) %>');
-  $('.pending_money').html('<%= number_to_currency(@event.donate.pending.expense_pending, locale: :vi) %>');
+  $('.pending_money').html('<%= number_to_currency(@event.donates.pending.expense_pending, locale: :vi) %>');
 <% else %>
   $('.create-errors').html('<%= j render "donate_errors" %>');
 <% end %>

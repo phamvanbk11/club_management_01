@@ -123,7 +123,7 @@
             </div>
           <% when @event.donate? %>
             <div class="content-donate col-md-12">
-              <%= render partial: "view_donate", locals: {donates: @event.donate.newest} %>
+              <%= render partial: "view_donate", locals: {donates: @event.donates.newest} %>
             </div>
           <% when @event.activity_money? %>
             <% if is_member_of_club? @club %>

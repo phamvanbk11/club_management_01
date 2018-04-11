@@ -2,7 +2,7 @@ class Donate < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :event
-  belongs_to :user
+  belongs_to :user, ->{with_deleted}
 
   after_save :update_event, if: ->{self.accept?}
 
