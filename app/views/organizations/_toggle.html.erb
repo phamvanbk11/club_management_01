@@ -1,6 +1,6 @@
 <% if @user_organization.nil? %>
   <%= form_for(UserOrganization.new) do |f| %>
-    <%= f.hidden_field :organization_id, value: @organization.id %>
+    <%= hidden_field_tag :id, @organization.id %>
     <%= button_tag(type: :submit, class: "btn btn-breez btn-sm") do %>
       <%= t "join" %>
       <i class="fa fa-sign-in"></i>

@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, only: [:show, :edit, :update]
-  before_action :load_organizations, only: [:show, :edit]
+  before_action :load_organizations, only: :show
   authorize_resource
 
   def show
     @clubs = Club.of_user_clubs(@user.user_clubs.joined)
       .page(params[:page]).per Settings.user.club_per_page
     @club_time_lines = current_user.clubs
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def edit
@@ -24,10 +20,10 @@ class UsersController < ApplicationController
   def update
     if @user.update user_params
       flash[:success] = t("update_user_success")
-      bypass_sign_in(current_user)
-      redirect_to user_url(current_user)
+      bypass_sign_in @user
+      redirect_to user_url(@user)
     else
-      flash_error current_user
+      flash_error @user
       redirect_back fallback_location: user_path(id: current_user.id)
     end
   end

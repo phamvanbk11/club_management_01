@@ -1,6 +1,6 @@
-<% if @album.destroy %>
-  $('.show-album-<%=params[:id]%>').fadeOut();
-  $('#page-container').append('<%= j render "shared/flash_warning" %>');
-<% else %>
-  $('#page-container').append('<%= j render "shared/flash_warning" %>');
-<% end %>
+<% if flash[:success] %>
+  $('.show-album-<%= @album.id %>').fadeOut();
+ <% end %>
+$('.container').append('<%= j render "shared/flash_warning" %>');
+$('.notify').delay(4000).slideUp(300);
+

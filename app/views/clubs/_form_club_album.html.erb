@@ -1,7 +1,5 @@
 <%= form_for [@club, key], remote: :true,
-  html: {multipart: true, enctype: "multipart/form-data",
-  class: "form-horizontal form-bordered"} do |f| %>
-  <%= f.hidden_field :club_id, value: @club.id %>
+  html: {class: "form-horizontal form-bordered"} do |f| %>
   <fieldset>
     <div class="album-errors"></div>
     <div class="form-group">

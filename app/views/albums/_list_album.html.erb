@@ -1,0 +1,31 @@
+<div id="page-container">
+  <section class="site-content site-section">
+    <div class="container">
+      <div class="row portfolio">
+        <div class="container gallery-container">
+          <div class="tz-gallery">
+            <div class="row" id="list-albums">
+              <%= render partial: "albums/album", collection: @infor_club.albums, as: :album %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="modal-new-album" class="modal fade" tabindex="-1"
+  role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title">
+          <i class="fa fa-camera"></i><%= t "club_manager.album.create" %>
+        </h5>
+      </div>
+      <div class="modal-body form-album">
+        <%= render partial: "form_club_album", locals: {key: @album} %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="edit-album-club"></div>

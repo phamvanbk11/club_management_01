@@ -1,5 +1,8 @@
-<% if @album.save %>
-  window.location.replace('<%= club_album_path @album.club_id, @album %>')
+<% if flash[:success] %>
+  $('#modal-new-album').modal('hide');
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+  $('#list-albums').append('<%= j render partial: "album", locals: {album: @album} %>');
 <% else %>
   $('.album-errors').html('<%= j render "album_errors" %>');
 <% end %>

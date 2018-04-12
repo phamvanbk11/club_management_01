@@ -25,6 +25,26 @@ RSpec.describe ClubsController, type: :controller do
     end
   end
 
+  describe "GET #index" do
+    it "responds successfully" do
+      get :index
+      expect(response).to be_ok
+    end
+  end
+
+  describe "GET #show" do
+    context "when params present" do
+      it "get success" do
+        get :show, params: {id: club.slug}
+        expect(response).to be_ok
+      end
+      it "get errors with params club invalid" do
+        get :show, params: {id: 0}
+        expect(flash[:danger]).to eq I18n.t("flash_not_found.club")
+      end
+    end
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       it "create new club" do

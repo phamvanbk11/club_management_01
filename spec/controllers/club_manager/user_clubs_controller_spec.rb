@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ClubManager::UserClubsController, type: :controller do
-  let(:user){create :user}
-  let(:user2){create :user}
-  let(:organization){create :organization}
-  let(:club) do
+  let!(:user){create :user}
+  let!(:user2){create :user}
+  let!(:organization){create :organization}
+  let!(:club) do
     create :club, organization: organization
   end
   let!(:user_club) do
@@ -51,6 +51,26 @@ RSpec.describe ClubManager::UserClubsController, type: :controller do
       it "when params[:id] not present" do
         post :create, params: {club_id: 0}
         expect(flash[:danger]).to eq I18n.t("not_found_club")
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    context "when params present" do
+      it "delete success" do
+        expect do
+          delete :destroy, xhr: true, params: {club_id: club.slug, id: user_club.id}
+        end.to change(UserClub, :count).by -1
+        expect(response).to be_ok
+        expect(flash[:success]).to eq I18n.t("deleted_successfull")
+      end
+      it "delete errors" do
+        allow_any_instance_of(UserClub).to receive(:destroy).and_return false
+        expect do
+          delete :destroy, xhr: true, params: {club_id: club.slug, id: user_club.id}
+        end.to change(UserClub, :count).by 0
+        expect(response).to be_ok
+        expect(flash[:danger]).to eq I18n.t("error_process")
       end
     end
   end

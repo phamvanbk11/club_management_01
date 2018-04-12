@@ -838,6 +838,7 @@ en:
   member_detail: "Membership details"
   plan_active: "Plan & Active"
   albums_club:
+    video: "video"
     image: "image"
     other_album: "Other albums"
   edit_infor_club: "Edit club's info"
@@ -1436,3 +1437,9 @@ en:
   export_report: "Export report"
   employee_code: "Employee code"
   in_the_club: "club"
+  flash_not_found:
+    club: "Can't find club!"
+    album: "Can't find gallery!"
+    image: "Can't find image!"
+    user: "Can't find user!"
+    user_org: "Not found!"

@@ -1,77 +1,45 @@
-<%= javascript_include_tag "images", "data-turbolinks-track" => true  %>
-<div id="page-container">
-  <section class="site-content site-section">
-    <div class="container">
-      <div class="row portfolio">
-        <div class="container gallery-container">
-          <div class="tz-gallery">
-            <div class="row">
-              <% @infor_club.albums.each do |album| %>
-                <div class="col-sm-6 col-md-3 portfolio-item show-album-<%= album.id %>">
-                  <div class="thumbnail">
-                    <%= link_to club_album_path(@club.id, album.id) do %>
-                      <% if album.images.blank? %>
-                        <%= image_tag "fram.jpg", class: "col-md-12 centered-and-cropped" %>
-                      <% else %>
-                        <%= image_tag albums_club(album), class: "col-md-12 centered-and-cropped" %>
-                      <% end %>
-                    <% end %>
-                    <div class="col-md-12">
-                      <div class="caption row">
-                        <p class="col-md-10">
-                          <%= link_to club_album_path(@club.id, album.id) do %>
-                            <%= truncate(album.name, length: Settings.truncate.album_name) %>
-                          <% end %></br>
-                          <%= album.images.size %> <%= t "albums_club.image" %>
-                        </p>
-                        <div class="pull-right col-md-1">
-                          <div class="dropup">
-                            <% if @club.is_admin? current_user %>
-                              <span class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="fa fa-cog" title="<%= t("settings") %>"></span>
-                              </span>
-                            <% end %>
-                            <ul class="dropdown-menu drop_form" role="menu" aria-labelledby="menu1">
-                              <li class="text-center">
-                                <%= link_to edit_club_album_path(@club.id, album.id),
-                                  title: t("edit"), remote: :true do %>
-                                  <i class="fa fa-pencil"></i>
-                                <% end %>
-                                <%= link_to club_album_path(id: album.id,
-                                  club_id: @club.id), class: "",
-                                  title: t("delete"), method: :delete, remote: :true,
-                                  data: {confirm: t("confirm_delete_album")} do %>
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                <% end %>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+<div class="col-sm-6 col-md-3 portfolio-item show-album-<%= album.id %>">
+  <div class="thumbnail">
+    <%= link_to club_album_path(club_id: @club.slug, id: album.id) do %>
+      <% if album.images.blank? %>
+        <%= image_tag "fram.jpg", class: "col-md-12 centered-and-cropped" %>
+      <% else %>
+        <%= image_tag albums_club(album), class: "col-md-12 centered-and-cropped" %>
+      <% end %>
+    <% end %>
+    <div class="col-md-12">
+      <div class="caption row">
+        <p class="col-md-10">
+          <%= link_to club_album_path(club_id: @club.slug, id: album.id) do %>
+            <%= truncate(album.name, length: Settings.truncate.album_name) %>
+          <% end %></br>
+          <%= album.images.size %> <%= t "albums_club.image" %>, &nbsp;
+          <%= album.videos.size %> <%= t "albums_club.video" %>
+        </p>
+        <div class="pull-right col-md-1">
+          <div class="dropup">
+            <% if @club.is_admin? current_user %>
+              <span class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-cog" title="<%= t("settings") %>"></span>
+              </span>
+            <% end %>
+            <ul class="dropdown-menu drop_form" role="menu" aria-labelledby="menu1">
+              <li class="text-center">
+                <%= link_to edit_club_album_path(club_id: @club.slug, id: album.id),
+                  title: t("edit"), remote: :true do %>
+                  <i class="fa fa-pencil"></i>
+                <% end %>
+                <%= link_to club_album_path(id: album.id,
+                  club_id: @club.slug), class: "",
+                  title: t("delete"), method: :delete, remote: :true,
+                  data: {confirm: t("confirm_delete_album")} do %>
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <% end %>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </section>
-</div>
-<div id="modal-new-album" class="modal fade" tabindex="-1"
-  role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h5 class="modal-title">
-          <i class="fa fa-camera"></i><%= t "club_manager.album.create" %>
-        </h5>
-      </div>
-      <div class="modal-body form-album">
-        <%= render partial: "form_club_album", locals: {key: @album} %>
-      </div>
-    </div>
   </div>
 </div>
-<div class="edit-album-club"></div>
