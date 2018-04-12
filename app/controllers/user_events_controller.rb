@@ -9,13 +9,13 @@ class UserEventsController < ApplicationController
       user_event = UserEvent.new user_event_params
       unless user_event.save
         flash_error user_event
-        redirect_to :back
+        redirect_back fallback_location: club_event_path(@event.club, @event)
       end
       flash[:success] = t("thanks_for_join")
     elsif params[:user_id].is_a? Array
       import_member params[:user_id], @event.id
     end
-    redirect_to :back
+    redirect_back fallback_location: club_event_path(@event.club, @event)
   end
 
   def destroy
@@ -41,7 +41,7 @@ class UserEventsController < ApplicationController
     end
     unless @event
       flash[:danger] = t("not_found_event")
-      redirect_to :back
+      redirect_back fallback_location: root_path
     end
   end
 

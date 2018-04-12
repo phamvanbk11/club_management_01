@@ -6,15 +6,7 @@ class StatisticReportsController < ApplicationController
   authorize_resource
 
   def index
-    if @organization
-      @q = StatisticReport.search params[:q]
-      club_ids = @organization.clubs.pluck :id
-      @statistic_reports = Support::StatisticReportSupport
-        .new club_ids, params[:page], params[:q]
-      id_clubs_report = @statistic_reports.club_is_not_report.search(params[:q])
-        .result.map(&:club_id)
-      @clubs_not_report = Club.not_report(club_ids - id_clubs_report)
-    end
+    all_report if @organization
   end
 
   def show; end
@@ -83,7 +75,7 @@ class StatisticReportsController < ApplicationController
     @statistic_reports = Support::StatisticReportSupport
       .new club_ids, params[:page], params[:q]
     id_clubs_report = @statistic_reports.club_is_not_report.search(params[:q])
-      .result.map(&:club_id)
+      .result.pluck :club_id
     @clubs_not_report = Club.not_report(club_ids - id_clubs_report)
   end
 end

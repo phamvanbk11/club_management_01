@@ -76,7 +76,7 @@ class Ability
         video.album.club.user_clubs.manager.pluck(:user_id).include? user.id
       end
 
-      can :show, Post do |post|
+      can :read, Post do |post|
         post.target.club.user_clubs.joined.pluck(:user_id).include? user.id
       end
 
@@ -145,6 +145,12 @@ class Ability
       can :manage, Evaluate do |evaluate|
         evaluate.club.organization.user_organizations.are_admin.pluck(:user_id)
           .include?(user.id)
+      end
+
+      can :manage, :club_request_organization do |org|
+        if org.is_a? Hash
+          org.keys.first.user_organizations.are_admin.pluck(:user_id).include? user.id
+        end
       end
     end
   end

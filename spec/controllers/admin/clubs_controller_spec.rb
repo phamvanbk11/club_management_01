@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Admin::ClubsController, type: :controller do
-  let(:admin){create :admin}
-  let(:organization){create :organization}
-  let(:club) do
+  let!(:admin){create :admin}
+  let!(:organization){create :organization}
+  let!(:club) do
     create :club, organization: organization
   end
 
@@ -33,13 +33,10 @@ RSpec.describe Admin::ClubsController, type: :controller do
   end
 
   describe "get #show" do
-    let!(:club) do
-      create :club, organization: organization
-    end
     context "with params present" do
       it "get success with params user_id valid" do
-        get :show, params: {organization_id: organization, id: club.id}
-        expect(response).to be_ok
+        get :show, params: {organization_id: organization, id: club}
+        expect(response).to render_template(:show)
       end
       it "get errors with params user_id invalid" do
         get :show, params: {organization_id: organization, id: 0}
@@ -50,8 +47,13 @@ RSpec.describe Admin::ClubsController, type: :controller do
 
   describe "get #edit" do
     context "with params present" do
-      it "get errors with params user_id invalid" do
-        get :show, params: {organization_id: organization, id: 0}
+      it "get success" do
+        get :edit, params: {organization_id: organization, id: club}
+        expect(response).to render_template(:edit)
+      end
+
+      it "get errors" do
+        get :edit, params: {organization_id: organization, id: 0}
         expect(flash[:danger]).to eq I18n.t("not_found")
       end
     end
@@ -90,17 +92,16 @@ RSpec.describe Admin::ClubsController, type: :controller do
     context "with params present" do
       it "destroy success" do
         expect do
-          delete :destroy, xhr: true, params: {organization_id: organization, id: club.id}
-        end.to change(Club, :count).by 1
+          delete :destroy, xhr: true, params: {organization_id: organization, id: club}
+        end.to change(Club, :count).by -1
         expect(response).to be_ok
       end
-    end
-    context "delete faild" do
-      it do
+
+      it "delete faild"do
         allow_any_instance_of(Club).to receive(:destroy).and_return false
         expect do
-          delete :destroy, xhr: true, params: {organization_id: organization, id: club.id}
-        end.to change(Club, :count).by 1
+          delete :destroy, xhr: true, params: {organization_id: organization, id: club}
+        end.to change(Club, :count).by 0
       end
     end
   end

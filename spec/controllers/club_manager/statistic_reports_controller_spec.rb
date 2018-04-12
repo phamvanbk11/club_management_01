@@ -14,6 +14,52 @@ RSpec.describe ClubManager::StatisticReportsController, type: :controller do
     sign_in user
   end
 
+  before(:each) do
+    request.env["HTTP_REFERER"] = "where_i_came_from"
+  end
+
+  describe "get #new" do
+    context "with params club" do
+      it "get success with valid params" do
+        get :new, params: {club_id: club.slug}
+        expect(response).to be_ok
+      end
+
+      it "get errors with valid params" do
+        get :new, params: {club_id: "abcd"}
+        expect(flash[:danger]).to be_present
+      end
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid attributes" do
+      it "create new statistic report" do
+        expect do
+          post :create, xhr: true, params: {statistic_report:
+            attributes_for(:statistic_report), date: {year: 2017}, quarter: 3, club_id: club.slug}
+        end.to change(StatisticReport, :count).by 1
+        expect(flash[:success]).to be_present
+      end
+
+      it "create fail with invalid report" do
+        expect do
+          post :create, xhr: true, params: {statistic_report: {style: 2},
+            date: {year: 2017}, quarter: 3, club_id: club.slug}
+        end.to change(StatisticReport, :count).by 0
+        expect(flash[:danger]).to be_present
+      end
+
+      it "create fail with invalid club" do
+        expect do
+          post :create, xhr: true, params: {statistic_report: {style: 2},
+            date: {year: 2017}, quarter: 3, club_id: "abcd"}
+        end.to change(StatisticReport, :count).by 0
+        expect(flash[:danger]).to be_present
+      end
+    end
+  end
+
   describe "get #index" do
     context "with params" do
       it "get with params q nil" do

@@ -20,7 +20,7 @@ class UserOrganizationsController < ApplicationController
     else
       flash[:danger] = t("cant_create_user_organization")
     end
-    redirect_to :back
+    redirect_back fallback_location: organizations_path
   end
 
   def destroy
@@ -37,7 +37,7 @@ class UserOrganizationsController < ApplicationController
     @organization = Organization.find_by id: params[:id]
     return if @organization
     flash[:danger] = t("organization_not_found")
-    redirect_to :back
+    redirect_back fallback_location: organizations_path
   end
 
   def organization_params

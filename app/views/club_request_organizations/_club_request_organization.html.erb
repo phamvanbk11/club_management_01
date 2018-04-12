@@ -14,7 +14,7 @@
       <tbody>
         <% if clubs_pending.any? %>
           <% clubs_pending.each do |club| %>
-            <tr class="add-user-member">
+            <tr class="add-user-member" id="request-<%= club.id %>">
               <td>
                 <%= link_to user_path(club.user_id) do %>
                   <%= image_tag club.logo,
@@ -31,7 +31,7 @@
                 <%= club.full_name %>
               </td>
               <td class="show-request">
-                <%= link_to t("view_detail"), edit_club_request_organization_path(club),
+                <%= link_to t("view_detail"), edit_club_request_organization_path(club, organization_id: @organization.slug),
                   class: "btn btn-primary btn-sm pull-right", remote: :true %>
               </td>
             </tr>

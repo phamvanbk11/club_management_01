@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     @club = Club.find_by slug: params[:club_id]
     return if @club
     flash[:danger] = t("not_found_club")
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   def current_user_clubs

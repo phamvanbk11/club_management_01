@@ -7,7 +7,7 @@ class Admin::ImportUserOrganizationsController < Admin::AdminController
     else
       flash[:danger] = t("import_file")
     end
-    redirect_to :back
+    redirect_back fallback_location: admin_organization_path(id: @organization.id)
   end
 
   private

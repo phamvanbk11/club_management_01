@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Manager::ImportUserClubsController, type: :controller do
+RSpec.describe ClubManager::ImportUserClubsController, type: :controller do
   let!(:user){create :user}
   let!(:organization){create :organization}
   let!(:club) do
@@ -21,12 +21,12 @@ RSpec.describe Manager::ImportUserClubsController, type: :controller do
   describe "POST #create" do
     context "with file" do
       it "create fail with no file" do
-        post :create, params: {file: nil, club_id: club.id}
+        post :create, params: {file: nil, club_id: club.slug}
         expect(flash[:danger]).to eq I18n.t("import_file")
       end
       it "create with xlsx" do
         file = fixture_file_upload("abcd.xlsx", "application/vnd.ms-excel")
-        post :create, params: {file: file, club_id: club.id}
+        post :create, params: {file: file, club_id: club.slug}
         expect(flash[:success]).to be_present
       end
     end

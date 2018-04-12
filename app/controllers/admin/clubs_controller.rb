@@ -5,11 +5,10 @@ class Admin::ClubsController < Admin::AdminController
   def index
     @q = @organization.clubs.search params[:q]
     @clubs = @q.result.includes(:user_clubs)
-     .newest.page(params[:page]).per Settings.club_per_page
+      .newest.page(params[:page]).per Settings.club_per_page
   end
 
-  def show
-  end
+  def show; end
 
   def update
     @club_update = @club.update_attributes club_params

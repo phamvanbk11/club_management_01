@@ -55,7 +55,7 @@
               </td>
               <td class="location">
                 <div class="ui-block-title" id="search-organization">
-                  <%= search_form_for @q, url: organization_path(@organization, club: :true), class: "w-search", id: "organization_club_form" do |f| %>
+                  <%= search_form_for @q, url: organization_path(id: @organization.id, club: :true), class: "w-search", id: "organization_club_form" do |f| %>
                     <div class="row">
                       <div class="form-group with-button col-md-5" >
                         <%= f.text_field :name_cont,
@@ -109,7 +109,7 @@
                         <% end %>
                       </li>
                       <li>
-                        <%= link_to club_request_organization_path(@organization), remote: :true do %>
+                        <%= link_to club_request_organizations_path(organization_id: @organization.slug), remote: :true do %>
                           <%= t "request_club" %>
                         <% end %>
                       </li>
@@ -127,7 +127,7 @@
                         <% end %>
                       </li>
                       <li>
-                        <%= link_to organization_club_type_path(@organization), remote: :true do %>
+                        <%= link_to organization_club_types_path(@organization), remote: :true do %>
                           <%= t "manager_club_type" %>
                         <% end %>
                       </li>

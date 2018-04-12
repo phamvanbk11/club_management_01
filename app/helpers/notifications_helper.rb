@@ -106,7 +106,7 @@ module NotificationsHelper
 
   def notification_member
     Activity.notification_user(current_user.id).of_user_clubs(current_user.user_clubs
-      .are_member.pluck(:club_id)).type_receive(Activity.type_receives[:club_member]).pluck(:id)
+      .are_member.joined.pluck(:club_id)).type_receive(Activity.type_receives[:club_member]).pluck(:id)
   end
 
   def notification_organization_manager

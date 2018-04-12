@@ -1,42 +1,35 @@
 class ClubRequestOrganizationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :load_organization
+  authorize_resource class: false, through: :organization
   before_action :load_request, only: [:update, :edit]
-  before_action :load_organization, only: :show
 
-  def show
-    @requests = @organization.club_requests.pending.order_date_desc
-    respond_to do |format|
-      format.js
-    end
+  def index
+    @requests = @organization.club_requests.pending.order_date_desc if @organization
   end
 
-  def edit
-    respond_to do |format|
-      format.js
-    end
-  end
+  def edit; end
 
   def update
-    if @request.update_attributes status: params[:status].to_i
-      flash[:success] = t("success_process")
-    else
-      flash[:danger] = t("error_process")
+    if @request && @request.update_attributes(status: params[:status].to_i)
+      flash.now[:success] = t("success_process")
+    elsif @request
+      flash.now[:danger] = t("error_process")
     end
-    redirect_to organization_path @request.organization.slug
   end
 
   private
   def load_organization
-    @organization = Organization.friendly.find_by slug: params[:id]
+    @organization = Organization.find_by slug: params[:organization_id]
     return if @organization
-    flash[:danger] = t("organization_not_found")
-    redirect_to root_path
+    flash.now[:danger] = t("organization_not_found")
   end
 
   def load_request
-    @request = ClubRequest.find_by id: params[:id]
-    unless @request
-      flash[:danger] = t "not_found_request"
-      redirect_to root_path
+    if @organization
+      @request = ClubRequest.find_by id: params[:id]
+      return if @request
+      flash.now[:danger] = t "not_found_request"
     end
   end
 end

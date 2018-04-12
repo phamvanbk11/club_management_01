@@ -4,13 +4,13 @@
       <div class="modal-body">
         <div class="block">
           <div class="row club-request-organization">
-              <h4 class="col-md-9"><%= t "detail_request" %></h4>
-              <%= url_approve_club_organization(id: @request.id,
-                status: ClubRequest.statuses[:joined], organization_id: @request.organization.id,
-                name: t("active"), button: :breez, confirm: t("answer_active_club")) %>
-              <%= url_approve_club_organization(id: @request.id,
-                status: ClubRequest.statuses[:reject], organization_id: @request.organization.id,
-                name: t("reject"), button: :danger, confirm: t("answer_reject_club")) %>
+            <h4 class="col-md-9"><%= t "detail_request" %></h4>
+            <%= url_approve_club_organization(id: @request.id,
+              status: ClubRequest.statuses[:joined], organization_id: @request.organization.slug,
+              name: t("active"), button: :breez, confirm: t("answer_active_club")) %>
+            <%= url_approve_club_organization(id: @request.id,
+              status: ClubRequest.statuses[:reject], organization_id: @request.organization.slug,
+              name: t("reject"), button: :danger, confirm: t("answer_reject_club")) %>
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <%= image_tag request.logo, class: "circle-profile logo-club col-md-12" %>
@@ -79,10 +79,10 @@
               </div><br/>
               <div class="inline-items">
                 <%= url_approve_club_organization(id: @request.id,
-                  status: ClubRequest.statuses[:reject], organization_id: @request.organization.id,
+                  status: ClubRequest.statuses[:reject], organization_id: @request.organization.slug,
                   name: t("reject"), button: :danger, confirm: t("answer_reject_club")) %>
                 <%= url_approve_club_organization(id: @request.id,
-                  status: ClubRequest.statuses[:joined], organization_id: @request.organization.id,
+                  status: ClubRequest.statuses[:joined], organization_id: @request.organization.slug,
                   name: t("active"), button: :breez, confirm: t("answer_active_club")) %>
               </div>
             </div>

@@ -1,0 +1,8 @@
+<% if @requests %>
+  $('#organization_club').html('<%= j render partial: "club_request_organization",
+    locals: {clubs_pending: @requests} %>');
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>');
+  $('.notify').delay(4000).slideUp(300);
+<% end %>
+$('#club_report_form').remove();

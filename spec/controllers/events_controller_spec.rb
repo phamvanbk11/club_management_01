@@ -3,57 +3,41 @@ require "rails_helper"
 RSpec.describe EventsController, type: :controller do
   let!(:user){create :user}
   let!(:organization){create :organization}
-  let(:club) do
+  let!(:club) do
     create :club, organization: organization
   end
   let!(:user_club) do
     create :user_club, user: user, club: club, status: "joined", is_manager: true
   end
-  let(:event) do
-    create :event, club: club, user: user
-  end
 
   before do
     sign_in user
-    request.env["HTTP_REFERER"] = "where_i_came_from"
   end
 
   describe "POST #create" do
-    let :event_params do
-      {
-        event_category: 3,
-        name: "abcabc",
-        club_id: 1,
-        user_id: 1,
-        date_end: Date.today
-      }
-    end
     context "with params present" do
-      before{post :create, params: {club_id: club, event: event_params}}
-      it "create new event" do
-        expect(flash[:success]).to eq I18n.t("club_manager.event.success_create")
+      it "create success" do
+        event_params = FactoryGirl.attributes_for(:event, club_id: club.id, user_id: user.id)
+        post :create, params: {club_id: club, event: event_params}
+          expect(flash[:success]).to eq I18n.t("club_manager.event.success_create")
       end
-    end
-    context "with params present" do
       it "create fail with params[:event][:name] nil" do
         expect do
           post :create, params: {club_id: club, event: {event_category: 3}}
         end.to change(Event, :count).by 0
-        expect(flash[:danger]).to eq ["Tên sự kiện  không được bỏ trống",
-          "Tên sự kiện  quá ngắn (ít nhất 5 ký tự)", "Ngày kết thúc  không được bỏ trống"]
+        expect(flash[:danger]).to be_present
       end
-    end
-    context "with params present" do
       it "create fail with params[:event][:name] nil" do
         expect do
           post :create, params: {club_id: club, event: {event_category: 3, name: "123"}}
         end.to change(Event, :count).by 0
-        expect(flash[:danger]).to eq ["Tên sự kiện  quá ngắn (ít nhất 5 ký tự)", "Ngày kết thúc  không được bỏ trống"]
+        expect(flash[:danger]).to be_present
       end
     end
   end
+
   describe "GET #show" do
-    let!(:event) do
+    let(:event) do
       create :event, club: club, user: user
     end
     context "when params present" do
@@ -76,11 +60,10 @@ RSpec.describe EventsController, type: :controller do
   describe "PATCH #update" do
     let! :event_params do
       {
-        event_category: 3,
+        event_category: :activity_money,
         name: "qweretr",
-        club_id: club.id,
-        user_id: user.id,
         date_end: Date.today,
+        date_start: 4.day.ago,
         expense: "200,000",
         event_details_attributes: {
           a: {
@@ -108,13 +91,20 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let(:event) do
+    let!(:event) do
       create :event, club: club, user: user
     end
     context "when params present" do
-      it "with valid id" do
+      it "destroy success" do
         post :destroy, xhr: true, params: {club_id: club.slug, id: event.id}
         expect(response).to be_ok
+      end
+      it "delete errors" do
+        allow_any_instance_of(Event).to receive(:destroy).and_return false
+        expect do
+          delete :destroy, xhr: true, params: {club_id: club.slug, id: event.id}
+        end.to change(Event, :count).by 0
+        expect(flash[:danger]).to eq I18n.t("event_notifications.error_in_process")
       end
     end
   end

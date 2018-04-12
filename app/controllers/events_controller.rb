@@ -82,7 +82,7 @@ class EventsController < ApplicationController
 
   private
   def load_club
-    @club = Club.friendly.find params[:club_id]
+    @club = Club.find_by slug: params[:club_id]
     return if @club
     flash[:danger] = t "not_found"
     redirect_to(root_url) unless request.xhr?

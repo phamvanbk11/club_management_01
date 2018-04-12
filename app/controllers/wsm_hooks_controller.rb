@@ -14,14 +14,14 @@ class WsmHooksController < ApplicationController
   def verify_token!
     @token = params[:access_token]
     if @token.blank? || @token != Settings.access_token
-      render nothing: true
+      render body: nil
       return
     end
   end
 
   def verify_domain!
     unless request.domain == Settings.wsm_domain
-      render nothing: true
+      render body: nil
       return
     end
   end

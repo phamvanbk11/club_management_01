@@ -1,3 +1,5 @@
 <% if @organization %>
   $('#organization_club').html('<%= j render partial: "index" %>');
+  $('#club_report_form').remove();
+  $('#organization_club_form').remove();
 <% end %>

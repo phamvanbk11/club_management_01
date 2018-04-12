@@ -15,6 +15,6 @@ class ClubManager::ImportUserClubsController < ApplicationController
     else
       flash[:danger] = t("import_file")
     end
-    redirect_to :back
+    redirect_back fallback_location: organization_club_path(@club.organization, @club)
   end
 end
