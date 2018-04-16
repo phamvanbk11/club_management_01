@@ -1,13 +1,14 @@
 <div class="col-md-3 mrg-r-20">
-  <%= f.text_field :description, class: "form-control input-text",
-    placeholder: t("club_manager.event.description"), required: true %>
+  <%= f.text_field :description, class: "form-control input-text input-require
+    description-input", placeholder: t("club_manager.event.description"),
+    required: true %>
 </div>
 <div class="col-md-2 mrg-r-20">
-  <%= f.text_field :money, class: "form-control input-text money-input",
+  <%= f.text_field :money, class: "form-control input-text money-input input-require",
     placeholder: t("club_manager.event.expense_holder"), required: true %>
 </div>
 <div class="col-md-2 mrg-r-20">
-  <%= f.text_field :spent_at, class: "form-control input-text datepicker white-bgr",
+  <%= f.text_field :spent_at, class: "form-control input-text datepicker white-bgr input-require",
     placeholder: t("club_manager.event.spent_at"), required: true,
     value: format_date(f.object.spent_at) %>
 </div>

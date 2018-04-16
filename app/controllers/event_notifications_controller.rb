@@ -85,7 +85,7 @@ class EventNotificationsController < ApplicationController
   def event_notification_params
     event_category = params[:event][:event_category].to_i
     params.require(:event).permit(:club_id, :name, :date_start, :status,
-      :date_end, :location, :description, :image, :user_id, :is_public)
+      :date_end, :location, :description, :image, :user_id, :is_public, :is_auto_create)
       .merge! event_category: event_category
   end
 
@@ -112,21 +112,27 @@ class EventNotificationsController < ApplicationController
       event_params_with_album
     else
       if params[:create_albums].present?
-        event_params_with_attributes.merge! albums_attributes: [name: params[:event][:name],
+        event_params_with_check_attributes.merge! albums_attributes: [name: params[:event][:name],
           club_id: @club.id]
       else
-        event_params_with_attributes
+        event_params_with_check_attributes
       end
     end
   end
 
-  def event_params_with_attributes
+  def event_params_with_check_attributes
     event_category = params[:event][:event_category].to_i
     count_money = CountMoney.new params[:event][:event_details_attributes]
-    params.require(:event).permit(:club_id, :name, :date_start, :status,
-      :date_end, :location, :description, :image, :user_id, :is_public,
-      event_details_attributes: [:description, :money, :id, :_destroy, :style, :spent_at])
-      .merge! event_category: event_category, expense: count_money.money
+    if is_present_params_attributes?
+      params.require(:event).permit(:club_id, :name, :date_start, :status,
+        :date_end, :location, :description, :image, :user_id, :is_public,
+        event_details_attributes: [:description, :money, :id, :_destroy, :style, :spent_at])
+        .merge! event_category: event_category, expense: count_money.money
+    else
+      params.require(:event).permit(:club_id, :name, :date_start, :status,
+        :date_end, :location, :description, :image, :user_id, :is_public, :is_auto_create)
+        .merge! event_category: event_category
+    end
   end
 
   def replace_string_in_money
@@ -181,5 +187,11 @@ class EventNotificationsController < ApplicationController
       @events_notification = @club.events.newest
         .notification.page(params[:page].to_i - Settings.one).per Settings.per_page
     end
+  end
+
+  def is_present_params_attributes?
+    params[:event].present? && params[:event][:event_details_attributes].present? &&
+    params[:event][:event_details_attributes]["0"].present? &&
+    params[:event][:event_details_attributes]["0"][:description].present?
   end
 end

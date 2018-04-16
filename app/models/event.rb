@@ -49,6 +49,7 @@ class Event < ApplicationRecord
   scope :more_id_event, ->id{where "id > ?", id}
   scope :in_categories, ->ids{where event_category: ids}
   scope :status_public, ->is_public{where is_public: is_public}
+  scope :events_auto_create, ->is_auto_create{where is_auto_create: is_auto_create}
   scope :event_category_activity_money, ->ids, activity_money_id do
     where "case event_category
     when ? then exists (SELECT * FROM event_details WHERE events.id = event_id)

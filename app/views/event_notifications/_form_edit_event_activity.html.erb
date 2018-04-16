@@ -76,6 +76,9 @@
       </div>
     </div>
   <% end %>
+  <% if @event.event_details.blank? || @event.event_details.first.id.blank? %>
+     <%= render partial: "event_notifications/auto_create", locals: {event: @event, f: f} %>
+  <% end %>
   <div class="form-group col-md-12">
     <%= f.label(:location, class: "control-label label-bold") do %>
       <%= t(".location") %>

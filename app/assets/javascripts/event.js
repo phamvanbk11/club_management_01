@@ -7,7 +7,7 @@ $(document).ready(function () {
       $('#event_expense').prop('disabled', false);
       $('#label-expense').text($('#subsidy').text());
       $('#money-details').removeClass('form-money');
-      $('#event_event_details_attributes_0_description').prop('required', false);
+      $('.input-require').prop('required', false);
     }
     else if (cat === gon.event_money.money.toString()) {
       $('#expense').show();
@@ -17,7 +17,7 @@ $(document).ready(function () {
       $('#event_expense').prop('disabled', true);
       $('#label-expense').text($('#money').text());
       $('#money-details').addClass('form-money');
-      $('#event_event_details_attributes_0_description').prop('required', true);
+      $('.input-require').prop('required', true);
     }
     else if (cat === gon.event_money.get_money_member.toString()) {
       $('#label-expense').text($('#get_money_member').text());
@@ -25,7 +25,7 @@ $(document).ready(function () {
       $('.expense_details').hide();
       $('#event_expense').prop('disabled', false);
       $('#money-details').removeClass('form-money');
-      $('#event_event_details_attributes_0_description').prop('required', false);
+      $('.input-require').prop('required', false);
     }
     else if (cat === gon.event_money.subsidy.toString()) {
       $('#label-expense').text($('#subsidy').text());
@@ -33,7 +33,7 @@ $(document).ready(function () {
       $('.expense_details').hide();
       $('#event_expense').prop('disabled', false);
       $('#money-details').removeClass('form-money');
-      $('#event_event_details_attributes_0_description').prop('required', false);
+      $('.input-require').prop('required', false);
     }
   });
 });

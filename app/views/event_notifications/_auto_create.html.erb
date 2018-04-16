@@ -1,0 +1,9 @@
+<div class="form-group" id="js-auto-create">
+  <label class="col-md-3 control-label label-check label-bold" for="example-text-input">
+    <%= t ".auto_create" %>
+  </label>
+  <div class="toggle-btn <%= get_class_checkbox @event.is_auto_create? %>">
+    <%= f.check_box :is_auto_create, class: "cb-value", checked: event.is_auto_create? %>
+    <span class="round-btn"></span>
+  </div>
+</div>

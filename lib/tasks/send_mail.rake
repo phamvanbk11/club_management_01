@@ -21,7 +21,7 @@ task :send_notification_remind_report_month, [:organization_id] => :environment 
   end
 end
 
-task :send_notification_remind_report_quarter, [:organization_id] => :environment do
+task :send_notification_remind_report_quarter, [:organization_id] => :environment do |t, args|
   organization = Organization.find_by id: args[:organization_id]
   if organization
     month = Date.current.month
