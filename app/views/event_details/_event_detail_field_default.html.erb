@@ -1,0 +1,21 @@
+<div class="col-md-3 mrg-r-20">
+  <%= f.text_field :description, class: "form-control input-text",
+    placeholder: t("club_manager.event.description"), required: true %>
+</div>
+<div class="col-md-2 mrg-r-20">
+  <%= f.text_field :money, class: "form-control input-text money-input",
+    placeholder: t("club_manager.event.expense_holder"), required: true %>
+</div>
+<div class="col-md-2 mrg-r-20">
+  <%= f.text_field :spent_at, class: "form-control input-text datepicker white-bgr",
+    placeholder: t("club_manager.event.spent_at"), required: true,
+    value: format_date(f.object.spent_at) %>
+</div>
+<label class="col-md-1 radio-inline-flex mrg-r-20">
+  <%= f.radio_button :style, EventDetail.styles[:get], class: "radio-get-money radio", checked: f.object.get? %>
+  <%= t("event_details.event_detail_fields.get") %>
+</label>
+<label class="col-md-1 radio-inline-flex mrg-r-20">
+  <%= f.radio_button :style, EventDetail.styles[:pay], class: "radio-pay-money radio", checked: f.object.pay? %>
+  <%= t("event_details.event_detail_fields.pay") %>
+</label>

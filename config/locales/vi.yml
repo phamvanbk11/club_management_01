@@ -552,6 +552,7 @@ vi:
       create: "Tạo mới"
       kind: "Chế độ"
       description: "Mô tả"
+      spent_at: "Ngày"
     club:
       success_update: "Thông tin câu lạc bộ được cập nhập thành công"
     video:
