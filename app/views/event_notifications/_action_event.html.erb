@@ -1,10 +1,10 @@
 <% if @club.is_admin?(current_user) && event.by_user?(current_user) %>
   <td class="funtion-event">
-    <%= link_to edit_club_event_path(@club.id, event.id, event_category: event.event_category), title: t("edit"),
+    <%= link_to edit_club_event_path(@club.slug, event.id, event_category: event.event_category), title: t("edit"),
       class: "btn btn-sm btn-primary" do %>
       <i class="fa fa-pencil-square-o"></i>
     <% end %>
-    <%= link_to club_event_notification_path(@club.id, event.id, category: category, page: page), title: t("delete"), remote: true,
+    <%= link_to club_event_notification_path(@club.slug, event.id, category: category, page: page), title: t("delete"), remote: true,
       class: "btn btn-sm btn-danger", method: :delete,
       data: {confirm: confirm_delete(category)} do %>
       <i class="fa fa-remove"></i>

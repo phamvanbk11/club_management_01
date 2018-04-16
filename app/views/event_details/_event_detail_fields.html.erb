@@ -1,20 +1,8 @@
 <div class="nested-fields full-width">
   <div class="row">
-    <div class="col-md-3">
-      <%= f.text_field :description, class: "form-control input-text",
-        placeholder: t("club_manager.event.description"), required: true %>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-      <%= f.text_field :money, class: "form-control input-text money-input",
-        placeholder: t("club_manager.event.expense_holder"), required: true %>
-    </div>
+    <%= render partial: "event_details/event_detail_field_default", locals: {f: f} %>
     <div class="col-md-1">
       <%= link_to_remove_association button_tag('-', type: "button", class: "btn btn-primary field-btn"), f %>
     </div>
-    <%= f.radio_button :style, EventDetail.styles[:get], class: "radio-get-money radio col-md-1", checked: f.object.get? %>
-    <%= f.label :style, t("event_details.event_detail_fields.get"), class: "col-md-1 label-status" %>
-    <%= f.radio_button :style, EventDetail.styles[:pay], class: "radio-pay-money radio col-md-1", checked: f.object.pay? %>
-    <%= f.label :style, t("event_details.event_detail_fields.pay"), class: "col-md-1 label-status" %>
   </div>
 </div>

@@ -10,22 +10,7 @@
   <%= f.fields_for :event_details do |detail| %>
     <div class="nested-fields full-width">
       <div class="row">
-        <div class="col-md-3">
-          <%= detail.text_field :description, class: "form-control input-text",
-            placeholder: t("club_manager.event.description"), required: true %>
-        </div>
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-3">
-          <%= detail.text_field :money, class: "form-control input-text money-input",
-            placeholder: t("club_manager.event.expense_holder"), required: true %>
-        </div>
-        <div class="col-md-1">
-        </div>
-        <%= detail.radio_button :style, EventDetail.styles[:get], class: "radio-get-money radio col-md-1", checked: detail.object.get? %>
-        <%= detail.label :style, t("event_details.event_detail_fields.get"), class: "col-md-1 label-status" %>
-        <%= detail.radio_button :style, EventDetail.styles[:pay], class: "radio-pay-money radio col-md-1", checked: detail.object.pay? %>
-        <%= detail.label :style, t("event_details.event_detail_fields.pay"), class: "col-md-1 label-status" %>
+        <%= render partial: "event_details/event_detail_field_default", locals: {f: detail} %>
       </div>
     </div>
   <% end %>

@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_club
   before_action :load_event, only: [:show, :edit, :update]
-  before_action :check_is_admin, only: [:new, :edit, :destroy]
   before_action :replace_string_in_money, only: [:create, :update]
   before_action :set_gon_varible, only: :new
   authorize_resource
@@ -28,7 +27,7 @@ class EventsController < ApplicationController
     else
       flash[:danger] = t "events_club.error_in_process"
     end
-    redirect_back fallback_location: new_club_event_path(club_id: @club.id)
+    redirect_back fallback_location: new_club_event_path(club_id: @club.slug)
   end
 
   def show
@@ -58,7 +57,7 @@ class EventsController < ApplicationController
       create_acivity @event, Settings.update, @event.club, current_user,
         Activity.type_receives[:club_member]
       flash[:success] = t "club_manager.event.success_update"
-      redirect_to club_event_path(club_id: @club.id, id: @event.id)
+      redirect_to club_event_path(club_id: @club.slug, id: @event.id)
     end
   rescue
     if @event && @event.errors.any?
@@ -66,7 +65,7 @@ class EventsController < ApplicationController
     else
       flash[:danger] = t "event_notifications.error_process"
     end
-    redirect_back fallback_location: edit_club_event_path(club_id: @club.id, event_id: @event)
+    redirect_back fallback_location: edit_club_event_path(club_id: @club.slug, event_id: @event)
   end
 
   def destroy
@@ -85,26 +84,19 @@ class EventsController < ApplicationController
     @club = Club.find_by slug: params[:club_id]
     return if @club
     flash[:danger] = t "not_found"
-    redirect_to(root_url) unless request.xhr?
+    redirect_back(fallback_location: root_path) unless request.xhr?
   end
 
   def load_event
     @event = Event.find_by id: params[:id]
     return if @event
     flash[:danger] = t "not_found"
-    redirect_to(root_url) unless request.xhr?
+    redirect_back(fallback_location: root_path) unless request.xhr?
   end
 
   def event_params
     params.require(:event).permit(:club_id, :name, :date_start, :status,
       :expense, :date_end, :location, :description, :image, :user_id, :is_public)
-  end
-
-  def check_is_admin
-    unless @club.is_admin? current_user
-      flash[:danger] = t "not_correct_manager"
-      redirect_to root_url
-    end
   end
 
   def event_params_with_album
@@ -142,7 +134,7 @@ class EventsController < ApplicationController
     count_money = CountMoney.new params[:event][:event_details_attributes]
     params.require(:event).permit(:club_id, :name, :date_start, :status,
       :date_end, :location, :description, :image, :user_id, :is_public,
-      event_details_attributes: [:description, :money, :id, :_destroy, :style])
+      event_details_attributes: [:description, :money, :id, :_destroy, :style, :spent_at])
       .merge! event_category: event_category, expense: count_money.money
   end
 

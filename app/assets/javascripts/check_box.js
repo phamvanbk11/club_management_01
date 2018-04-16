@@ -7,6 +7,4 @@ $(document).ready(function () {
       $(mainParent).removeClass('active');
     }
   });
-
-  $( '.datepicker' ).datepicker({dateFormat: 'dd/mm/yy'});
 });

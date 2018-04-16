@@ -42,7 +42,7 @@ class EventNotificationsController < ApplicationController
     else
       flash[:danger] = t ".error_in_process"
     end
-    redirect_back fallback_location: new_club_event_notification_path(club_id: @club.id)
+    redirect_back fallback_location: new_club_event_notification_path(club_id: @club.slug)
   end
 
   def update
@@ -61,7 +61,7 @@ class EventNotificationsController < ApplicationController
     else
       flash[:danger] = t ".error_process"
     end
-    redirect_back fallback_location: edit_club_event_notification_path(club_id: @club.id,
+    redirect_back fallback_location: edit_club_event_notification_path(club_id: @club.slug,
       event: @event)
   end
 
@@ -76,11 +76,10 @@ class EventNotificationsController < ApplicationController
 
   private
   def load_club
-    @club = Club.friendly.find params[:club_id]
-    unless @club
-      flash[:danger] = t ".error_find_club"
-      redirect_to root_url
-    end
+    @club = Club.find_by slug: params[:club_id]
+    return if @club
+    flash[:danger] = t ".error_find_club"
+    redirect_back fallback_location: root_path
   end
 
   def event_notification_params
@@ -103,7 +102,7 @@ class EventNotificationsController < ApplicationController
     @event = Event.find_by id: params[:id]
     return if @event
     flash[:danger] = t ".error_find_event"
-    redirect_to root_url
+    redirect_back fallback_location: root_path
   end
 
   def params_option
@@ -126,7 +125,7 @@ class EventNotificationsController < ApplicationController
     count_money = CountMoney.new params[:event][:event_details_attributes]
     params.require(:event).permit(:club_id, :name, :date_start, :status,
       :date_end, :location, :description, :image, :user_id, :is_public,
-      event_details_attributes: [:description, :money, :id, :_destroy, :style])
+      event_details_attributes: [:description, :money, :id, :_destroy, :style, :spent_at])
       .merge! event_category: event_category, expense: count_money.money
   end
 
@@ -159,7 +158,7 @@ class EventNotificationsController < ApplicationController
     if event.notification?
       redirect_to @club
     else
-      redirect_to club_event_path(club_id: @club.id, id: event.id)
+      redirect_to club_event_path(club_id: @club.slug, id: event.id)
     end
   end
 

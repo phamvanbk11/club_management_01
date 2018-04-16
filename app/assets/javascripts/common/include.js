@@ -30,6 +30,14 @@ jQuery(document).ready(function($) {
 
   $('.input-slider').slider();
 
+  $(document).on('click', '.datepicker', function(){
+    $(this).datepicker({dateFormat: 'dd/mm/yy'});
+    $(this).datepicker("show");
+  });
+
+  $(document).on('keypress', '.datepicker', function(e){
+    e.preventDefault();
+  });
 });
 
 var turbolink_app = function(){
