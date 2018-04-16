@@ -1,34 +1,25 @@
 class RatingsController < ApplicationController
-  before_action :load_club, only: [:create, :rating_executed]
+  before_action :authenticate_user!
+  before_action :load_club, only: [:create]
 
   def create
     ActiveRecord::Base.transaction do
-      @club.ratings.build(user: current_user, star: params[:rating]).save!
+      @club.ratings.create! user_id: current_user.id, star: params[:rating]
       rating_executed
+      flash.now[:success] = t "you_raiting_club"
     end
-    flash[:success] = t "you_raiting_club"
-    respond_to do |format|
-      format.js
-    end
+  rescue
+    flash.now[:danger] = t "you_raiting_club_errors"
   end
 
   private
   def rating_executed
-    unless @club.update_attributes rating: Rating.avg_rate(params[:rating], @club)
-      flash[:danger] = t("not_rating")
-      redirect_to root_url
-    end
-  end
-
-  def rating_params
-    params.permit :rating, :book_id
+    @club.update_attributes rating: Rating.avg_rate(params[:rating], @club)
   end
 
   def load_club
-    @club = Club.find_by(id: params[:club_id])
-    unless @club
-      flash[:danger] = t("not_found_club")
-      redirect_to root_url
-    end
+    @club = Club.find_by id: params[:club_id]
+    return if @club
+    flash.now[:danger] = t "not_found_club"
   end
 end

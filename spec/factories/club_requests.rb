@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :club_request do
     organization_id organization
     user_id user

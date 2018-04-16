@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :organization_setting do
     key Settings.key_date_remind_month
     organization_id organization

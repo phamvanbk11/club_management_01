@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :rule_detail do
     content{Faker::Lorem.sentence}
     points 10

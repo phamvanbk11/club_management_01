@@ -1,2 +1,5 @@
-$('.join-cancel-toggle-container').html('<%=j render "join_cancel_toggle" %>');
-alert(I18n.t("thanks_for_join"));
+<% if flash[:success] %>
+  $('.join-cancel-toggle-container').html('<%=j render "join_cancel_toggle" %>');
+<% end %>
+$('.container').append('<%= j render "shared/flash_warning" %>');
+$('.notify').delay(4000).slideUp(300);

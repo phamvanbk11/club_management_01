@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "organizations/show", type: :view do
-  let!(:user){FactoryGirl.create :user}
+  let!(:user){FactoryBot.create :user}
   let!(:organization){create :organization}
   before do
     sign_in user

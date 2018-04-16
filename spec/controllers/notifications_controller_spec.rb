@@ -17,7 +17,7 @@ RSpec.describe NotificationsController, type: :controller do
     create :event, club: club, user: user
   end
   let!(:activity) do
-    FactoryGirl.create :activity, trackable_type: "Club", container_id: club.id,
+    FactoryBot.create :activity, trackable_type: "Club", container_id: club.id,
     owner_type: "User", container_type: "Club", owner_id: user.id, trackable_id: club.id, type_receive: :club_member
   end
   before do
