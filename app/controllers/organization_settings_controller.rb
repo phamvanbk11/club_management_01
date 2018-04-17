@@ -1,8 +1,8 @@
 class OrganizationSettingsController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource
   before_action :load_organization
   before_action :load_settings
+  authorize_resource
 
   def index; end
 

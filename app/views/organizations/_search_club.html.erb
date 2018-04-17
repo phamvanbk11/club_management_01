@@ -1,4 +1,4 @@
-<%= search_form_for @q, url: organization_path(@organization, club: :true), class: "w-search", id: "organization_club_form" do |f| %>
+<%= search_form_for @q, url: organization_path(@organization.slug, club: :true), class: "w-search", id: "organization_club_form" do |f| %>
   <div class="row">
     <div class="form-group with-button col-md-5" >
       <%= f.text_field :name_cont,

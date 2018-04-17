@@ -452,6 +452,7 @@ vi:
         create_evaluate: "Tạo đánh giá"
         owner: "Người đánh giá"
     statistic_reports:
+      error_process: "Có lỗi trong quá trình xử lý,vui lòng thử lại"
       list_report:
         person_report: "Người báo cáo"
         date_report: "Ngày báo cáo"
@@ -1425,6 +1426,7 @@ vi:
       date_remind_month: "Nhắc nhở báo cáo tháng: "
       date_remind_quarter: "Nhắc nhở báo cáo quý: "
       system: "Hệ thống"
+      date_deadline_report: "Ngày khóa báo cáo: "
   statistic_reports:
     show:
       pay_money: "Chi tiền"
@@ -1765,3 +1767,11 @@ vi:
     user: "Không tìm thấy người dùng!"
     user_org: "Không tìm thấy!"
   you_raiting_club_errors: "Đã có lỗi xảy ra, vui lòng thử lại"
+  dealine_report: "Đã quá thời hạn báo cáo"
+  set_action_reports:
+    cant_find_club: "Không tìm thấy câu lạc bộ"
+    un_permit: "Không cho phép tạo, sửa báo cáo quá hạn"
+    permit: "Cho phép tạo, sửa báo cáo quá hạn"
+    success_permit: "Đã kích hoạt quyền tạo, sửa báo cáo"
+    success_un_permit: "Đã tắt quyền tạo, sửa báo cáo"
+    errors: "Đã có lỗi xảy ra, vui lòng thử lại!"

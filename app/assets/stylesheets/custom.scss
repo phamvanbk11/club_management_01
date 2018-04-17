@@ -1292,3 +1292,7 @@ a.pull-right.add_fields {
   margin-top: 7px;
   display: inline-flex;
 }
+.has-error .error-block {
+  color: #e74c3c;
+  line-height: 2;
+}

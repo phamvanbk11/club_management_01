@@ -36,7 +36,7 @@
               <% end %>
             <% end %>
           </div>
-          <% if params[:controller] == "organizations" %>
+          <% if params[:controller] == "organizations" && params[:q].blank? %>
             <%= link_to club_evaluates_path(club_id: club.slug), remote: true,
               class: "btn btn-breez" do %>
               <i class="fa fa-star" aria-hidden="true"></i>

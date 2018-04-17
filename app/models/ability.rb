@@ -6,8 +6,27 @@ class Ability
     when Settings.namespace_admin
       can :manage, User
     when Settings.namespace_club_manage
-      can :manage, StatisticReport do |report|
+      can [:read], StatisticReport do |report|
         report.club.user_clubs.manager.pluck(:user_id).include? user.id
+      end
+
+      can [:create], StatisticReport do |report|
+        (report.club.user_clubs.manager.pluck(:user_id).include?(user.id) &&
+          report.club.organization.organization_settings.find_by(
+          key: Settings.key_dealine_report).value >= Date.current.day) ||
+          report.club.is_action_report?
+      end
+
+      can [:update, :destroy], StatisticReport do |report|
+        if report.monthly?
+          user.id == report.user_id && (report.pending? || report.rejected?) &&
+            report.club.user_clubs.manager.pluck(:user_id).include?(user.id) &&
+            (is_dealine_month?(report) || report.club.is_action_report?)
+        else
+          user.id == report.user_id && (report.pending? || report.rejected?) &&
+          report.club.user_clubs.manager.pluck(:user_id).include?(user.id) &&
+          (is_dealine_quater?(report) || report.club.is_action_report?)
+        end
       end
 
       can :read, StatisticReport do |report|
@@ -159,6 +178,45 @@ class Ability
         album.club.user_clubs.manager.pluck(:user_id)
           .include?(user.id)
       end
+
+      can :update, :set_action_report do |club|
+        club.keys.first.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
+      end
     end
+  end
+
+  private
+
+  def current_quarter
+    1 + (Date.current.month - 1) / 3
+  end
+
+  def last_month_of_quarter quarter
+    case quarter
+    when StatisticReport.quarters[:quarter_1]
+      Settings.quarter_1.last
+    when StatisticReport.quarters[:quarter_2]
+      Settings.quarter_2.last
+    when StatisticReport.quarters[:quarter_3]
+      Settings.quarter_3.last
+    else
+      Settings.quarter_4.last
+    end
+  end
+
+  def is_dealine_quater? report
+    if last_month_of_quarter(report.time) >= Date.current.month &&
+      Date.current.year == report.year
+      true
+    elsif Date.current.year == report.year
+      report.club.organization.organization_settings.find_by(
+        key: Settings.key_dealine_report).value >= Date.current.day
+    end
+  end
+
+  def is_dealine_month? report
+    report.club.organization.organization_settings.find_by(
+      key: Settings.key_dealine_report).value >= Date.current.day &&
+      report.year = Date.current.year && report.time == Date.current.month
   end
 end

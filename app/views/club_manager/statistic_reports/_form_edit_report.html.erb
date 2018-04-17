@@ -19,24 +19,15 @@
         {class: "select_custom form-control", disabled: @report.id?} %>
     </div>
   </div>
-  <div class="form-group" id="detail-report-field">
-    <div class="form-group col-md-12" id="detail-report-field">
-      <div id="detail" class="col-md-12">
-        <%= render partial: "list_bugets_report", locals: {budgets: @report.report_details.money} %>
-        <%= render partial: "list_activity_report", locals: {budgets: @report.report_details.active} %>
-        <%= render partial: "list_member_report", locals: {budgets: @report.report_details.member.load_date_report} %>
-        <%= f.fields_for :report_details do |ff| %>
-          <% if is_report_of_category_obligatory? ff.object %>
-            <%= render partial: "detail_category_report", locals: {f: ff, category: ff.object.report_category} %>
-          <% else %>
-            <%= render "report_detail_fields", f: ff %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="form-group col-md-12", id="button-add-fields">
+  <div class="form-group col-md-12" id="detail-report-field">
+    <% @report_categories.obligatory.each do |category|%>
+      <%= f.fields_for :report_detail do |ff| %>
+        <%= render partial: "field_for_category_obligatory", locals: {f: ff, category: category, report: report, events: load_event(@club, category.style_event, report)} %>
+      <% end %>
+    <% end %>
+    <div class="form-group col-md-12" id="button-add-fields">
       <%= link_to_add_association t("add"), f, :report_details,
-        class: "pull-right btn btn-breez" %>
+        class: "btn btn-breez pull-right" %>
     </div>
   </div>
   <div class="form-group col-md-12">
@@ -69,3 +60,4 @@
       "data-dismiss": "modal" %>
   </div>
 <% end %>
+<%= javascript_include_tag "statistic_report" %>

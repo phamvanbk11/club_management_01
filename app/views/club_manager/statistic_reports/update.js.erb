@@ -6,3 +6,4 @@
   $('.report-<%= @report.id %>').html('<%= j render partial: "report", locals: {report: @report} %>');
   $('.modal-backdrop').remove();
 <% end %>
+$('.notify').delay(4000).slideUp(300);

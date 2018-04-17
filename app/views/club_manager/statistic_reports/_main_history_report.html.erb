@@ -4,11 +4,15 @@
       <div class="ui-block col-md-12">
         <div class="list-report ui-block-title">
           <h6 class="title"><%= t "title_list_report" %></h6>
-          <% if @club.is_admin? current_user %>
+          <% if can? :create, @club.statistic_reports.build %>
             <%= link_to new_club_manager_club_statistic_report_path(@club.slug),
               class: "btn btn-sm btn-breez pull-right" do %>
               <i class="fa fa-plus-circle"> </i><%= t "add_report" %>
             <% end %>
+          <% elsif is_manager_club? current_user, @club %>
+            <div class="has-error pull-right">
+              <span class="error-block"><%= t "dealine_report" %></span>
+            </div>
           <% end %>
         </div>
         <div id="list-report">

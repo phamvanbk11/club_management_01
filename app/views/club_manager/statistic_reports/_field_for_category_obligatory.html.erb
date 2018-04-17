@@ -1,6 +1,5 @@
 <% if category.present? %>
   <% unless category.style_event.blank? %>
-    <% events = load_event @club, category.style_event %>
     <% if category.money? %>
       <%= render partial: "set_static_reports/report_budgets",
       locals: {events: events.event_category_activity_money(Event.array_style_event_money_except_activity,

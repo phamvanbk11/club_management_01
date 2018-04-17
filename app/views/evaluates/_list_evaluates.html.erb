@@ -2,10 +2,12 @@
   <div class="infor-request ui-block-title">
     <h6 class="title"><%= t ".list_evaluates", name: @club.name %></h6>
     <div class="pull-right funtion-request">
-      <%= link_to new_club_evaluate_path(club_id: @club.slug), remote: true,
-        class: "btn btn-breez btn-sm" do %>
-        <i class="fa fa-check-square-o" aria-hidden="true"></i>
-        <%= t ".create_evaluate" %>
+      <% if can? :create, @club.evaluates.build %>
+        <%= link_to new_club_evaluate_path(club_id: @club.slug), remote: true,
+          class: "btn btn-breez btn-sm" do %>
+          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          <%= t ".create_evaluate" %>
+        <% end %>
       <% end %>
       <%= link_to organization_path(@club.organization, club: :true), remote: :true,
         class: "btn btn-primary btn-sm button-back" do %>

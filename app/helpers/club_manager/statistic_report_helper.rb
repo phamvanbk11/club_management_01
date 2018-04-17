@@ -31,6 +31,10 @@ module ClubManager::StatisticReportHelper
     end
   end
 
+  def is_manager_club? user, club
+    club.user_clubs.manager.pluck(:user_id).include? user.id
+  end
+
   private
   def set_status category
     case category.status

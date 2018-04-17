@@ -110,4 +110,5 @@ Rails.application.routes.draw do
   end
   resources :set_sponsor_events, except: %i(new destroy)
   resources :export_reports, only: :index
+  resources :set_action_reports, only: :update
 end
