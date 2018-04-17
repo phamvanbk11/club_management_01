@@ -17,10 +17,10 @@
     <% if tab_activity %>
       <% if events.first.activity_money? %>
         <%= paginate events, params: {controller: "event_notifications", action: "show",
-          club_id: @club.id, category: Event.event_categories[:activity_money]}, remote: true %>
+          club_id: @club.slug, category: Event.event_categories[:activity_money]}, remote: true %>
       <% elsif events.first.notification? %>
         <%= paginate events, params: {controller: "event_notifications", action: "show",
-          club_id: @club.id, category: Event.event_categories[:notification]}, remote: true %>
+          club_id: @club.slug, category: Event.event_categories[:notification]}, remote: true %>
       <% end %>
     <% elsif is_member_of_club? @club %>
       <%= paginate events, remote: true,

@@ -1,5 +1,5 @@
 require File.expand_path("../..//config/environment.rb", __FILE__)
-set :environment, "development"
+set :environment, "production"
 set :output, error: "log/cron_error_log.log", standard: "log/cron_log.log"
 
 setting_month = OrganizationSetting.of_key Settings.key_date_remind_month
@@ -19,4 +19,8 @@ if setting_quarter
       rake "send_notification_remind_report_quarter[#{setting.organization_id}]"
     end
   end
+end
+
+every "0 0 * * 0" do
+  rake "auto_create_event"
 end

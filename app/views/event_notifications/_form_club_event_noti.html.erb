@@ -62,6 +62,7 @@
         placeholder: t("club_manager.event.expense_holder"), required: true, disabled: true %>
     </div>
   </div>
+  <%= render partial: "event_notifications/auto_create", locals: {event: @event, f: f} %>
   <div class="form-group col-md-12">
     <%= f.label(:location, class: "control-label label-bold") do %>
       <%= t(".location") %>

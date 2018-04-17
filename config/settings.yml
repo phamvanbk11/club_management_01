@@ -363,3 +363,5 @@ export_plan:
 album_class: "Album"
 string_true: "true"
 num_boolean_true: "1"
+day_of_week: 7
+second_sleep_retry_task: 1200

@@ -19,7 +19,7 @@ class UpdateClubMoneyService
 
   def save_event_and_plus_money_club_in_activity_event
     @event.save!
-    plus_money_club if @event.activity_money?
+    plus_money_club if (@event.activity_money? && @event_params[:expense].present?)
   end
 
   def update_event_and_money_club_in_activity_event
