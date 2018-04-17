@@ -4,11 +4,16 @@ class SetStaticReportsController < ApplicationController
   before_action :report_categories
 
   def index
-    @statistic_report = StatisticReport.new
+    @statistic_report = @club.statistic_reports.build
     @statistic_report.report_details.build
-    respond_to do |format|
-      format.js
+    @statistic_report.style = params[:q][:style].to_i
+    if @statistic_report.quarterly?
+      @statistic_report.time = params[:q][:quarter]
+    else
+      @statistic_report.time = params[:q][:month]
     end
+    @statistic_report.year = params[:q][:date_year]
+    load_events_for_report @report_categories, @statistic_report
   end
 
   private

@@ -1,28 +1,28 @@
 <%= hidden_field_tag :club_id, @club.id %>
-<div class="col-sm-10 col-md-10 push-md-1" id="new_report">
+<div class="col-sm-10 col-md-10 push-md-1">
   <%= form_for [:club_manager, @club, @statistic_report], html: {id: "form-contact"}, remote: true do |f|%>
     <div class="col-md-12">
       <div class="form-group row">
         <div class="col-md-3">
           <label for="contact-name"><%= t "type_report" %></label></br>
           <%= f.select(:style, options_for_select(option_select(
-            StatisticReport.styles)),
+            StatisticReport.styles), StatisticReport.styles[@statistic_report.style]),
             {}, {class: "form-control select_custom"}) %>
         </div>
-        <div class="col-md-3 push-md-1 month">
+        <div class="col-md-3 push-md-1 month <%= "hide-div" if @statistic_report.quarterly? %>">
           <label for="contact-name"><%= t "month" %></label></br>
           <%= select_tag "month", options_for_select(option_select_time(:monthly, @club),
-            Date.current.month), class: "form-control select_custom" %>
+            @statistic_report.time || Date.current.month), class: "form-control select_custom" %>
         </div>
-        <div class="col-md-3 push-md-1 quarter hide-div">
+        <div class="col-md-3 push-md-1 quarter <%= "hide-div" if !@statistic_report.quarterly? %>">
           <label for="contact-name"><%= t "quarter" %></label></br>
           <%= select_tag "quarter", options_for_select(
-            option_select_time(:quarterly, @club), current_quarter),
+            option_select_time(:quarterly, @club), @statistic_report.time || current_quarter),
             class: "form-control select_custom" %>
         </div>
         <div class="col-md-3 push-md-2 year">
           <label for="contact-name"><%= t "year" %></label></br>
-          <%= select_year(Date.current, {start_year: option_select_time(:year, @club),
+          <%= select_year(@statistic_report.year || Date.current, {start_year: option_select_time(:year, @club),
             end_year: Date.current.year}, {class: "select_custom form-control stype-reports"}) %>
         </div>
       </div>
@@ -30,11 +30,12 @@
     <div class="form-group col-md-12" id="detail-report-field-new">
       <% @report_categories.obligatory.each do |category|%>
         <%= f.fields_for :report_details do |ff| %>
-          <%= render partial: "field_for_category_obligatory", locals: {f: ff, category: category,
-            report: @statistic_report, events: load_event(@club, category.style_event, @statistic_report)} %>
+          <%= render partial: "club_manager/statistic_reports/field_for_category_obligatory",
+            locals: {f: ff, category: category,
+            report: @statistic_report, events: @hash_events[category.id.to_s]} %>
         <% end %>
       <% end %>
-      <div class="form-group col-md-12", id="button-add-fields-new-form">
+      <div class="form-group col-md-12" id="button-add-fields-new-form">
         <%= link_to_add_association t("add"), f, :report_details,
           class: "btn btn-breez pull-right" %>
       </div>

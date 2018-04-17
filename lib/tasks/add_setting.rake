@@ -6,6 +6,7 @@ namespace :db do
       org.organization_settings.create key: Settings.key_date_remind_month, value: 25
       org.organization_settings.create key: Settings.key_date_remind_quarter, value: 25
       org.organization_settings.create key: Settings.key_dealine_report, value: 30
+      org.organization_settings.create key: Settings.key_date_report, value: 30
     end
   end
 end

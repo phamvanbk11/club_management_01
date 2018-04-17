@@ -36,18 +36,6 @@ module StatisticReportsHelper
       style_report: StatisticReport.styles[:monthly])
   end
 
-  def load_event club, category, report
-    if report && report.id.present?
-      if report.quarterly?
-        club.events.by_event(category).by_quarter(get_month_from_quarter(report.time)).by_years(report.year)
-      else
-        club.events.by_event(category).by_months(report.time).by_years(report.year)
-      end
-    else
-      club.events.by_event(category).by_months(Date.current.month).by_current_year
-    end
-  end
-
   def money_expense event
     if event.get_money_member?
       event.expense * event.budgets.size

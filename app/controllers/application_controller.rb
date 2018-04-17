@@ -105,4 +105,10 @@ class ApplicationController < ActionController::Base
   def load_all_organization
     @organizations = Organization.all
   end
+
+  def load_events_for_report report_categories, report
+    events_service = LoadEventsService.new report_categories, report
+    @hash_events = events_service.load_events_to_hash
+    @time_range = events_service.time_range_by_report
+  end
 end

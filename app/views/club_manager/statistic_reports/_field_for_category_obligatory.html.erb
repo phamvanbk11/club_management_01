@@ -1,9 +1,7 @@
 <% if category.present? %>
-  <% unless category.style_event.blank? %>
+  <% if category.style_event.present? %>
     <% if category.money? %>
-      <%= render partial: "set_static_reports/report_budgets",
-      locals: {events: events.event_category_activity_money(Event.array_style_event_money_except_activity,
-        Event.event_categories[:activity_money]), category: category} %>
+      <%= render partial: "set_static_reports/report_budgets", locals: {events: events, category: category} %>
     <% elsif category.activity? %>
       <%= render partial: "set_static_reports/report_activity", locals: {events: events, category: category} %>
     <% elsif category.member? %>

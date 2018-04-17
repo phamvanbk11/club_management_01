@@ -1,4 +1,4 @@
-$('#new_report').html('<%= j render "new_report" %>');
+$('#form-new-report').html('<%= j render partial: "club_manager/statistic_reports/new_report" %>');
 <% if @report_categories.optional.blank? %>
   $('#button-add-fields-new-form').hide();
 <% end %>

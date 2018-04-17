@@ -20,7 +20,8 @@ class ClubManager::StatisticReportsController < ApplicationController
 
   def edit
     gon_variable
-    @report_categories = @club.organization.report_categories.all
+    @report_categories = @club.organization.report_categories.active.all
+    load_events_for_report @report_categories, @report
   end
 
   def destroy
@@ -50,7 +51,9 @@ class ClubManager::StatisticReportsController < ApplicationController
   def new
     @statistic_report = current_user.statistic_reports.build club_id: @club.id
     @statistic_report.report_details.build
+    @statistic_report.style = :monthly
     all_report
+    load_events_for_report @report_categories, @statistic_report
   end
 
   def create
@@ -132,9 +135,9 @@ class ClubManager::StatisticReportsController < ApplicationController
   end
 
   def create_detail_report static_report
-    @report_categorys = ReportCategory.load_category.active.by_category(@club.organization_id)
-    if @report_categorys
-      service = CreateReportService.new @report_categorys, static_report, @club
+    report_categories = ReportCategory.load_category.active.by_category(@club.organization_id)
+    if report_categories
+      service = CreateReportService.new report_categories, static_report, @club
       ReportDetail.import service.create_report
     end
   end
