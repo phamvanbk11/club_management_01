@@ -31,6 +31,8 @@ module NotificationsHelper
     when Settings.notification_sponsor
       organization_club_path(organization_id: notification.trackable.club.organization,
         id: notification.trackable.club)
+    when ClubRequest.name
+      organization_path(id: notification.trackable.organization.slug)
     else
       club_album_path(club_id: notification.container, id: notification.trackable_id)
     end

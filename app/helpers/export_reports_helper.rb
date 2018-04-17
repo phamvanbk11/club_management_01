@@ -73,4 +73,12 @@ module ExportReportsHelper
   def get_total details
     number_to_currency total_pay_get_money(details).second, locale: :vi
   end
+
+  def time_report_title style, time
+    if style&.to_i == StatisticReport.styles[:monthly]
+      I18n.t "export_report_members.month", time: time
+    else
+      I18n.t "export_report_members.quarter", time: time
+    end
+  end
 end

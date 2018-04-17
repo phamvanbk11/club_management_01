@@ -1459,3 +1459,8 @@ en:
     success_permit: "Active permission create. edit reports"
     success_un_permit: "Unactive permission create. edit reports"
     errors: "Errors inprocess, please try again!"
+  requestopenclub: "send request open club"
+  export_report_members:
+    month: "month %{time}"
+    quarter: "quarter %{time}"
+    report_time: "List report members %{time} year %{year} organization %{organization}"

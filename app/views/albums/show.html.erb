@@ -30,7 +30,7 @@
                   <% end %>
                 </div>
                 <div id="list-video">
-                  <%= render partial: "videos/list_video" %>
+                  <%= render partial: "videos/list_video", locals: {videos: @videos, album: @album, club: @club} %>
                 </div>
                 <div class="tz-gallery">
                   <div class="row">
@@ -72,8 +72,8 @@
   </div>
 </div>
 <div id="modal-new-image" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <%= render "new_club_image" %>
+  <%= render partial: "new_club_image", locals: {club: @club, album: @album, image: @image} %>
 </div>
 <div id="modal-new-video" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <%= render "new_club_video" %>
+  <%= render partial: "new_club_video", locals: {club: @club, album: @album} %>
 </div>

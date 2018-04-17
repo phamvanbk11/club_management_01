@@ -4,8 +4,8 @@
       <h2 class="modal-title"><i class="fa fa-camera"></i> <%= t "club_manager.album.create" %></h2>
     </div>
     <div class="modal-body">
-      <%= form_for [@club, @album, @image], html: {multipart: true, enctype: "multipart/form-data", class: "form-horizontal form-bordered"} do |f| %>
-        <%= f.hidden_field :album_id, value: @album.id %>
+      <%= form_for [club, album, image], html: {multipart: true, enctype: "multipart/form-data", class: "form-horizontal form-bordered"} do |f| %>
+        <%= f.hidden_field :album_id, value: album.id %>
         <fieldset>
           <div class="form-group">
             <label class="col-md-3 control-label" for="example-file-input"><%= t "club_manager.image.images" %></label>

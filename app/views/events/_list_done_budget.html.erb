@@ -18,8 +18,8 @@
           </tr>
         </thead>
         <tbody>
-          <% if @members_done.any? %>
-            <% @members_done.each do |user| %>
+          <% if @event_support.members_done.any? %>
+            <% @event_support.members_done.each do |user| %>
               <tr>
                 <td><%= link_to user.full_name, user_path(user.id), target: :blank %></td>
                 <td><%= user.email %></td>

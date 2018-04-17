@@ -1780,3 +1780,8 @@ vi:
     success_permit: "Đã kích hoạt quyền tạo, sửa báo cáo"
     success_un_permit: "Đã tắt quyền tạo, sửa báo cáo"
     errors: "Đã có lỗi xảy ra, vui lòng thử lại!"
+  requestopenclub: "gửi yêu cầu thành lập câu lạc bộ"
+  export_report_members:
+    month: "tháng %{time}"
+    quarter: "quý %{time}"
+    report_time: "Danh sách báo cáo thành viên %{time} năm %{year} tổ chức %{organization}"

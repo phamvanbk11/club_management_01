@@ -9,11 +9,11 @@ class ImagesController < ApplicationController
         @album.images.create!(url: img)
         flash[:success] = t "add_images_successfully"
       end
-      redirect_to club_album_path id: @album.id
+      redirect_back fallback_location: club_album_path(id: @album.id)
     end
   rescue
     flash[:danger] = t "error_in_process"
-    redirect_to club_album_path id: @album.id
+    redirect_back fallback_location: root_path
   end
 
   def destroy

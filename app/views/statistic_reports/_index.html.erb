@@ -16,6 +16,12 @@
       </li>
     </ul>
     <div class="pull-right funtion-request">
+      <%= hidden_field_tag :organization_id, @organization.slug %>
+      <%= link_to "#", class: "btn-export-report", title: t("export_report") do %>
+        <span class = "export-member primary">
+          <i class="fa fa-download"></i>
+        </span>
+      <% end %>
       <%= link_to organization_path(@organization), remote: :true,
         class: "btn btn-primary btn-sm" do %>
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -87,3 +93,4 @@
   <%= render "modal" %>
 </div>
 <%= javascript_include_tag "tabs" %>
+<%= javascript_include_tag "export_report_members" %>

@@ -182,6 +182,10 @@ class Ability
       can :update, :set_action_report do |club|
         club.keys.first.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
       end
+
+      can :index, :export_report_member do |organization|
+        organization.keys.first.user_organizations.are_admin.pluck(:user_id).include?(user.id)
+      end
     end
   end
 

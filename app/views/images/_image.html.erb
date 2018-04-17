@@ -1,0 +1,18 @@
+<div class="col-sm-12 col-md-2 portfolio-item img-<%= image.id %>"
+  data-category="">
+  <%= link_to "#{image.url}", class: "list-image lightbox" do  %>
+    <%= image_tag image.url, class: "centered-and-cropped js-img" %>
+  <% end %>
+  <% if @club.is_admin? current_user %>
+    <div class="middle">
+      <div class="delete-img">
+        <%= link_to club_album_image_path(id: image.id,
+          club_id: @club.id, album_id: @event_support.load_albums.id), title: t("delete"),
+          method: :delete, remote: :true,
+          data: {confirm: t("club_manager.image.confirm_delete")} do %>
+           <i class="fa fa-window-close"></i>
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

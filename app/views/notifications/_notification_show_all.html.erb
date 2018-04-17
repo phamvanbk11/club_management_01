@@ -15,6 +15,9 @@
               <% elsif notification.trackable_type == Settings.class_sponsor %>
                 <%= render partial: "notifications/notification_main_sponsor",
                   locals: {notification: notification} %>
+              <% elsif notification.trackable_type == ClubRequest.name %>
+                <%= render partial: "notifications/notification_request_club",
+                  locals: {notification: notification} %>
               <% else %>
                 <div class="notification-event">
                   <div class="notification-value">
