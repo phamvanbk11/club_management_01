@@ -37,7 +37,7 @@
           </div>
         </td>
         <td class="description">
-          <p class="description"><%= raw(event.description.truncate(Settings.event_truncate)) unless event.description.nil? %></p>
+          <p class="description"><%= raw(event.description.gsub("<pre>", "<p>").truncate(Settings.event_truncate)) unless event.description.nil? %></p>
         </td>
         <%= render partial: "event_notifications/action_event", locals: {event: event, category: Event.event_categories[:activity_money], page: page} %>
       </tr>

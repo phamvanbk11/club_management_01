@@ -33,12 +33,15 @@ class EventNotificationsController < ApplicationController
       create_acivity event, Settings.create, event.club, current_user,
         Activity.type_receives[:club_member]
       service_money.save_event_and_plus_money_club_in_activity_event
+      save_images_in_album event
       flash[:success] = t ".create_success"
       page_redirect event
     end
   rescue
     if event && event.errors.any?
       flash_error(event)
+    elsif params[:images].blank? && event.activity_money?
+      flash[:danger] = t ".please_upload_image"
     else
       flash[:danger] = t ".error_in_process"
     end
@@ -85,12 +88,12 @@ class EventNotificationsController < ApplicationController
   def event_notification_params
     event_category = params[:event][:event_category].to_i
     params.require(:event).permit(:club_id, :name, :date_start, :status,
-      :date_end, :location, :description, :image, :user_id, :is_public, :is_auto_create)
+      :date_end, :location, :description, :user_id, :is_public, :is_auto_create)
       .merge! event_category: event_category
   end
 
   def event_params_with_album
-    if params[:create_albums].present?
+    if event_notification_params[:event_category] == Event.event_categories[:activity_money]
       event_notification_params.merge! albums_attributes: [name: params[:event][:name],
         club_id: @club.id]
     else
@@ -111,12 +114,8 @@ class EventNotificationsController < ApplicationController
     when Event.event_categories[:notification]
       event_params_with_album
     else
-      if params[:create_albums].present?
-        event_params_with_check_attributes.merge! albums_attributes: [name: params[:event][:name],
-          club_id: @club.id]
-      else
-        event_params_with_check_attributes
-      end
+      event_params_with_check_attributes.merge! albums_attributes: [name: params[:event][:name],
+        club_id: @club.id]
     end
   end
 
@@ -193,5 +192,13 @@ class EventNotificationsController < ApplicationController
     params[:event].present? && params[:event][:event_details_attributes].present? &&
     params[:event][:event_details_attributes]["0"].present? &&
     params[:event][:event_details_attributes]["0"][:description].present?
+  end
+
+  def save_images_in_album event
+    if event.activity_money?
+      params[:images][:urls].each do |img|
+        event.albums.first.images.create! url: img
+      end
+    end
   end
 end

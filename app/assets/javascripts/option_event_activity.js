@@ -12,11 +12,15 @@ $(document).ready(function () {
       $('#js-lb-name').text($('#js-lb-name-notification').text());
       $('#js-text-name').attr('placeholder', $('#js-lb-name-notification').text());
       $('#js-auto-create').show();
+      $('.images_album').hide();
+      $('#file-upload').prop('required', false);
     }
     else if (cat === gon.activity_money.toString()) {
       $('#collapse-money').show();
       $('#js-lb-name').text($('#js-lb-name-activity').text());
       $('#js-text-name').attr('placeholder', $('#js-lb-name-activity').text());
+      $('.images_album').show();
+      $('#file-upload').prop('required', true);
     }
   });
 

@@ -23,7 +23,7 @@
               <%= link_to event.name, club_event_url(event.club, event), class: "author-name h5 link_notification" %></br>
               <% if event.description.present? %>
                 <div id="description-<%= event.id %>">
-                  <%= raw(event.description.truncate(Settings.notification_truncate, separator: " ")) %>
+                  <%= raw(event.description.gsub("<pre>", "<p>").truncate(Settings.notification_truncate, separator: " ")) %>
                   <% if raw(event.description).length > Settings.notification_truncate %>
                     <%= link_to "", data: {event: event.id},
                       title: t("show_more_descrip"), class: "show-more" do %>
@@ -32,7 +32,7 @@
                   <% end %>
                 </div>
                 <div class="hide-div" id="content-<%= event.id %>">
-                  <%= raw(event.description) if (raw(event.description).length > Settings.notification_truncate) %>
+                  <%= raw(event.description.gsub("<pre>", "<p>")) if (raw(event.description).length > Settings.notification_truncate) %>
                 </div>
               <% end %>
             </div>

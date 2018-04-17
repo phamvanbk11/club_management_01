@@ -86,22 +86,22 @@
       </div>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group images_album hide-div">
+    <label class="col-md-2 control-label label-check label-bold" for="example-text-input">
+      <%= t "form_club_event.album" %>
+    </label>
+    <div class="toggle-btn col-md-1 active">
+      <%= check_box_tag "create_albums", Settings.value_default_check_box, true, class: "cb-value", disabled: true %>
+      <span class="round-btn"></span>
+    </div>
+  </div>
+  <div class="form-group images_album hide-div">
     <label class="col-md-3 control-label label-bold" id="js-lb-image">
       <%= t ".image" %>
     </label>
     <div class="col-md-12">
-      <%= f.file_field :image, id: "file-upload", accept: Settings.image_upload %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-md-2 control-label label-check label-bold" for="example-text-input">
-      <%= t "form_club_event.album" %>
-    </label>
-    <div class="toggle-btn col-md-1 <%= get_class_checkbox check_albums(@event)%>">
-      <%= check_box_tag "create_albums", Settings.value_default_check_box, check_albums(@event),
-        disabled: check_action_and_albums(params[:action], @event), class: "cb-value" %>
-      <span class="round-btn"></span>
+      <%= file_field_tag "images_album", id: "file-upload", name: "images[urls][]",
+        accept: Settings.image_upload, multiple: true %>
     </div>
   </div>
   <div class="form-group">

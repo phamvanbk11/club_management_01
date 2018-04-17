@@ -81,24 +81,6 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="col-md-3 control-label label-bold" for="example-file-input">
-      <%= t "form_event.image" %>
-    </label>
-    <div class="col-md-12">
-      <%= f.file_field :image, id: "file-upload", accept: Settings.image_upload %>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-md-2 control-label label-check label-bold" for="example-text-input">
-      <%= t "form_club_event.album" %>
-    </label>
-    <div class="toggle-btn col-md-1">
-      <%= check_box_tag "create_albums", Settings.value_default_check_box, check_albums(@event),
-        disabled: check_action_and_albums(params[:action], @event), class: "cb-value" %>
-      <span class="round-btn"></span>
-    </div>
-  </div>
-  <div class="form-group">
     <label class="col-md-3 control-label label-bold" for="example-textarea-input">
       <%= t "description" %>
     </label>
