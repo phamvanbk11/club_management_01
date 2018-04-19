@@ -14,6 +14,7 @@ class EvaluatesController < ApplicationController
 
   def create
     @evaluate = @club.evaluates.new params_evaluate
+    authorize! :create, @evaluate
     if params[:rule_detail_ids].is_a?(Array) && params[:note].is_a?(Array)
       ActiveRecord::Base.transaction do
         import_evaluate_details

@@ -33,7 +33,7 @@
     title: t("info"), class: "btn btn-warning btn-info-report" do %>
     <i class="fa fa-info"></i>
   <% end %>
-  <% if is_can_edit_report? report %>
+  <% if can? :update, report %>
     <%= link_to edit_club_manager_club_statistic_report_path(@club, report), remote: true,
       title: t("edit"), class: "btn btn-primary btn-info-report" do %>
       <i class="fa fa-edit"></i>

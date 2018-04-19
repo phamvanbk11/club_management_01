@@ -36,8 +36,16 @@ module StatisticReportsHelper
       style_report: StatisticReport.styles[:monthly])
   end
 
-  def load_event club, category
-    club.events.by_event(category).by_months(Date.current.month).by_current_year
+  def load_event club, category, report
+    if report && report.id.present?
+      if report.quarterly?
+        club.events.by_event(category).by_quarter(get_month_from_quarter(report.time)).by_years(report.year)
+      else
+        club.events.by_event(category).by_months(report.time).by_years(report.year)
+      end
+    else
+      club.events.by_event(category).by_months(Date.current.month).by_current_year
+    end
   end
 
   def money_expense event
@@ -48,7 +56,50 @@ module StatisticReportsHelper
     end
   end
 
-  def is_can_edit_report? report
-    current_user.id == report.user_id && (report.pending? || report.rejected?)
+  def option_select_time style, club
+    if club.is_action_report?
+      option_time_full style
+    else
+      option_time_limit style
+    end
+  end
+
+  def current_quarter
+    1 + (Date.current.month - 1) / 3
+  end
+
+  def get_month_from_quarter quarter
+    case quarter
+    when StatisticReport.quarters[:quarter_1]
+      Settings.quarter_1
+    when StatisticReport.quarters[:quarter_2]
+      Settings.quarter_2
+    when StatisticReport.quarters[:quarter_3]
+      Settings.quarter_3
+    else
+      Settings.quarter_4
+    end
+  end
+
+  def option_time_full style
+    case style
+    when :monthly
+      option_select(StatisticReport.months)
+    when :quarterly
+      option_select(StatisticReport.quarters)
+    else
+      Settings.year_ago.years.ago.year
+    end
+  end
+
+  def option_time_limit style
+    case style
+    when :monthly
+      option_select(StatisticReport.months.select{|k ,v| v >= Date.current.month})
+    when :quarterly
+      option_select(StatisticReport.quarters.select{|k ,v| v >= current_quarter})
+    else
+      Date.current.year
+    end
   end
 end

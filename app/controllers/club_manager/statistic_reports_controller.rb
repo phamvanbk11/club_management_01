@@ -20,6 +20,7 @@ class ClubManager::StatisticReportsController < ApplicationController
 
   def edit
     gon_variable
+    @report_categories = @club.organization.report_categories.all
   end
 
   def destroy
@@ -33,12 +34,17 @@ class ClubManager::StatisticReportsController < ApplicationController
   end
 
   def update
-    send_notification
-    if @report && @report.update_attributes(report_params)
+    ActiveRecord::Base.transaction do
+      @report.report_details.delete_all
+      @report.update_attributes! report_params
+      send_notification
+      create_detail_report @report
       flash.now[:success] = t "update_report_success"
-    elsif @report
-      flash.now[:danger] = t "update_report_error"
+      create_acivity @report, Settings.create_report,
+        @club.organization, current_user, Activity.type_receives[:organization_manager]
     end
+  rescue
+    flash.now[:danger] = t ".error_process"
   end
 
   def new

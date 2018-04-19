@@ -18,8 +18,9 @@
             <% end %>
           </td>
           <td>
-            <% if report_detail.detail.is_a? Hash %>
-              <%= count_money_detail report_detail, EventDetail.styles.key(Settings.style_event_detail.value_enum_pay) %></br>
+            <%= count_money_detail report_detail, EventDetail.styles.key(Settings.style_event_detail.value_enum_pay) %></br>
+            <% if report_detail.detail.is_a?(Hash) && is_present_details?(report_detail,
+              EventDetail.styles.key(Settings.style_event_detail.value_enum_pay)) %>
               <%= link_to "#detail-pay-#{report_detail.id}", data: { toggle: :collapse },
                 title: t("click_to_show") do %>
                 <i class="fa fa-info"></i> <%= t "detail" %>
@@ -29,7 +30,8 @@
           </td>
           <td>
             <%= count_money_detail report_detail, EventDetail.styles.key(Settings.style_event_detail.value_enum_get) %></br>
-            <% if report_detail.detail.is_a? Hash %>
+            <% if report_detail.detail.is_a?(Hash) && is_present_details?(report_detail,
+              EventDetail.styles.key(Settings.style_event_detail.value_enum_get)) %>
               <%= link_to "#detail-get-#{report_detail.id}", data: { toggle: :collapse },
                 title: t("click_to_show") do %>
                 <i class="fa fa-info"></i> <%= t "detail" %>

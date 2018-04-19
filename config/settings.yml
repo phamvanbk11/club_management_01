@@ -243,6 +243,7 @@ count_render_list_report: 1
 value_default_check_box: 1
 key_date_remind_month: "date_remind_month"
 key_date_remind_quarter: "date_remind_quarter"
+key_dealine_report: "date_deadline_report"
 command_update_whenever: "whenever -w"
 size_image_club: 200
 action_edit: "edit"

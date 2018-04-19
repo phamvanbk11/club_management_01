@@ -72,7 +72,7 @@ class CreateReportService
     detail = {}
     event.event_details.each do |event|
       detail.merge!({event.id.to_s.to_sym => {name: "#{event.description}", money: "#{event.money}",
-        style: event.style}})
+        style: event.style, date: event.spent_at}})
     end
     return detail
   end

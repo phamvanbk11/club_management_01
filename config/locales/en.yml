@@ -1446,3 +1446,12 @@ en:
     image: "Can't find image!"
     user: "Can't find user!"
     user_org: "Not found!"
+  you_raiting_club_errors: "Errors inprocess, please try again!"
+  dealine_report: "Can't create, edit report"
+  set_action_reports:
+    cant_find_club: "Can't find club"
+    un_permit: "Unpermit create, edit reports"
+    permit: "Permit create, edit reports"
+    success_permit: "Active permission create. edit reports"
+    success_un_permit: "Unactive permission create. edit reports"
+    errors: "Errors inprocess, please try again!"

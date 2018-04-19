@@ -3,7 +3,8 @@ $(document).ready(function() {
     var organization_slug = $('#organization_slug').val();
     var date_remind_month = $('#date_remind_month_select').val();
     var date_remind_quarter = $('#date_remind_quarter_select').val();
-    var data = {settings: {date_remind_month: date_remind_month, date_remind_quarter: date_remind_quarter},
+    var date_deadline_report = $('#date_deadline_report_select').val();
+    var data = {settings: {date_remind_month: date_remind_month, date_remind_quarter: date_remind_quarter, date_deadline_report: date_deadline_report},
       organization_slug: organization_slug};
     $.ajax(
     {

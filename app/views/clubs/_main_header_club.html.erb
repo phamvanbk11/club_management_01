@@ -138,6 +138,23 @@
                           <% end %>
                         <% end %>
                       </li>
+                      <% if is_manager_organization? @club, current_user %>
+                        <li>
+                          <% if @club.is_action_report? %>
+                            <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: false),
+                              method: :patch, class: "set-image-club" do %>
+                              <i class="fa fa-pause-circle-o"></i>
+                              <%= t "set_action_reports.un_permit" %>
+                            <% end %>
+                          <% else %>
+                            <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: true),
+                              method: :patch, class: "set-image-club" do %>
+                              <i class="fa fa-play"></i>
+                              <%= t "set_action_reports.permit" %>
+                            <% end %>
+                          <% end %>
+                        </li>
+                      <% end %>
                     </ul>
                   </div>
                 <% end %>

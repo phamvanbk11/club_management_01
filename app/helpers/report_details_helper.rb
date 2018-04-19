@@ -54,11 +54,21 @@ module ReportDetailsHelper
       if report_detail.detail.is_a? Hash
         report_detail.detail.each do |key, value|
           if value[:style] == style
-            concat content_tag(:li, value[:name] + ": " + number_to_currency(value[:money], locals: :vi))
+            concat content_tag(:li, format_date_dd_mm_yy(value[:date]) + value[:name] + ": " +
+              number_to_currency(value[:money], locals: :vi) )
           end
         end
       end
     end
+  end
+
+  def is_present_details? report_detail, style
+    if report_detail.detail.is_a? Hash
+      report_detail.detail.each do |key, value|
+        return true if(value[:style] == style)
+      end
+    end
+    false
   end
 
   def is_size_more_eight? detail
@@ -84,5 +94,13 @@ module ReportDetailsHelper
       end
     end
     [pay_total, get_total]
+  end
+
+  def format_date_dd_mm_yy date
+    if date
+      (l date, format: :short) + " | "
+    else
+      ""
+    end
   end
 end
