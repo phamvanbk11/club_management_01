@@ -22,7 +22,7 @@
   <div class="form-group col-md-12" id="detail-report-field">
     <% @report_categories.obligatory.each do |category|%>
       <%= f.fields_for :report_detail do |ff| %>
-        <%= render partial: "field_for_category_obligatory", locals: {f: ff, category: category, report: report, events: load_event(@club, category.style_event, report)} %>
+        <%= render partial: "field_for_category_obligatory", locals: {f: ff, category: category, report: report, events: @hash_events[category.id.to_s]} %>
       <% end %>
     <% end %>
     <div class="form-group col-md-12" id="button-add-fields">

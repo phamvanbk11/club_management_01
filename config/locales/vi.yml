@@ -1427,6 +1427,7 @@ vi:
       date_remind_quarter: "Nhắc nhở báo cáo quý: "
       system: "Hệ thống"
       date_deadline_report: "Ngày khóa báo cáo: "
+      date_report: "Ngày tính báo cáo: "
   statistic_reports:
     show:
       pay_money: "Chi tiền"
@@ -1772,6 +1773,8 @@ vi:
     cant_find_club: "Không tìm thấy câu lạc bộ"
     un_permit: "Không cho phép tạo, sửa báo cáo quá hạn"
     permit: "Cho phép tạo, sửa báo cáo quá hạn"
+    un_permit: "Không cho phép tạo, sửa báo cáo"
+    permit: "Cho phép tạo, sửa báo cáo"
     success_permit: "Đã kích hoạt quyền tạo, sửa báo cáo"
     success_un_permit: "Đã tắt quyền tạo, sửa báo cáo"
     errors: "Đã có lỗi xảy ra, vui lòng thử lại!"

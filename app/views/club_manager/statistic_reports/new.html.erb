@@ -10,12 +10,14 @@
                 <%= link_to club_path(@club), title: t("back"),
                   class: "btn btn-sm btn-primary" do %>
                   <i class="fa fa-arrow-left"></i>
-                <% end %>  
+                <% end %>
               </div>
               <div class="block-title">
                 <h5 class="text-center"><strong><%= t "add_report" %>: <%= @club.name %></strong></h5>
               </div>
-              <%= render "clubs/new_report" %>
+              <div id="form-new-report">
+                <%= render "new_report" %>
+              </div>
             </div>
           </div>
         </article>

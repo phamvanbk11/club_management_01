@@ -1113,6 +1113,8 @@ en:
       date_remind_month: "Remind report month: "
       date_remind_quarter: "Remind report quarter: "
       system: "System"
+      date_report: "Date report"
+      date_deadline_report: "Date lock report"
   statistic_reports:
     show:
       pay_money: "Pay money"

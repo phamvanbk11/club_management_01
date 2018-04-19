@@ -1,10 +1,6 @@
 <label for="contact-name"><%= category.name %> *</label></br>
 <% if events.present? %>
-  <% if events.first.date_end %>
-    (<%= l events.first.date_end.beginning_of_month, format: :short %> - <%= l events.last.date_end.end_of_month, format: :short %>)</br>
-  <% else %>
-    (<%= l events.first.created_at, format: :short %> - <%= l events.last.created_at, format: :short %>)</br>
-  <% end %>
+  <%= l @time_range.first, format: :short %> - <%= l @time_range.last, format: :short %></br>
   <table class="table ui-block table-bordered results">
     <thead>
       <tr>

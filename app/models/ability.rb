@@ -217,6 +217,6 @@ class Ability
   def is_dealine_month? report
     report.club.organization.organization_settings.find_by(
       key: Settings.key_dealine_report).value >= Date.current.day &&
-      report.year = Date.current.year && report.time == Date.current.month
+      report.year == Date.current.year && report.time >= Date.current.month
   end
 end
