@@ -1,0 +1,13 @@
+<div class="notification-event">
+  <div class="notification-value">
+    <span class="h6 notification-friend"><%= notification.owner_full_name %></span>
+    <%= t "has_been" %><%= t notification.key.try(:downcase) %>
+    <strong><%= notification.trackable.name %></strong>
+    <% if notification.container %>
+      <%= t notification.container_type.try(:downcase) %>
+      <strong><%= notification.container_name %></strong>
+      </br><i class="fa fa-clock-o time_create" aria-hidden="true">
+        <%= l notification.created_at, format: :short %></i>
+    <% end %>
+  </div>
+</div>

@@ -368,3 +368,15 @@ num_boolean_true: "1"
 day_of_week: 7
 second_sleep_retry_task: 1200
 date_report_default: 30
+request_club: "RequestOpenClub"
+export_full_report_members:
+  merge_cell_head: "A1:E2"
+  width_colums:
+    a: 5
+    b: 20
+    c: 20
+    d: 25
+    e: 20
+rand_file_name:
+  num: 36
+  xnum: 10

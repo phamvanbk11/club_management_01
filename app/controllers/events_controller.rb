@@ -31,19 +31,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event_support = Support::EventSupport.new @event, @club
     @donate = Donate.new
-    @expense_pending = @event.donates.pending.expense_pending
-    @members_done = User.with_deleted.done_by_ids(@event.budgets.pluck :user_id)
-    @members_yet = @club.users.yet_by_ids(@event.budgets.pluck :user_id)
-    if params[:comment_status] == "all"
-      @comments = @event.comments.newest
-      respond_to do |format|
-        format.js
-      end
-    else
-      @comments = @event.comments.includes(:user).newest.take(Settings.limit_comments)
-    end
-    @posts = @event.posts.includes(:user, :post_galleries).newest.page(params[:page]).per Settings.per_page
     @post = @event.posts.build
     @comment = @event.comments.build
     load_member_not_join

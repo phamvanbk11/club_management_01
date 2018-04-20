@@ -36,6 +36,8 @@ class ClubRequestsController < ApplicationController
     request = ClubRequest.new request_params
     if request.save
       save_user_club_request request
+      create_acivity request, Settings.request_club,
+        request.organization, current_user, Activity.type_receives[:organization_manager]
       flash[:success] = t "success_create"
       redirect_to root_path
     else

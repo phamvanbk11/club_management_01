@@ -6,8 +6,7 @@ class CreateReportService
   end
 
   def create_report
-    events_service = LoadEventsService.new @club, @report_categories, @static_report,
-      @static_report.style, @static_report.year, @static_report.time
+    events_service = LoadEventsService.new @report_categories, @static_report
     @hash_events = events_service.load_events_to_hash
     @report_detail = []
     @report_categories.each do |report_category|

@@ -11,6 +11,7 @@ class ReportDetail < ApplicationRecord
 
   scope :load_detail_budgets, ->{where.not style: :other}
   scope :load_date_report, ->{where date_event: nil}
+  scope :by_report_id, ->ids{where statistic_report_id: ids}
 
   delegate :name, to: :report_category, prefix: :report_category, allow_nil: :true
 end

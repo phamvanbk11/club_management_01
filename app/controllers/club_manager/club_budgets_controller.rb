@@ -64,7 +64,6 @@ class ClubManager::ClubBudgetsController < ApplicationController
   end
 
   def load_member_done_and_yet
-    @members_done = @club.users.done_by_ids @event.budgets.pluck(:user_id)
-    @members_yet = @club.users.yet_by_ids @event.budgets.pluck(:user_id)
+    @event_support = Support::EventSupport.new @event, @club
   end
 end

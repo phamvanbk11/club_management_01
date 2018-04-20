@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   def create_acivity trackable, key, container, owner, type
     Activity.create! key: key, container: container,
-    trackable: trackable, owner: owner, type_receive: type
+      trackable: trackable, owner: owner, type_receive: type
   end
 
   def load_club

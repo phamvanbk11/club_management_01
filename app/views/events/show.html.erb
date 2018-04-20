@@ -146,7 +146,7 @@
           <% end %>
           <div class="comment-post">
             <div class="row">
-              <div class="col-md-8">
+              <div class="menu-bar">
                 <ul class="profile-menu tab_list_detail_club">
                   <li>
                     <%= link_to t("post"), "#post", class: "active" %>
@@ -154,6 +154,11 @@
                   <li>
                     <%= link_to t("comment"), "#comment" %>
                   </li>
+                  <% if @event_support.load_albums.present? && @event.activity_money? %>
+                    <li>
+                      <%= link_to t("gallery"), "#gallery" %>
+                    </li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -175,16 +180,64 @@
                 </div>
               <% end %>
               <div id="post-list">
-                <%= render partial: "events/post", locals: {posts: @posts} %>
+                <%= render partial: "events/post", locals: {posts: @event_support.posts} %>
               </div>
             </div>
             <div class="ui-block" id="comment">
-              <%= render partial: "events/comment", locals: {comments: @comments, event: @event} %>
+              <%= render partial: "events/comment", locals: {
+                comments: @event_support.comments, event: @event} %>
             </div>
           </div>
+          <% if @event_support.load_albums.present? && @event.activity_money? %>
+            <div class = "tab_detail_club comment-post-event">
+              <div class="ui-block" id="gallery">
+                <div class="ui-block-title ui-block-title-small">
+                  <h6 class="title col-md-1"><%= t "gallery"%></h6>
+                  <% if @club.is_admin? current_user %>
+                    <div class="new_image_video">
+                      <%= link_to "#modal-new-image", data: {toggle: "modal"},
+                        class: "btn btn-sm btn-breez pull-right" do %>
+                        <i class="fa fa-camera"></i><%= t "club_manager.image.create" %>
+                      <% end %>
+                      <%= link_to "#modal-new-video", data: {toggle: "modal"},
+                        class: "btn btn-sm btn-breez pull-right" do %>
+                        <i class="fa fa-camera"></i><%= t "club_manager.video.create" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div id="list-video">
+                  <%= render partial: "videos/list_video", locals: {videos: @event_support.videos,
+                    album: @event_support.load_albums, club: @club} %>
+                </div>
+                <div class="tz-gallery">
+                  <div class="row">
+                    <% if @event_support.images.present? %>
+                      <%= render partial: "images/image", collection: @event_support.images,
+                        as: :image %>
+                    <% else %>
+                      <div class="text-center col-md-12">
+                        <h5><%= t "club_manager.image.no_image" %></h5>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </article>
       </div>
     </div>
   </div>
 </div>
+<% if @event_support.load_albums.present? %>
+  <div id="modal-new-image" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <%= render partial: "albums/new_club_image", locals: {club: @club,
+      album: @event_support.load_albums, image: @event_support.build_image} %>
+  </div>
+  <div id="modal-new-video" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <%= render partial: "albums/new_club_video", locals: {club: @club,
+      album: @event_support.load_albums} %>
+  </div>
+<% end %>
 <%= javascript_include_tag "add_member_join_event" %>

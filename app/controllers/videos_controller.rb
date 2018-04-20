@@ -53,8 +53,8 @@ class VideosController < ApplicationController
     end
     @club = @album.club
     @videos = @album.videos.upload_success
-    render json: {html: render_to_string(partial: "list_video"),
-      message: render_to_string(partial: "shared/flash_warning")}
+    render json: {html: render_to_string(partial: "videos/list_video", locals: {videos: @videos,
+      club: @club, album: @album}), message: render_to_string(partial: "shared/flash_warning")}
   end
 
   def destroy
