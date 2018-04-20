@@ -70,7 +70,7 @@ module ClubsHelper
   end
 
   def is_in_organization_of_club? club
-    current_user.organizations.pluck(:id).include?(club.organization.id)
+    club.organization.user_organizations.joined.pluck(:user_id).include?(current_user.id)
   end
 
   def is_manager_organization? club, user

@@ -59,7 +59,11 @@
           </div>
           <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-              <%= image_tag @event.image, class: "img-responsive full_image event-image centered-and-cropped" %>
+              <% if @event.albums.present? && @event.albums.first.images.present? %>
+                <%= image_tag @event.albums.first.images.first.url, class: "img-responsive full_image event-image centered-and-cropped" %>
+              <% else %>
+                <%= image_tag @event.image, class: "img-responsive full_image event-image centered-and-cropped" %>
+              <% end %>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
               <div class="event-description">
@@ -114,7 +118,7 @@
               <strong><%= t "no_description" %></strong>
             </h5>
           <% else %>
-            <p><%= raw(@event.description) %></p>
+            <p><%= raw(@event.description.gsub("<pre>", "<p>")) %></p>
           <% end %>
           <% case when @event.get_money_member? %>
             <div class="content-event col-md-12 site-block border panel-collapse collapse list-budget"

@@ -23,7 +23,7 @@ module NotificationsHelper
   def url_notification notification
     case notification.trackable_type
     when Settings.notification_event
-      club_event_path(id: notification.trackable_id, club_id: notification.container_id)
+      club_event_path(id: notification.trackable_id, club_id: notification.container)
     when Settings.notification_club
       club_path(id: notification.container)
     when Settings.notification_report
@@ -32,7 +32,7 @@ module NotificationsHelper
       organization_club_path(organization_id: notification.trackable.club.organization,
         id: notification.trackable.club)
     else
-      club_album_path(club_id: notification.container_id, id: notification.trackable_id)
+      club_album_path(club_id: notification.container, id: notification.trackable_id)
     end
   end
 

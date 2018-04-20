@@ -11,9 +11,13 @@
   </div>
   <div class="time-line-description">
     <% unless event.image.nil? %>
-      <%= image_tag event.image, class: "centered-and-cropped" %><br>
+      <% if event.albums.present? && event.albums.first.images.present? %>
+        <%= image_tag event.albums.first.images.first.url, class: "centered-and-cropped" %><br>
+      <% else %>
+        <%= image_tag event.image, class: "centered-and-cropped" %><br>
+      <% end %>
       <div class="text-left bgr-body">
-        <%= raw(event.description.truncate(Settings.event_truncate)) unless event.description.nil? %>
+        <%= raw(event.description.gsub("<pre>", "<p>").truncate(Settings.event_truncate)) unless event.description.nil? %>
       </div>
     <% end %>
   </div>

@@ -41,7 +41,9 @@
             <% end %>
           </td>
           <td>
-            <%= raw(event.description) %>
+            <div class="scroll-user-event">
+              <%= raw(event.description.gsub("<pre>", "<p>")) %>
+            </div>
           </td>
         </tr>
       <% end %>

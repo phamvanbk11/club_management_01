@@ -871,7 +871,7 @@ vi:
   members_of: "Thành viên của "
   actived: "Đã kích hoạt"
   not_active: "Chưa kích hoạt"
-  answer_active: "Bạn chắc chắn muốn kích hoạt thành viên này?"
+  answer_active: "Bạn muốn duyệt thành viên này?"
   active: "Duyệt"
   user_organization_not_found: "Người dùng này không tìm thấy!"
   can_not_active: "Không thể kích hoạt người dùng này!"
@@ -1448,6 +1448,8 @@ vi:
     error_process: "Có lỗi trong quá trình xử lý,vui lòng thử lại"
     success_process: "Bạn đã xử lý thành công"
     amount_for: "Tổng tiền"
+    error_in_process: "Đã có lỗi xảy ra, vui lòng thử lại!"
+    please_upload_image: "Vui lòng tải lên ảnh của hoạt động"
     form_edit_event_activity:
       name: "Tên"
       inprocess: "Đang diễn ra"

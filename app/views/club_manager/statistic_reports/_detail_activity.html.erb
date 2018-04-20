@@ -19,7 +19,7 @@
           <td><%= detail.name_event %></td>
           <td>
             <div class="scroll-user-event">
-              <%= raw(detail.detail) %>
+              <%= raw(detail.detail.gsub("<pre>", "<p>")) %>
             </div>
           </td>
           <td>

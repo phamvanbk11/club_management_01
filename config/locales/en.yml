@@ -1134,6 +1134,8 @@ en:
     update_errors: "Update errors"
     error_process: "Error in processing,please try again"
     success_process: "You processed success"
+    error_in_process: "Error in processing,please try again"
+    please_upload_image: "Please upload image"
     form_edit_event_activity:
       name: "Name"
       inprocess: "On-going"
