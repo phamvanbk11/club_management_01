@@ -1,6 +1,9 @@
 <% if @statistic_report.errors.any? %>
   $('.error-messages').html('<%= j render partial: "shared/error_messages", locals: {object: @statistic_report} %>');
 <% else %>
+  <% if flash[:danger].blank? %>
+    window.location.replace('<%= club_path @club %>');
+  <% end %>
   $('.container').append('<%= j render partial: "shared/flash_warning" %>');
   $('.notify').delay(4000).slideUp(300);
 <% end %>

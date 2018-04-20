@@ -83,14 +83,14 @@
                   </li>
                   <% if current_user.user_clubs.joined.of_club(@club) %>
                     <li>
-                      <%= link_to club_manager_club_statistic_reports_path(@club), remote: :true, id: "none-tab" do %>
+                      <%= link_to club_manager_club_statistic_reports_path(@club), remote: :true, class: "none-tab tab-reports" do %>
                         <%= t "statistic_report" %>
                       <% end %>
                     </li>
                   <% end %>
                   <% if @club.is_admin? current_user %>
                     <li>
-                      <%= link_to club_sponsors_path(@club), remote: :true, id: "none-tab" do %>
+                      <%= link_to club_sponsors_path(@club), remote: :true, class: "none-tab" do %>
                         <%= t "sponsors.sponsors" %>
                       <% end %>
                     </li>

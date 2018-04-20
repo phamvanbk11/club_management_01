@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
     $('.tab_list_detail_club li a').removeClass('active');
     $(this).addClass('active');
     var id=$(this).attr('href');
-    if ($('#none-tab').attr('href') != id) {
+    if ($(this).attr('href') != id) {
       $(id).show('slow');
       return false;
     };
