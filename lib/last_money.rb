@@ -31,13 +31,7 @@ class LastMoney
     end
 
     def count_event user_id, events
-      count = 0
-      events.each do |event|
-        unless event.user_events.by_user(user_id).blank?
-          count = count + 1
-        end
-      end
-      return count
+      UserEvent.by_user(user_id).by_events(events.ids).size
     end
   end
 end
