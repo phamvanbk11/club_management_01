@@ -24,7 +24,12 @@ class OrganizationSettingsController < ApplicationController
   end
 
   def load_settings
-    @settings = @organization.organization_settings if @organization
+    if @organization
+      @settings = @organization.organization_settings
+      @money_supports = @organization.money_supports.group_by &:arr_range
+      @range_supports = @organization.range_supports.newest.page(params[:page]).per Settings.per_page_range
+      @range_supports_full = @organization.range_supports
+    end
   end
 
   def import_settings settings

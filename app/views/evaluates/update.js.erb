@@ -3,3 +3,4 @@ $('.modal-backdrop').remove()
 $('body').removeClass('modal-open');
 $('#organization_club').html('<%= j render partial: "list_evaluates", locals: {evaluates: @evaluates} %>');
 $('.container').append('<%= j render partial: "shared/flash_warning" %>');
+$('.notify').slideUp(3000);

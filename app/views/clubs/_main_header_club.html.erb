@@ -124,6 +124,12 @@
                         <% end %>
                       </li>
                       <li>
+                        <%= link_to club_manager_money_support_clubs_path(club_id: @club.slug), remote: true,
+                          class: "set-image-club" do %>
+                          <i class="fa fa-star-o"></i> <%= t "club_manager.money_support_clubs.link" %>
+                        <% end %>
+                      </li>
+                      <li>
                         <% if @club.is_active %>
                           <%= link_to set_active_club_path(@club, active: Settings.club.not_active),
                             method: :patch, class: "set-image-club" do %>
@@ -138,23 +144,23 @@
                           <% end %>
                         <% end %>
                       </li>
-                      <% if is_manager_organization? @club, current_user %>
-                        <li>
-                          <% if @club.is_action_report? %>
-                            <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: false),
-                              method: :patch, class: "set-image-club" do %>
-                              <i class="fa fa-pause-circle-o"></i>
-                              <%= t "set_action_reports.un_permit" %>
-                            <% end %>
-                          <% else %>
-                            <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: true),
-                              method: :patch, class: "set-image-club" do %>
-                              <i class="fa fa-play"></i>
-                              <%= t "set_action_reports.permit" %>
-                            <% end %>
+                    <% end %>
+                    <% if is_manager_organization? @club, current_user %>
+                      <li>
+                        <% if @club.is_action_report? %>
+                          <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: false),
+                            method: :patch, class: "set-image-club" do %>
+                            <i class="fa fa-pause-circle-o"></i>
+                            <%= t "set_action_reports.un_permit" %>
                           <% end %>
-                        </li>
-                      <% end %>
+                        <% else %>
+                          <%= link_to set_action_report_path(club_id: @club.slug, is_action_report: true),
+                            method: :patch, class: "set-image-club" do %>
+                            <i class="fa fa-play"></i>
+                            <%= t "set_action_reports.permit" %>
+                          <% end %>
+                        <% end %>
+                      </li>
                     </ul>
                   </div>
                 <% end %>
@@ -165,4 +171,6 @@
       </div>
     </div>
   </div>
+</div>
+<div id="js-money-support-clubs" class="modal fade" role="dialog">
 </div>

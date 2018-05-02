@@ -1,0 +1,36 @@
+<div class="ui-block col-md-12">
+  <div class="infor-request ui-block-title">
+    <h6 class="title"><%= t ".title_money_support" %>
+      &nbsp; -><%= t ".help" %>
+    </h6>
+  </div>
+  <div class="table-responsive">
+    <table class="table ui-block table-pricing">
+      <thead>
+        <tr>
+          <th class="text-center" colspan="<%= @range_supports_full.evaluate_point.size + 1 %>"><%= t ".members" %></th>
+        </tr>
+        <tr>
+          <th class="text-center"><%= t ".points" %></th>
+          <% @range_supports_full.member.each do |range_support| %>
+            <th class="text-center"><%= get_range_string(range_support) %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody id="js-list-money-supports">
+        <% @range_supports_full.evaluate_point.each do |range_support| %>
+          <tr>
+            <td class="text-center"><%= get_range_string(range_support) %></td>
+            <% @range_supports_full.member.each_with_index do |range, index| %>
+              <%= render partial: "money_supports/money_support", locals:
+                {member_id: range.id,
+                evaluate_point_id: range_support.id,
+                money_support: @money_supports[[range.id,
+                range_support.id]]&.first} %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

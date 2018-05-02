@@ -39,8 +39,16 @@
           <% if params[:controller] == "organizations" && params[:q].blank? %>
             <%= link_to club_evaluates_path(club_id: club.slug), remote: true,
               class: "btn btn-breez" do %>
-              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star font-size-16" aria-hidden="true"></i>
               <%= t "evaluates.title_link" %>
+            <% end %>
+            <%= link_to edit_setting_club_path(id: club.slug), remote: true,
+              class: "btn btn-breez" do %>
+              <i class="fa fa-cog font-size-15" aria-hidden="true"></i>
+            <% end %>
+            <%= link_to setting_club_path(id: club.slug), remote: true,
+              class: "btn btn-breez" do %>
+              <i class="fa fa-info font-size-15" aria-hidden="true"></i>
             <% end %>
           <% end %>
         </div>
@@ -52,4 +60,6 @@
   <nav aria-label="Page navigation example">
     <%= paginate @clubs, remote: true %>
   </nav>
+</div>
+<div id="config-club" class="modal fade" role="dialog">
 </div>

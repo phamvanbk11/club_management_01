@@ -13,7 +13,7 @@ $(document).ready(function(){
     $('.tab-in-activity li a').removeClass('w3-border-red');
     $(this).addClass('w3-border-red');
     var id = $(this).attr('href');
-    if ($(this).attr('href') != id) {
+    if (id[0] == '#') {
       $(id).show();
       $(document).scrollTop(scroll);
       return false;

@@ -18,6 +18,12 @@
     <%= evaluate.total_points %>
   </td>
   <td class="text-center">
+    <%= link_to setting_club_path(id: @club.slug, hide: true), remote: true,
+      class: "btn btn-breez btn-bottom-0" do %>
+      <%= number_to_currency evaluate.money_support_club&.money, locale: :vi %>
+    <% end %>
+  </td>
+  <td class="text-center">
     <% if can? :read, evaluate %>
       <%= link_to club_evaluate_path(club_id: @club.slug, id: evaluate.id),
         title: t("info"), remote: :true, class: "btn btn-warning btn-bottom-0" do %>

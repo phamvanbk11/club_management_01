@@ -150,7 +150,7 @@
                       <li>
                         <%= link_to organization_settings_path(organization_slug: @organization),
                           remote: :true do %>
-                          <%= t "organization_settings.index.title" %>
+                          <%= t "organization_settings.settings_system.title" %>
                         <% end %>
                       </li>
                     </ul>
@@ -252,3 +252,4 @@
     </div>
   </div>
 </div>
+<%= javascript_include_tag "money_support" %>

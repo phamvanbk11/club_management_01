@@ -1,0 +1,75 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= t ".title" %></h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="row <%= "hide-div" if @hide %>">
+        <div class="col-md-4 push-md-1">
+          <label for="contact-name"><%= t "month" %></label></br>
+          <%= select_tag "month", options_for_select(option_select_time(:monthly, @club),
+            Date.current.month), class: "form-control select_custom" %>
+        </div>
+        <div class="col-md-4 push-md-2">
+          <label for="contact-name"><%= t "year" %></label></br>
+          <%= select_year(Date.current, {start_year: option_select_time(:year, @club),
+            end_year: Date.current.year}, {class: "select_custom form-control stype-reports"}) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <strong class="pad-10"><%= t ".frequency", num: @club.frequency %>
+            : <%= @users.size %>
+          </strong>
+        </div>
+      </div>
+      <div class="widget-simple list-scroll pad-top-10">
+        <div class="table-responsive">
+          <table class="table ui-block table-pricing">
+            <thead>
+              <tr>
+                <th></th>
+                <th><%= t ".avatar" %></th>
+                <th><%= t ".name" %></th>
+                <th><%= t ".email" %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @users.any? %>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <div class="col-md-1 avarta-memeber">
+                        <%= link_to user_path(user.id) do %>
+                          <%= image_tag user.avatar, class: "member-organization-view view-avt-member",
+                            title: "#{user.full_name}" %>
+                        <% end %>
+                      </div>
+                    </td>
+                    <td>
+                      <%= user.full_name %>
+                    </td>
+                    <td>
+                      <%= user.email %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr class="text-center">
+                  <td colspan="4">
+                    <h3 class="center notifi-empty"><%= t "empty" %></h3>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t ".close" %></button>
+    </div>
+  </div>
+</div>

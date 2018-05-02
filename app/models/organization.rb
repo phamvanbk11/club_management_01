@@ -18,6 +18,8 @@ class Organization < ApplicationRecord
   has_many :sponsors, through: :clubs
   has_many :organization_settings, dependent: :destroy
   has_many :rules, dependent: :destroy
+  has_many :range_supports, dependent: :destroy
+  has_many :money_supports, dependent: :destroy
 
   validates :name, uniqueness: true, presence: true,
     length: {maximum: Settings.max_name}

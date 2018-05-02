@@ -451,6 +451,7 @@ vi:
         created_at: "Ngày đánh giá"
         create_evaluate: "Tạo đánh giá"
         owner: "Người đánh giá"
+        money_support: "Tiền hỗ trợ"
     statistic_reports:
       error_process: "Có lỗi trong quá trình xử lý,vui lòng thử lại"
       list_report:
@@ -486,6 +487,15 @@ vi:
         events_join: "Sự kiện tham gia"
       list_activity_report:
         member: "Người tham gia"
+    money_support_clubs:
+      link: "Chi tiết hỗ trợ"
+      not_found_club: "Không tìm thấy câu lạc bộ"
+      list_money_supports:
+        timeline: "Ngày tạo"
+        date: "Thời gian"
+        money: "Số tiền"
+        evaluate_owner: "Người đánh giá"
+        title: "Danh sách hỗ trợ"
     money: "Tiền quỹ: "
     cant_fount: "Không thể tìm thấy câu lạc bộ!"
     user_club:
@@ -1421,13 +1431,17 @@ vi:
   organization_settings:
     update_success: "Cập nhật thành công"
     update_errors: "Cập nhật thất bại"
-    index:
+    settings_system:
       title: "Cài đặt"
       date_remind_month: "Nhắc nhở báo cáo tháng: "
       date_remind_quarter: "Nhắc nhở báo cáo quý: "
       system: "Hệ thống"
       date_deadline_report: "Ngày khóa báo cáo: "
       date_report: "Ngày tính báo cáo: "
+    tab_settings:
+      system: "Hệ thống"
+      money_support: "Tiền hỗ trợ"
+      range_support: "Loại tính hỗ trợ"
   statistic_reports:
     show:
       pay_money: "Chi tiền"
@@ -1640,6 +1654,7 @@ vi:
   no_spending: "Hiện tại chưa có chi tiêu nào!"
   no_activity: "Hiện tại chưa có hoạt động nào!"
   evaluates:
+    zero_point: "Không thể để trống đánh giá"
     evaluate: "Danh sách đánh giá"
     success: "Thành công"
     error_process: "Xảy ra lỗi trong quá trình, vui lòng thử lại!"
@@ -1654,6 +1669,7 @@ vi:
       created_at: "Ngày đánh giá"
       create_evaluate: "Tạo đánh giá"
       owner: "Người đánh giá"
+      money_support: "Tiền hỗ trợ"
     form_new:
       new_evaluate: "Đánh giá hoạt động"
       submit: "Tạo đánh giá"
@@ -1785,3 +1801,94 @@ vi:
     month: "tháng %{time}"
     quarter: "quý %{time}"
     report_time: "Danh sách báo cáo thành viên %{time} năm %{year} tổ chức %{organization}"
+  money_supports:
+    success: "Thành công"
+    errors: "Thất bại"
+    not_found_org: "Không tìm thấy tổ chức"
+    create_success: "Tạo mới thành công"
+    create_errors: "Tạo mới thất bại"
+    list_money_supports:
+      help: "(nhập dữ liệu và nhấn enter)"
+      member: "Thành viên"
+      points: "Điểm"
+      money: "Số tiền"
+      new_money_support: "Tạo mới"
+      title_money_support: "Tiền hỗ trợ"
+      no_money_support: "Chưa tạo mức hỗ trợ nào"
+      members: "Thành viên"
+      points: "Điểm"
+      money: "Số tiền"
+      from_required: "Từ"
+      to: "Đến"
+      less_than: "<"
+      more_than: "<"
+      less_than_or_equal: "<="
+      more_than_or_equal: ">="
+      evaluate_point: "Điểm đánh giá"
+      member: "Thành viên"
+    form_new:
+      title: "Tạo mức hỗ trợ"
+      members: "Thành viên"
+      points: "Điểm"
+      money: "Số tiền"
+      from_required: "Từ"
+      to: "Đến"
+      less_than: "<"
+      more_than: "<"
+      less_than_or_equal: "<="
+      more_than_or_equal: ">="
+      evaluate_point: "Điểm đánh giá"
+      member: "Thành viên"
+  range_supports:
+    not_found_range_support: "Không tìm thấy"
+    not_found_org: "Không tìm thấy tổ chức"
+    create_success: "Tạo mới thành công"
+    create_errors: "Tạo mới thất bại"
+    update_success: "Cập nhật thành công"
+    update_errors: "Cập nhật thất bại"
+    destroy_success: "Xóa thành công"
+    destroy_errors: "Xóa thất bại"
+    list_range_supports:
+      title: "Loại tính hỗ trợ"
+      new_range_support: "Tạo mới"
+      style_range: "Loại"
+      value: "Giá trị"
+      operator: "Toán tử"
+    range_support:
+      evaluate_point: "Điểm đánh giá"
+      member: "Thành viên"
+      range: "Dãy"
+      less_than: "<"
+      more_than: "<"
+      less_than_or_equal: "<="
+      more_than_or_equal: ">="
+    form_new:
+      title: "Tạo loại tính hỗ trợ"
+      from_required: "Từ"
+      to: "Đến"
+      range_support: "Giá trị"
+      style_range: "Loại"
+      evaluate_point: "Điểm đánh giá"
+      member: "Thành viên"
+      operator: "Toán tử"
+      range: "Dãy"
+      less_than: "Bé hơn"
+      more_than: "Lớn hơn"
+      less_than_or_equal: "Bé hơn hoặc bằng"
+      more_than_or_equal: "Lớn hơn hoặc bằng"
+  setting_clubs:
+    update_success: "Cập nhật thành công"
+    update_errors: "Cập nhật thất bại"
+    not_found_club: "Không tìm thấy câu lạc bộ"
+    modal_config_club:
+      title: "Cài đặt câu lạc bộ"
+      frequency: "Tần suất sinh hoạt / tháng"
+      update: "Cập nhật"
+      close: "Đóng"
+    member_frequency:
+      title: "Đếm số người tham gia sinh hoạt"
+      avatar: "Ảnh"
+      name: "Họ tên"
+      email: "Email"
+      close: "Đóng"
+      frequency: "Thành viên tham gia %{num} buổi"

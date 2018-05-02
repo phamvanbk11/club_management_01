@@ -1,0 +1,34 @@
+<div class="ui-block col-md-12">
+  <div class="infor-request ui-block-title">
+    <h6 class="title"><%= t ".title" %></h6>
+    <div class="pull-right funtion-request">
+      <%= link_to new_range_support_path(organization_id: @organization.slug), remote: true,
+        class: "btn btn-breez btn-sm" do %>
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <%= t ".new_range_support" %>
+      <% end %>
+    </div>
+  </div>
+  <div id="new-range-support" class="modal fade" role="dialog">
+  </div>
+  <div class="table-responsive">
+    <table class="table ui-block table-pricing">
+      <thead>
+        <tr>
+          <th class="text-center"><%= t ".style_range" %></th>
+          <th class="text-center"><%= t ".value" %></th>
+          <th class="text-center"><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody id="js-list-range-supports">
+        <%= render partial: "range_supports/range_support", collection: @range_supports, as: :range_support %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12">
+    <nav aria-label="Page navigation example">
+      <%= paginate @range_supports, params: {controller: "range_supports",
+        action: "index", organization_id: @organization.slug}, remote: true %>
+    </nav>
+  </div>
+</div>

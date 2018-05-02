@@ -380,3 +380,5 @@ export_full_report_members:
 rand_file_name:
   num: 36
   xnum: 10
+per_page_range: 10
+default_money_support: 0

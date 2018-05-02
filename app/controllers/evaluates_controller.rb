@@ -39,7 +39,7 @@ class EvaluatesController < ApplicationController
         import_evaluate_details
       end
     else
-      flash.now[:danger] = t ".error_process"
+      flash.now[:danger] = t ".zero_point"
     end
     all_evaluates
   rescue
@@ -89,16 +89,33 @@ class EvaluatesController < ApplicationController
       end
     end
     EvaluateDetail.import details
+    save_money_supports
     flash.now[:success] = t ".success"
   end
 
   def all_evaluates
     if @club
-      @evaluates = @club.evaluates.newest.page(params[:page]).per Settings.per_page
+      @evaluates = @club.evaluates.includes(:money_support_club)
+        .newest.page(params[:page]).per Settings.per_page
     end
   end
 
   def load_rules
     @rules = @club.organization.rules.includes(:rule_details).newest if @club
+  end
+
+  def save_money_supports
+    frequency = FrequencyClub.new @club, @evaluate.time, @evaluate.year
+    users = frequency.frequency_club_by_time
+    money_support = CaculatorMoneySupport.new @club, users.size, count_point
+    money = money_support.caculator_money_support || Settings.default_money_support
+    if @evaluate.money_support_club.present?
+      @evaluate.money_support_club.update_attributes! money: money,
+        year: @evaluate.year, time: @evaluate.time, user_ids: users.ids
+    else
+      MoneySupportClub.create! club_id: @club.id, money: money,
+        evaluate_id: @evaluate.id, time: @evaluate.time, year: @evaluate.year,
+        user_ids: users.ids
+    end
   end
 end
