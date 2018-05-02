@@ -2,8 +2,10 @@ class ImagesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_album, only: [:destroy, :create]
   before_action :load_image, except: :create
+  authorize_resource
 
   def create
+    authorize! :create, @album.images.build
     ActiveRecord::Base.transaction do
       params[:images][:urls].each do |img|
         @album.images.create!(url: img)

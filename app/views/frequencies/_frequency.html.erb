@@ -1,0 +1,23 @@
+<tr class="js-frequency-<%= frequency.id %>">
+  <td class="text-center">
+    <% if frequency.range? %>
+      <%= frequency.value_from %>&nbsp;<%= t ".#{frequency.operator}" %>
+      &nbsp;<%= frequency.value_to %>
+    <% else %>
+      <%= t ".#{frequency.operator}" %>&nbsp;<%= frequency.value_from %>
+    <% end %>
+  </td>
+  <td class="text-center">
+    <%= link_to edit_frequency_path(organization_id: @organization.slug,
+      id: frequency.id),
+      title: t("edit"), remote: :true, class: "btn btn-primary btn-bottom-0" do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+    <%= link_to frequency_path(organization_id: @organization.slug,
+      id: frequency.id), method: :delete, title: t("delete"),
+      data: {confirm: t("confirm_delete_type")}, remote: true,
+      class: "btn btn-danger btn-bottom-0" do %>
+      <i class="fa fa-remove"></i>
+    <% end %>
+  </td>
+</tr>

@@ -172,10 +172,18 @@ class Ability
         end
       end
 
-      can :read, Album
+      can :read, Album do |album|
+        album.club.user_clubs.joined.pluck(:user_id)
+          .include?(user.id)
+      end
 
       can :manage, Album do |album|
         album.club.user_clubs.manager.pluck(:user_id)
+          .include?(user.id)
+      end
+
+      can :manage, Image do |image|
+        image.album.club.user_clubs.manager.pluck(:user_id)
           .include?(user.id)
       end
 
@@ -185,6 +193,18 @@ class Ability
 
       can :index, :export_report_member do |organization|
         organization.keys.first.user_organizations.are_admin.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, Frequency do |frequency|
+        frequency.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, RangeSupport do |range_support|
+        range_support.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
+      end
+
+      can :manage, MoneySupport do |money_support|
+        money_support.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
       end
     end
   end

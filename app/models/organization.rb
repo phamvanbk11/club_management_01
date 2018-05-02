@@ -20,6 +20,7 @@ class Organization < ApplicationRecord
   has_many :rules, dependent: :destroy
   has_many :range_supports, dependent: :destroy
   has_many :money_supports, dependent: :destroy
+  has_many :frequencies, dependent: :destroy
 
   validates :name, uniqueness: true, presence: true,
     length: {maximum: Settings.max_name}

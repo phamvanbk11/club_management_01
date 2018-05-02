@@ -90,7 +90,7 @@ class ClubsController < ApplicationController
 
   def update
     set_crop
-    if @club.update_attributes club_params
+    if @club.update_attributes params_merge_frequency
       create_acivity @club, Settings.update, @club, current_user,
         Activity.type_receives[:club_member]
       flash[:success] = t "club_manager.club.success_update"
@@ -129,6 +129,14 @@ class ClubsController < ApplicationController
     unless @organization
       flash[:danger] = t "not_found_organization"
       redirect_to request.referer
+    end
+  end
+
+  def params_merge_frequency
+    if params[:frequency_id].present?
+      club_params.merge! frequency_id: params[:frequency_id]
+    else
+      club_params
     end
   end
 

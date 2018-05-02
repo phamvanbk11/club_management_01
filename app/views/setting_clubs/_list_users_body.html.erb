@@ -1,0 +1,28 @@
+<tr>
+  <% if @users.any? %>
+    <% @users.each do |user| %>
+      <tr>
+        <td></td>
+        <td>
+          <div class="col-md-1 avarta-memeber">
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.avatar, class: "member-organization-view view-avt-member",
+                title: "#{user.full_name}" %>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <%= user.full_name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+  <tr class="text-center">
+    <td colspan="4">
+      <h3 class="center notifi-empty"><%= t "empty" %></h3>
+    </td>
+  </tr>
+<% end %>

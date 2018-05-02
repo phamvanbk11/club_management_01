@@ -63,8 +63,8 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    redirect_to request.referer || root_url
+    flash[:alert] = t "authorize_denided"
+    redirect_back fallback_location: root_url
   end
 
   def load_member_not_join

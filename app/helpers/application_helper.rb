@@ -106,4 +106,8 @@ module ApplicationHelper
   def option_select_custom options, selected
     options_for_select(options.map{|k, v| [t("." + k.to_s), v]}, selected)
   end
+
+  def class_div boolean, class_div
+    boolean ? class_div : ""
+  end
 end

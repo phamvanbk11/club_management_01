@@ -4,10 +4,6 @@ class AlbumsController < ApplicationController
   before_action :load_album, except: %i(index create)
   authorize_resource
 
-  def index
-    @albums = @club.albums.newest.includes(:images)
-  end
-
   def create
     @album = Album.new album_params
     if @album.save

@@ -8,11 +8,13 @@
             <strong><%= t "request" %></strong> <%= t "club" %>
           </h3>
           <div class="hr-center-line-div"></div>
-          <%= form_for [:user, @request], html: {id: "form-contact"} do |f|%>
+          <%= form_for [:user, @club_request_support.new_club_request],
+            html: {id: "form-contact"} do |f|%>
             <div class="col-md-12 new-organization">
               <label for="contact-name"><%= t "organization_sign" %></label>
               <br>
-              <%= f.select(:organization_id, @organizations.collect {|org| [org.name, org.organization_id ]},
+              <%= f.select(:organization_id, @club_request_support
+                .organizations.collect {|org| [org.name, org.organization_id ]},
                 {}, {class: "form-control select_custom", id: "select_orgzt"}) %>
               <label class="push-left"><%= t "organization_question" %></label>
               <%= link_to t("click_here"), new_user_organization_request_path(user_id: current_user.id) %>
@@ -28,7 +30,8 @@
             </div>
             <div class="col-md-12">
               <label for="contact-name"><%= t "type_club" %></label></br>
-              <%= f.select(:club_type_id, @club_types.collect {|club_type| [
+              <%= f.select(:club_type_id, @club_request_support
+                .club_types.collect {|club_type| [
                 club_type.name, club_type.id ]}, {},
                 {class: "form-control select_custom", id: "select_club_type"}) %>
             </div>
@@ -49,7 +52,8 @@
                 <span class="text-center"><%= t "add_member" %></span>
               <% end %>
               <div id="user_club_request">
-                <%= render partial: "add_user", locals: {user_clubs: @user_organizations} %>
+                <%= render partial: "add_user", locals: {user_clubs:
+                  @club_request_support.user_organizations} %>
               </div>
             </div>
             <div class = "col-md-12 list-member">
@@ -100,6 +104,11 @@
                   <% end %>
                 </div>
               </div>
+            </div>
+            <div class="form-group col-md-12" id="js-radio-frequencies">
+              <%= render partial: "radio_frequency", locals: {frequencies:
+                @club_request_support.frequencies,
+                choose: @club_request_support.frequencies.first&.id} %>
             </div>
             <div class="form-group col-md-12">
                <div class="form-group label-floating">

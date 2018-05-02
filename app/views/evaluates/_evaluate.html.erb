@@ -18,7 +18,8 @@
     <%= evaluate.total_points %>
   </td>
   <td class="text-center">
-    <%= link_to setting_club_path(id: @club.slug, hide: true), remote: true,
+    <%= link_to setting_club_path(id: @club.slug, hide: true,
+      time: evaluate.time, year: evaluate.year), remote: true,
       class: "btn btn-breez btn-bottom-0" do %>
       <%= number_to_currency evaluate.money_support_club&.money, locale: :vi %>
     <% end %>
@@ -43,3 +44,5 @@
     <% end %>
   </td>
 </tr>
+<div id="config-club" class="modal fade" role="dialog">
+</div>

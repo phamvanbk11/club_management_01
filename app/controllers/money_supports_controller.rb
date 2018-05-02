@@ -3,6 +3,7 @@ class MoneySupportsController < ApplicationController
   before_action :load_organization
   before_action :load_money_support
   before_action :replace_string_in_params
+  authorize_resource
 
   def create
     if @money_support

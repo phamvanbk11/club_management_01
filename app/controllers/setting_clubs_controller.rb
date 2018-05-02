@@ -28,6 +28,6 @@ class SettingClubsController < ApplicationController
   end
 
   def club_setting_params
-    params.require(:club).permit :frequency
+    params.require(:club).permit :frequency, :is_action_report
   end
 end

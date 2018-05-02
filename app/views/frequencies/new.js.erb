@@ -1,0 +1,7 @@
+<% if @organization %>
+  $('#js-new-frequency').html('<%= j render partial: "form_new", locals: {frequency: @frequency} %>');
+  $('#js-new-frequency').modal('show');
+<% else %>
+  $('.container').append('<%= j render "shared/flash_warning" %>')
+  $('.notify').slideUp(3000);
+<% end %>

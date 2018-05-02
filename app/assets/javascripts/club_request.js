@@ -11,9 +11,10 @@ $(document).ready(function() {
       datatype: 'json',
       success: function(result) {
         $('#members').text('')
-        $('#user_club_request').html(result.html);
+        $('#user_club_request').html(result.html_users);
+        $('#js-radio-frequencies').html(result.html_frequencies);
         $('#select_club_type').empty();
-        $.each(result.data, function(){
+        $.each(result.club_types, function(){
           $('<option />', {
             val: this.id,
             text: this.name

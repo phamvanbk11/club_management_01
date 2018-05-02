@@ -2,6 +2,8 @@ class RangeSupportsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_organization
   before_action :load_range_support, only: %i(edit update destroy)
+  before_action :new_range_support, only: :create
+  authorize_resource
 
   def index
     @range_supports = @organization.range_supports.newest.page(params[:page]).per Settings.per_page_range
@@ -12,7 +14,6 @@ class RangeSupportsController < ApplicationController
   end
 
   def create
-    @range_support = @organization.range_supports.new(range_support_params)
     if @range_support.save
       flash.now[:success] = t ".create_success"
     elsif @range_support.errors.blank?
@@ -62,5 +63,9 @@ class RangeSupportsController < ApplicationController
       return if @range_support
       flash.now[:danger] = t ".not_found_range_support"
     end
+  end
+
+  def new_range_support
+    @range_support = @organization.range_supports.new range_support_params
   end
 end

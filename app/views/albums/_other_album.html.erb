@@ -6,7 +6,7 @@
     <% @album_other.each do |album| %>
       <div class="col-sm-6 col-md-3 portfolio-item show-album-<%= album.id %>">
         <div class="thumbnail">
-          <%= link_to club_album_path(@club.id, album.id) do %>
+          <%= link_to club_album_path(@club.slug, album.id) do %>
             <% if album.images.blank? %>
               <%= image_tag "fram.jpg", class: "col-md-12 centered-and-cropped" %>
             <% else %>
