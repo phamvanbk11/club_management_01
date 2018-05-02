@@ -40,8 +40,6 @@ class EventNotificationsController < ApplicationController
   rescue
     if event && event.errors.any?
       flash_error(event)
-    elsif params[:images].blank? && event.activity_money?
-      flash[:danger] = t ".please_upload_image"
     else
       flash[:danger] = t ".error_in_process"
     end
@@ -195,7 +193,7 @@ class EventNotificationsController < ApplicationController
   end
 
   def save_images_in_album event
-    if event.activity_money?
+    if event.activity_money? && params[:images]
       params[:images][:urls].each do |img|
         event.albums.first.images.create! url: img
       end
