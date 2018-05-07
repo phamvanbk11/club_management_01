@@ -18,7 +18,11 @@
           <div class="event-author inline-items">
             <div class="author-thumb img_small">
               <%= link_to club_event_url(event.club, event) do %>
-                <%= image_tag event.image, class: "img-responsive centered-and-cropped" %>
+                <% if event.albums.present? && event.albums.first.images.present? %>
+                  <%= image_tag event.albums.first.images.first.url, class: "img-responsive centered-and-cropped" %>
+                <% else %>
+                  <%= image_tag event.image, class: "img-responsive centered-and-cropped" %>
+                <% end %>
               <% end %>
             </div>
             <div class="author-date event-name">
