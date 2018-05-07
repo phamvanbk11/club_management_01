@@ -1,0 +1,24 @@
+<div class="modal-dialog modal-md">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= t ".title" %></h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <%= form_for @club, url: setting_club_path, method: :patch, remote: true do |f| %>
+      <div class="modal-body">
+        <div class="form-group col-md-10 push-md-1">
+          <label class="col-md-12 control-label label-bold">
+            <%= t ".frequency" %>
+            <span class="text-danger">*</span>
+          </label>
+          <%= f.number_field :frequency, required: true,
+            class: "form-control input-text input-pad-8-12 col-md-12" %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.button t(".update"), type: :submit, class: "btn btn-breez" %>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t ".close" %></button>
+      </div>
+    <% end %>
+  </div>
+</div>

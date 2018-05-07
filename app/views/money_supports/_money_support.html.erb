@@ -1,0 +1,4 @@
+<td class="text-center data-<%= member_id.to_s + evaluate_point_id.to_s %>"
+  contenteditable="true" data-id="<%= money_support&.id %>"
+  data-point="<%= evaluate_point_id %>"
+  data-member="<%= member_id %>"><%= number_to_currency money_support&.money, locale: :vi %></td>

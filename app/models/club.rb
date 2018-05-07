@@ -25,6 +25,7 @@ class Club < ApplicationRecord
   has_many :sponsors, dependent: :destroy
   has_many :evaluates, dependent: :destroy
   has_many :reasons, dependent: :destroy
+  has_many :money_support_clubs, dependent: :destroy
 
   belongs_to :organization
   belongs_to :club_type

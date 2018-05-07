@@ -3,4 +3,5 @@
   $('#detail-evaluate').modal('show');
 <% else %>
   $('.container').append('<%= j render partial: "shared/flash_warning" %>');
+  $('.notify').slideUp(3000);
 <% end %>

@@ -1,5 +1,6 @@
 $('#new-evaluate').modal('hide');
-<% if @evaluate.id %>
+<% if @evaluate.reload.id %>
   $('#body-list-evaluates').prepend('<%= j render partial: "evaluate", locals: {evaluate: @evaluate} %>')
 <% end %>
 $('.container').append('<%= j render partial: "shared/flash_warning" %>');
+$('.notify').slideUp(3000);

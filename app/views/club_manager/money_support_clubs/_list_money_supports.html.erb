@@ -1,0 +1,61 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= t ".title" %></h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="table-responsive">
+        <table class="table table-vcenter table-condensed table-bordered">
+          <thead>
+            <tr>
+              <th><%= t ".evaluate_owner" %></th>
+              <th><%= t ".timeline" %></th>
+              <th><%= t ".date" %></th>
+              <th><%= t ".money" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @money_support_clubs.any? %>
+              <% @money_support_clubs.each do |money_support_club| %>
+                <tr>
+                  <td>
+                    <div class="avarta-memeber">
+                      <%= link_to user_path(money_support_club.evaluate.user.id) do %>
+                        <%= image_tag money_support_club.evaluate.user_avatar,
+                          class: "member-organization-view view-avt-member",
+                          title: "#{money_support_club.evaluate.user_full_name}" %>
+                      <% end %>
+                      <label class="mgr-left-10">
+                        <%= money_support_club.evaluate.user_full_name %>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <%= l money_support_club.created_at, format: :short %>
+                  </td>
+                  <td>
+                    <%= money_support_club.time %>/<%= money_support_club.year %>
+                  </td>
+                  <td>
+                    <%= number_to_currency(money_support_club.money, locale: :vi) %>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr class="text-center">
+                <td colspan="6">
+                  <h3 class="center notifi-empty"><%= t "empty" %></h3>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <%= paginate @money_support_clubs, remote: true %>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>

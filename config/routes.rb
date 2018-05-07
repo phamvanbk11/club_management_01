@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       resources :club_budgets, only: [:destroy, :create]
       resources :user_clubs
     end
+    resources :money_support_clubs, only: %i(index)
     resources :evaluates, only: [:index, :show]
     resources :export_history_budgets
     resources :club_export_members
@@ -112,4 +113,7 @@ Rails.application.routes.draw do
   resources :export_reports, only: :index
   resources :set_action_reports, only: :update
   resources :export_report_members, only: :index
+  resources :money_supports, only: :create
+  resources :range_supports
+  resources :setting_clubs, only: %i(edit update show)
 end

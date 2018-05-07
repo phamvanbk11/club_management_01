@@ -1,0 +1,21 @@
+<tr class="range-support-<%= range_support.id %>">
+  <td class="text-center"><%= t ".#{range_support.style}" %></td>
+  <% if range_support.range? %>
+    <td class="text-center"><%= range_support.value_from %>&nbsp;~<&nbsp;<%= range_support.value_to %></td>
+  <% else %>
+    <td class="text-center"><%= t ".#{range_support.operator}" %>&nbsp;<%= range_support.value_from %></td>
+  <% end %>
+  <td class="text-center">
+    <%= link_to edit_range_support_path(organization_id: @organization.slug,
+      id: range_support.id),
+      title: t("edit"), remote: :true, class: "btn btn-primary btn-bottom-0" do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+    <%= link_to range_support_path(organization_id: @organization.slug,
+      id: range_support.id), method: :delete, title: t("delete"),
+      data: {confirm: t("confirm_delete_type")}, remote: true,
+      class: "btn btn-danger btn-bottom-0" do %>
+      <i class="fa fa-remove"></i>
+    <% end %>
+  </td>
+</tr>

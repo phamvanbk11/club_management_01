@@ -1,0 +1,11 @@
+<% if flash[:success].present? %>
+  $('#new-range-support').modal('hide');
+  $('.range-support-<%= @range_support.id %>').replaceWith('<%= j render partial: "range_support",
+    locals: {range_support: @range_support} %>')
+<% elsif @range_support.errors.blank? %>
+  $('#new-range-support').modal('hide');
+<% else %>
+  $('#new-range-support').html('<%= j render partial: "form_new", locals: {range_support: @range_support} %>')
+<% end %>
+$('.container').append('<%= j render "shared/flash_warning" %>')
+$('.notify').slideUp(3000);

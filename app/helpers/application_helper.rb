@@ -102,4 +102,8 @@ module ApplicationHelper
       Settings.class_check_box_checked
     end
   end
+
+  def option_select_custom options, selected
+    options_for_select(options.map{|k, v| [t("." + k.to_s), v]}, selected)
+  end
 end

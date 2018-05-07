@@ -1,0 +1,4 @@
+$('.data-<%= @money_support.arr_range.to_s.delete "[], " %>').html('<%= number_to_currency @money_support.money, locale: :vi %>');
+$('.data-<%= @money_support.arr_range.to_s.delete "[], " %>').attr('data-id', <%= @money_support.id %>);
+$('.container').append('<%= j render "shared/flash_warning" %>')
+$('.notify').slideUp(3000);
