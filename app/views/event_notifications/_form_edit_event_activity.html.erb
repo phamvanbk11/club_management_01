@@ -102,6 +102,17 @@
       </div>
     </div>
   </div>
+  <% if @event.activity_money? %>
+    <div class="form-group images_album">
+      <label class="col-md-3 control-label label-bold" id="js-lb-image">
+        <%= t ".image" %>
+      </label>
+      <div class="col-md-12">
+        <%= file_field_tag "images_album", id: "file-upload", name: "images[urls][]",
+          accept: Settings.image_upload, multiple: true %>
+      </div>
+    </div>
+  <% end %>
   <div class="form-group">
     <label class="col-md-3 control-label label-bold" for="example-textarea-input">
       <%= t ".description" %>

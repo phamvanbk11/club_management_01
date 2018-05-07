@@ -54,6 +54,7 @@ class EventNotificationsController < ApplicationController
       service_money.update_first_money_of_event
       service_money.update_event_and_money_club_in_activity_event
       flash[:success] = t ".update_success"
+      save_images_in_album @event
       page_redirect @event
     end
   rescue
