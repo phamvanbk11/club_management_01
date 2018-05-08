@@ -1,0 +1,5 @@
+<h4 class="modal-title"><%= t ".title" %>
+  <%= t ".month", month: params[:time] || Date.current.month %>
+  <%= t ".year", year: params[:year] || Date.current.year %>
+</h4>
+<button type="button" class="close" data-dismiss="modal">&times;</button>

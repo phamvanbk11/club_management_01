@@ -16,6 +16,10 @@
               <%= link_to t(".range_support"), "#range-supports",
                 class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
             </li>
+            <li>
+              <%= link_to t(".frequencies"), "#frequencies",
+                class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
+            </li>
           </ul>
         </div>
       </div>
@@ -37,7 +41,11 @@
       <div id="range-supports" class="event-table hide-div">
         <%= render "range_supports/list_range_supports" %>
       </div>
+      <div id="frequencies" class="event-table hide-div">
+        <%= render "frequencies/index" %>
+      </div>
     </div>
   </div>
 </div>
 <%= javascript_include_tag "tabs" %>
+<%= javascript_include_tag "option_support_operator" %>

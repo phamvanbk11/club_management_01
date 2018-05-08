@@ -38,6 +38,22 @@
                     <%= request.member %>
                   </span>
                 </div>
+                <% if request.frequency %>
+                  <div class="list-infor-club inline-items">
+                    <strong><%= t "frequency_club" %>:</strong>
+                    <span>
+                      <% if request.frequency.range? %>
+                        <%= request.frequency.value_from %>
+                        <%= t "frequencies.frequency.#{request.frequency.operator}" %>
+                        <%= request.frequency.value_to %>
+                      <% else %>
+                        <%= t "frequencies.frequency.#{request.frequency.operator}" %>
+                        <%= request.frequency.value_from %>
+                      <% end %>
+                      &nbsp;<%= t "per_month" %>
+                    </span>
+                  </div>
+                <% end %>
                 <div class="list-infor-club inline-items">
                   <strong><%= t "time_club" %>:</strong><br/>
                   <span>

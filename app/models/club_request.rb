@@ -7,6 +7,7 @@ class ClubRequest < ApplicationRecord
   has_many :users, through: :user_club_requests
   has_many :activities, as: :trackable, dependent: :destroy
   has_many :activities, as: :container, dependent: :destroy
+  belongs_to :frequency
 
   belongs_to :club_type
 

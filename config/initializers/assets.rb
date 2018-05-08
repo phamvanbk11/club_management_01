@@ -12,7 +12,7 @@ Rails.application.config.assets.precompile += %w(application_admin.js ckeditor/c
   edit_report_category organization_settings club_logo background_club background_org upload_video money_format
   check_box category_report.js option_event_activity.js sponsor.js event_notification.js add_member_join_event.js
   post.js delete_experience.js edit_post.js evaluate.js next_page_time_line.js export_report_members.js
-  option_range_support.js money_support.js)
+    money_support.js option_support_operator.js time_select.js)
 Rails.application.config.assets.precompile += %w(application_admin.css user_login.scss user_login_modal.scss
   organization-details.css intro.css jquery.range.css user_profile tabs.scss)
 # Precompile additional assets.

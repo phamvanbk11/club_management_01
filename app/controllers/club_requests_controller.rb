@@ -12,23 +12,16 @@ class ClubRequestsController < ApplicationController
   end
 
   def new
-    @request = ClubRequest.new
-    @organizations = current_user.user_organizations.includes(:organization).joined
-    if params[:organization_id]
-      @user_organizations = UserOrganization.load_user_organization(
-        params[:organization_id]
-      ).except_me(current_user.id).includes :user
-      @club_types = ClubType.of_organization params[:organization_id]
-      html = render_to_string partial: "add_user",
-        locals: {user_clubs: @user_organizations}
-      respond_to do |format|
-        format.json{render json: {data: @club_types, html: html}}
-      end
-    else
-      organization_id = current_user.organizations.first.id
-      @user_organizations = UserOrganization.load_user_organization(organization_id)
-        .except_me(current_user.id).includes :user
-      @club_types = ClubType.of_organization organization_id
+    @club_request_support = Support::ClubRequestSupport.new current_user, params
+    return unless request.xhr?
+    html_users = render_to_string partial: "add_user",
+      locals: {user_clubs: @club_request_support.user_organizations}
+    html_frequencies = render_to_string partial: "radio_frequency",
+      locals: {frequencies: @club_request_support.frequencies,
+      choose: @club_request_support.frequencies.first&.id}
+    respond_to do |format|
+      format.json{render json: {club_types: @club_request_support.club_types,
+        html_users: html_users, html_frequencies: html_frequencies}}
     end
   end
 
@@ -52,7 +45,8 @@ class ClubRequestsController < ApplicationController
     params.require(:club_request).permit(:name, :logo, :action,
       :organization_id, :member, :goal, :local, :activities_connect,
       :content, :rules, :rule_finance, :time_join, :punishment, :club_type_id,
-      :plan, :goal, time_activity: []).merge! user_id: current_user.id
+      :plan, :goal, time_activity: []).merge! user_id: current_user.id,
+      frequency_id: params[:frequency_id]
   end
 
   def save_user_club_request request

@@ -1,4 +1,5 @@
 vi:
+  authorize_denided: "Bạn không có quyền truy cập trang này !"
   club_type:
     sport: "Thể thao"
     game: "Game"
@@ -1442,6 +1443,7 @@ vi:
       system: "Hệ thống"
       money_support: "Tiền hỗ trợ"
       range_support: "Loại tính hỗ trợ"
+      frequencies: "Tần suất hoạt động"
   statistic_reports:
     show:
       pay_money: "Chi tiền"
@@ -1859,7 +1861,7 @@ vi:
       member: "Thành viên"
       range: "Dãy"
       less_than: "<"
-      more_than: "<"
+      more_than: ">"
       less_than_or_equal: "<="
       more_than_or_equal: ">="
     form_new:
@@ -1881,14 +1883,50 @@ vi:
     update_errors: "Cập nhật thất bại"
     not_found_club: "Không tìm thấy câu lạc bộ"
     modal_config_club:
-      title: "Cài đặt câu lạc bộ"
-      frequency: "Tần suất sinh hoạt / tháng"
+      title_setting: "Cài đặt"
+      frequency: "Đếm số thành viên tham gia hoạt động (buổi / tháng)"
       update: "Cập nhật"
       close: "Đóng"
+      is_edit_report: "Cho phép báo cáo khi hết hạn"
     member_frequency:
-      title: "Đếm số người tham gia sinh hoạt"
       avatar: "Ảnh"
       name: "Họ tên"
       email: "Email"
       close: "Đóng"
       frequency: "Thành viên tham gia %{num} buổi"
+    header_modal:
+      title: "Đếm số người tham gia sinh hoạt"
+      month: "tháng %{month}"
+      year: "năm %{year}"
+  frequencies:
+    create_success: "Tạo mới thành công"
+    create_errors: "Tạo mới thất bại"
+    update_success: "Cập nhật thành công"
+    update_errors: "Cập nhật thất bại"
+    destroy_success: "Xóa thành công"
+    destroy_errors: "Xóa thất bại"
+    not_found_frequency: "Không tìm thấy"
+    not_found_org: "Không tìm thấy tổ chức"
+    index:
+      new_frequency: "Tạo mới"
+      value: "Giá trị"
+      title: "Tần suất họat động"
+    form_new:
+      title: "Tạo mới tần suất"
+      from_required: "Từ"
+      to: "Đến"
+      range_support: "Giá trị"
+      operator: "Toán tử"
+      range: "Dãy"
+      less_than: "Bé hơn"
+      more_than: "Lớn hơn"
+      less_than_or_equal: "Bé hơn hoặc bằng"
+      more_than_or_equal: "Lớn hơn hoặc bằng"
+    frequency:
+      range: " ~< "
+      less_than: " < "
+      more_than: " > "
+      less_than_or_equal: " <= "
+      more_than_or_equal: " >= "
+  frequency_club: "Tần suất sinh hoạt / tháng"
+  per_month: "buổi / tháng"

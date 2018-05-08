@@ -1,0 +1,33 @@
+<div class="ui-block col-md-12">
+  <div class="infor-request ui-block-title">
+    <h6 class="title"><%= t ".title" %></h6>
+    <div class="pull-right funtion-request">
+      <%= link_to new_frequency_path(organization_id: @organization.slug), remote: true,
+        class: "btn btn-breez btn-sm" do %>
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+        <%= t ".new_frequency" %>
+      <% end %>
+    </div>
+  </div>
+  <div id="js-new-frequency" class="modal fade" role="dialog">
+  </div>
+  <div class="table-responsive">
+    <table class="table ui-block table-pricing">
+      <thead>
+        <tr>
+          <th class="text-center"><%= t ".value" %></th>
+          <th class="text-center"><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody id="js-frequencies">
+        <%= render @frequencies %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12">
+    <nav>
+      <%= paginate @frequencies, params: {controller: "frequencies",
+        action: "index", organization_id: @organization.slug}, remote: true %>
+    </nav>
+  </div>
+</div>

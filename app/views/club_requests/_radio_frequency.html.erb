@@ -1,0 +1,18 @@
+<label><%= t "frequency_club" %></label>
+<group class="inline-radio-custom">
+  <% frequencies.each do |frequency| %>
+    <div>
+      <%= radio_button_tag :frequency_id, frequency.id, frequency.id == choose, class: "radio-ct" %>
+      <label>
+        <% if frequency.range? %>
+          <%= frequency.value_from %>
+          <%= t "frequencies.frequency.#{frequency.operator}" %>
+          <%= frequency.value_to %>
+        <% else %>
+          <%= t "frequencies.frequency.#{frequency.operator}" %>
+          <%= frequency.value_from %>
+        <% end %>
+      </label>
+    </div>
+  <% end %>
+</group>

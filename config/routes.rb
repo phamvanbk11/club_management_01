@@ -62,7 +62,7 @@ Rails.application.routes.draw do
       resources :set_user_donates
       resources :user_events, only: [:create, :destroy]
     end
-    resources :albums do
+    resources :albums, except: :index do
       resources :images
       resources :videos, only: %i(create destroy update)
       post "/videos/upload", to: "videos#upload"
@@ -116,4 +116,5 @@ Rails.application.routes.draw do
   resources :money_supports, only: :create
   resources :range_supports
   resources :setting_clubs, only: %i(edit update show)
+  resources :frequencies, except: :show
 end

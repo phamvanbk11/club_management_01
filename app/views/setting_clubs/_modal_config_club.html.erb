@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-md">
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title"><%= t ".title" %></h4>
+      <h4 class="modal-title"><%= t ".title_setting" %></h4>
       <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <%= form_for @club, url: setting_club_path, method: :patch, remote: true do |f| %>
@@ -14,6 +14,17 @@
           <%= f.number_field :frequency, required: true,
             class: "form-control input-text input-pad-8-12 col-md-12" %>
         </div>
+        <div class="form-group col-md-10 push-md-1">
+          <label class="control-label label-check label-bold" for="example-text-input">
+            <%= t ".is_edit_report" %>
+          </label>&nbsp;&nbsp;
+          <div class="toggle-btn
+            <%= get_class_checkbox @club.is_action_report? %>">
+            <%= f.check_box :is_action_report, class: "cb-value",
+              checked: @club.is_action_report? %>
+            <span class="round-btn"></span>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <%= f.button t(".update"), type: :submit, class: "btn btn-breez" %>
@@ -22,3 +33,4 @@
     <% end %>
   </div>
 </div>
+<%= javascript_include_tag "check_box" %>

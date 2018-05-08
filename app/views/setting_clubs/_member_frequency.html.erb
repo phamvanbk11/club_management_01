@@ -1,20 +1,20 @@
-<div class="modal-dialog modal-lg">
+<%= hidden_field_tag :club_slug, @club.slug %>
+<div class="modal-dialog modal-lg js-check-modal">
   <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title"><%= t ".title" %></h4>
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-header" id="js-header-users">
+      <%= render "header_modal" %>
     </div>
     <div class="modal-body">
       <div class="row <%= "hide-div" if @hide %>">
         <div class="col-md-4 push-md-1">
           <label for="contact-name"><%= t "month" %></label></br>
           <%= select_tag "month", options_for_select(option_select_time(:monthly, @club),
-            Date.current.month), class: "form-control select_custom" %>
+            Date.current.month), class: "form-control select_custom select-month" %>
         </div>
         <div class="col-md-4 push-md-2">
           <label for="contact-name"><%= t "year" %></label></br>
-          <%= select_year(Date.current, {start_year: option_select_time(:year, @club),
-            end_year: Date.current.year}, {class: "select_custom form-control stype-reports"}) %>
+          <%= select_year(Date.current, {start_year: Settings.year_ago.year.ago.year,
+            end_year: Date.current.year}, {class: "select_custom form-control select-year"}) %>
         </div>
       </div>
       <div class="row">
@@ -35,34 +35,8 @@
                 <th><%= t ".email" %></th>
               </tr>
             </thead>
-            <tbody>
-              <% if @users.any? %>
-                <% @users.each do |user| %>
-                  <tr>
-                    <td></td>
-                    <td>
-                      <div class="col-md-1 avarta-memeber">
-                        <%= link_to user_path(user.id) do %>
-                          <%= image_tag user.avatar, class: "member-organization-view view-avt-member",
-                            title: "#{user.full_name}" %>
-                        <% end %>
-                      </div>
-                    </td>
-                    <td>
-                      <%= user.full_name %>
-                    </td>
-                    <td>
-                      <%= user.email %>
-                    </td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr class="text-center">
-                  <td colspan="4">
-                    <h3 class="center notifi-empty"><%= t "empty" %></h3>
-                  </td>
-                </tr>
-              <% end %>
+            <tbody id="js-list-users">
+              <%= render "list_users_body" %>
             </tbody>
           </table>
         </div>

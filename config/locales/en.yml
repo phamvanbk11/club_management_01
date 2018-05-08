@@ -1,4 +1,5 @@
 en:
+  authorize_denided: "You are not authorized to access this page !"
   club_type:
     sport: "Sport"
     game: "Game"
@@ -1128,6 +1129,7 @@ en:
       system: "System"
       money_support: "Money support"
       range_support: "Range support"
+      frequencies: "Frequencies"
   statistic_reports:
     show:
       pay_money: "Pay money"
@@ -1537,7 +1539,7 @@ en:
       member: "Member"
       range: "Range"
       less_than: "<"
-      more_than: "<"
+      more_than: ">"
       less_than_or_equal: "<="
       more_than_or_equal: ">="
     form_new:
@@ -1559,14 +1561,50 @@ en:
     update_errors: "Update errors"
     not_found_club: "Not found club"
     modal_config_club:
-      title: "Settings club"
+      title_setting: "Settings club"
       frequency: "Frequency activity / month"
       update: "Update"
       close: "Close"
+      is_edit_report: "Allow report when deadline"
     member_frequency:
-      title: "Caculator member join activity"
       avatar: "Avatar"
       name: "Full name"
       email: "Email"
       close: "Close"
       frequency: "Member join %{num}"
+    header_modal:
+      title: "Caculator member join activity"
+      month: "month %{month}"
+      year: "year %{year}"
+  frequencies:
+    create_success: "Create success"
+    create_errors: "Create errors"
+    update_success: "Update success"
+    update_errors: "Update errors"
+    destroy_success: "Delete success"
+    destroy_errors: "Delete errors"
+    not_found_frequency: "Not found"
+    not_found_org: "Not found organization"
+    index:
+      new_frequency: "New"
+      value: "Value"
+      title: "Frequencies"
+    form_new:
+      title: "New frequencies"
+      from_required: "From"
+      to: "To"
+      range_support: "Value"
+      operator: "Operator"
+      range: "Range"
+      less_than: "Less than"
+      more_than: "More than"
+      less_than_or_equal: "Less than or equal"
+      more_than_or_equal: "More than or equal"
+    frequency:
+      range: " ~< "
+      less_than: " < "
+      more_than: " > "
+      less_than_or_equal: " <= "
+      more_than_or_equal: " >= "
+  frequency_club: "Frequency / month"
+  per_month: "per month"

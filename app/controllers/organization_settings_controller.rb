@@ -29,6 +29,7 @@ class OrganizationSettingsController < ApplicationController
       @money_supports = @organization.money_supports.group_by &:arr_range
       @range_supports = @organization.range_supports.newest.page(params[:page]).per Settings.per_page_range
       @range_supports_full = @organization.range_supports
+      @frequencies = @organization.frequencies.page(params[:page]).per Settings.per_page_range
     end
   end
 
