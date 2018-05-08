@@ -1,0 +1,26 @@
+<% if hash_albums.present? %>
+  <section class="site-content site-section">
+    <div class="container">
+      <div class="row portfolio">
+        <% hash_albums.each do |key, albums| %>
+          <div class="container gallery-container">
+            <div class="row custom-time">
+              <%= t "month" %> <%= key.month %> - <%= key.year %>
+            </div>
+            <div class="tz-gallery-custom">
+              <div class="row">
+                <%= render partial: "albums/album", collection: albums, as: :album %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <div class="col-md-12 text-center" id="paginate-albums">
+    <%= paginate albums, remote: true,
+      params: {controller: "albums", action: "index", club_id: @club.slug} %>
+  </div>
+<% else %>
+  <h5 class="notifi-join text-center"><%= t "no_album" %></h5>
+<% end %>

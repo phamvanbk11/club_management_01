@@ -39,7 +39,7 @@
   <div class="modal-footer">
     <% if can? :create, @club.events.build %>
       <%= link_to new_club_event_path(
-        club_id: @club.id), class: "btn btn-sm btn-breez" do %>
+        club_id: @club.slug), class: "btn btn-sm btn-breez" do %>
         <i class="fa fa-plus-circle"> </i><%= t "form_event.new_event_money" %>
       <% end %>
     <% end %>

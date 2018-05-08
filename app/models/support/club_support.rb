@@ -11,6 +11,10 @@ class Support::ClubSupport
     @club_value.user_clubs.includes(:user).newest
   end
 
+  def hash_albums
+    albums.group_by{|e| e.created_at&.beginning_of_month}
+  end
+
   def albums
     @club_value.albums.includes(:images).newest.page(@page).per Settings.per_page_album
   end

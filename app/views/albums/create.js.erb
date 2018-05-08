@@ -2,7 +2,8 @@
   $('#modal-new-album').modal('hide');
   $('.container').append('<%= j render "shared/flash_warning" %>');
   $('.notify').delay(4000).slideUp(300);
-  $('#list-albums').append('<%= j render partial: "album", locals: {album: @album} %>');
+  $('.js-list-albums').html('<%= j render partial: "albums",
+    locals: {hash_albums: @hash_albums, albums: @albums} %>');
 <% else %>
   $('.album-errors').html('<%= j render "album_errors" %>');
 <% end %>

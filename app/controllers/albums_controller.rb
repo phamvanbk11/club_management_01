@@ -4,6 +4,10 @@ class AlbumsController < ApplicationController
   before_action :load_album, except: %i(index create)
   authorize_resource
 
+  def index
+    load_and_to_hash_albums
+  end
+
   def create
     @album = Album.new album_params
     if @album.save
@@ -13,12 +17,15 @@ class AlbumsController < ApplicationController
     else
       flash_error @album
     end
+    load_and_to_hash_albums
   end
 
   def show
     @image = Image.new
     @videos = @album.videos.upload_success
-    @album_other = @club.albums.includes(:images).newest.other @album.id
+    @other_albums = @club.albums.includes(:images).newest.other(@album.id)
+      .page(params[:page]).per Settings.per_page_album
+    @hash_other_albums = @other_albums.group_by{|e| e.created_at&.beginning_of_month}
   end
 
   def destroy
@@ -70,5 +77,11 @@ class AlbumsController < ApplicationController
 
   def album_params
     params.require(:album).permit(:name).merge! club_id: @club.id
+  end
+
+  def load_and_to_hash_albums
+    @albums = @club.albums.newest.includes(:images).page(params[:page])
+      .per Settings.per_page_album
+    @hash_albums = @albums.group_by{|e| e.created_at&.beginning_of_month}
   end
 end
