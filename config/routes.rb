@@ -62,7 +62,7 @@ Rails.application.routes.draw do
       resources :set_user_donates
       resources :user_events, only: [:create, :destroy]
     end
-    resources :albums, except: :index do
+    resources :albums do
       resources :images
       resources :videos, only: %i(create destroy update)
       post "/videos/upload", to: "videos#upload"

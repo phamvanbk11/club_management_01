@@ -3,7 +3,7 @@
     <td class="upcoming">
       <div>
         <% if key && key.is_a?(Date) %>
-          <%= t "month" %> <%= key.month %>-<%= key.year %>
+          <%= t "month" %> <%= key.month %> - <%= key.year %>
         <% else %>
           <%= t "date_start_nil" %>
         <% end %>

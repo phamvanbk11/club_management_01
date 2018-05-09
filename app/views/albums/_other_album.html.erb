@@ -1,55 +1,12 @@
-<div class="orther-album text-center">
-  <h3 class="title"><%= t "albums_club.other_album" %></h3>
-</div>
-<div class="tz-gallery">
-  <div class="row">
-    <% @album_other.each do |album| %>
-      <div class="col-sm-6 col-md-3 portfolio-item show-album-<%= album.id %>">
-        <div class="thumbnail">
-          <%= link_to club_album_path(@club.slug, album.id) do %>
-            <% if album.images.blank? %>
-              <%= image_tag "fram.jpg", class: "col-md-12 centered-and-cropped" %>
-            <% else %>
-              <%= image_tag albums_club(album), class: "col-md-12 centered-and-cropped" %>
-            <% end %>
-          <% end %>
-          <div class="col-md-12">
-            <div class="caption row">
-              <p class="col-md-10">
-                <%= link_to club_album_path(@club.id, album.id) do %>
-                  <%= truncate(album.name, length: Settings.truncate.album_name) %>
-                <% end %>
-                </br>
-                <%= album.images.size %> <%= t "albums_club.image" %>
-              </p>
-              <div class="pull-right col-md-1">
-                <div class="dropup">
-                  <% if @club.is_admin? current_user %>
-                    <span class="dropdown-toggle" data-toggle="dropdown">
-                      <span class="fa fa-cog"></span>
-                    </span>
-                  <% end %>
-                  <ul class="dropdown-menu drop_form" role="menu" aria-labelledby="menu1">
-                    <li class="text-center">
-                      <%= link_to edit_club_album_path(@club.id, album.id),
-                        title: t("edit"), remote: :true do %>
-                        <i class="fa fa-pencil"></i>
-                      <% end %>
-                      <%= link_to club_album_path(id: album.id,
-                        club_id: @club.id), class: "",
-                        title: t("delete"), method: :delete, remote: :true,
-                        data: {confirm: t("confirm_delete_album")} do %>
-                          <i class="fa fa-trash-o" aria-hidden="true"></i>
-                      <% end %>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+<% if @hash_other_albums.present? %>
+  <div class="tab-pad">
+    <div class="orther-album text-center">
+      <h3 class="title"><%= t "albums_club.other_album" %></h3>
+    </div>
+    <div id="page-container" class="js-list-albums">
+      <%= render partial: "albums/albums", locals: {hash_albums:
+        @hash_other_albums, albums: @other_albums} %>
+    </div>
+    <div class="edit-album-club"></div>
   </div>
-</div>
-<div class="edit-album-club"></div>
+<% end %>

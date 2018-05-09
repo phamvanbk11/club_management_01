@@ -1,17 +1,6 @@
-<div id="page-container">
-  <section class="site-content site-section">
-    <div class="container">
-      <div class="row portfolio">
-        <div class="container gallery-container">
-          <div class="tz-gallery">
-            <div class="row" id="list-albums">
-              <%= render partial: "albums/album", collection: @infor_club.albums, as: :album %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div id="page-container" class="js-list-albums">
+  <%= render partial: "albums/albums", locals: {hash_albums:
+    @infor_club.hash_albums, albums: @infor_club.albums} %>
 </div>
 <div id="modal-new-album" class="modal fade" tabindex="-1"
   role="dialog" aria-hidden="true">

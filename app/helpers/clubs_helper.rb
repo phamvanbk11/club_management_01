@@ -63,9 +63,9 @@ module ClubsHelper
 
   def set_logo_club club
     if club && club.logo.thumb.file && club.logo.thumb.file.exists?
-      image_tag club.logo_url(:thumb), class: "img-cover", title: t("image_cover")
+      image_tag club.logo_url(:thumb), class: "img-cover", title: t("logo_club")
     elsif club
-      image_tag club.logo_url, class: "img-cover", title: t("image_cover")
+      image_tag club.logo_url, class: "img-cover", title: t("logo_club")
     end
   end
 

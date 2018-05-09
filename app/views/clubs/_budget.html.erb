@@ -5,11 +5,10 @@
         <%= number_to_currency(@club.money, locale: :vi) %></strong>
       </h5>
       <div class="join-cancel-toggle-container center">
-        <%= link_to "#budget-club", data: {toggle: "modal", target: "#budget_club_popup"},
-          class: "btn btn-sm btn-primary animation-fadeIn360
-          button-budget-album" do %>
+        <button type="button" class="btn btn-sm btn-primary"
+          data-toggle="modal" data-target="#budget_club_popup">
           <i class="fa fa-search "></i> <%= t "view_detail_budget" %>
-        <% end %>
+        </button>
       </div>
       <div class="modal fade show" id="budget_club_popup">
         <%= render "popups/budget_club" %>
