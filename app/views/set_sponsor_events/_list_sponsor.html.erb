@@ -14,7 +14,7 @@
         <% sponsors.each do |sponsor| %>
           <tr class="add-user-member category-<%= sponsor.id %>">
             <td class= "text-center type-name ">
-              <%= sponsor.club_name %>
+              <%= link_to sponsor.club_name, club_path(sponsor.club) %>
             </td>
             <td class="text-center">
               <%= sponsor.name_event %>

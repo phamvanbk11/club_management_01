@@ -21,6 +21,7 @@ class UserClub < ApplicationRecord
   scope :by_club, ->club_id{where club_id: club_id}
   scope :by_club_ids, ->club_ids{where club_id: club_ids}
   scope :by_user_id_and_club_ids, ->user_id, club_ids{where user_id: user_id, club_id: club_ids}
+  scope :users_join_in_time, ->time_range{where created_at: time_range}
 
   class << self
     def of_club club

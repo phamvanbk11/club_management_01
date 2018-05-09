@@ -14,4 +14,12 @@ module SponsorsHelper
       t "#{sponsor.status}"
     end
   end
+
+  def total_money details, value_style
+    count = Settings.default_money
+    details.each do |detail|
+      count += detail.money if detail.style == SponsorDetail.styles.key(value_style)
+    end
+    number_to_currency count, locale: :vi
+  end
 end

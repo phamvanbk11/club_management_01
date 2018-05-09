@@ -15,8 +15,8 @@ class SettingClubsController < ApplicationController
   def show
     @hide = params[:hide] == "true"
     frequency = FrequencyClub.new @club, params[:time] || Date.current.month,
-      params[:year] || Date.current.year
-    @users = frequency.frequency_club_by_time
+      params[:year] || Date.current.year, params[:user_ids]
+    @users = frequency.users_frequency_club
   end
 
   private

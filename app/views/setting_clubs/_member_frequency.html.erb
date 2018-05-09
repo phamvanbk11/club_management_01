@@ -1,46 +1,11 @@
 <%= hidden_field_tag :club_slug, @club.slug %>
-<div class="modal-dialog modal-lg js-check-modal">
-  <div class="modal-content">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content" id="js-check-modal-users">
     <div class="modal-header" id="js-header-users">
       <%= render "header_modal" %>
     </div>
-    <div class="modal-body">
-      <div class="row <%= "hide-div" if @hide %>">
-        <div class="col-md-4 push-md-1">
-          <label for="contact-name"><%= t "month" %></label></br>
-          <%= select_tag "month", options_for_select(option_select_time(:monthly, @club),
-            Date.current.month), class: "form-control select_custom select-month" %>
-        </div>
-        <div class="col-md-4 push-md-2">
-          <label for="contact-name"><%= t "year" %></label></br>
-          <%= select_year(Date.current, {start_year: Settings.year_ago.year.ago.year,
-            end_year: Date.current.year}, {class: "select_custom form-control select-year"}) %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <strong class="pad-10"><%= t ".frequency", num: @club.frequency %>
-            : <%= @users.size %>
-          </strong>
-        </div>
-      </div>
-      <div class="widget-simple list-scroll pad-top-10">
-        <div class="table-responsive">
-          <table class="table ui-block table-pricing">
-            <thead>
-              <tr>
-                <th></th>
-                <th><%= t ".avatar" %></th>
-                <th><%= t ".name" %></th>
-                <th><%= t ".email" %></th>
-              </tr>
-            </thead>
-            <tbody id="js-list-users">
-              <%= render "list_users_body" %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="modal-body" id="js-modal-body-users">
+      <%= render "list_users_body" %>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" data-dismiss="modal"><%= t ".close" %></button>

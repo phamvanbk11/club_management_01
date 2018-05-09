@@ -1,0 +1,26 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="col-md-3 mrg-r-20">
+      <%= f.text_field :description, class: "form-control input-text input-require
+        description-input", placeholder: t(".description"),
+        required: true %>
+    </div>
+    <div class="col-md-3 mrg-r-20">
+      <%= f.text_field :money, class: "form-control input-text js-input-money",
+        placeholder: t(".money"), required: true %>
+    </div>
+    <label class="col-md-1 radio-inline-flex mrg-r-20">
+      <%= f.radio_button :style, SponsorDetail.styles[:get],
+        class: "radio-get-money radio", checked: f.object.get? %>
+      <%= t(".get") %>
+    </label>
+    <label class="col-md-1 radio-inline-flex mrg-r-20">
+      <%= f.radio_button :style, SponsorDetail.styles[:pay],
+        class: "radio-pay-money radio", checked: f.object.pay? %>
+      <%= t(".pay") %>
+    </label>
+    <div class="col-md-1">
+      <%= link_to_remove_association button_tag('-', type: "button", class: "btn btn-primary field-btn"), f %>
+    </div>
+  </div>
+</div>

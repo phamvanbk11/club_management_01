@@ -2,9 +2,11 @@ class SponsorsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_club
   before_action :load_sponsor, only: [:show, :edit, :destroy, :update]
+  before_action :replace_string_in_money, only: [:create, :update]
 
   def new
     @sponsor = Sponsor.new
+    @sponsor.sponsor_details.build
   end
 
   def index
@@ -59,7 +61,9 @@ class SponsorsController < ApplicationController
     experience = experience_params params
     params.require(:sponsor).permit(:event_id, :purpose, :time, :place,
       :organizational_units, :participating_units, :name_event,
-      :communication_plan, :prize, :regulations, :expense, :sponsor, :interest).merge! experience: experience,
+      :communication_plan, :prize, :regulations, :expense, :sponsor,
+      :interest, sponsor_details_attributes: [:id, :_destroy, :description, :money,
+      :style]).merge! experience: experience,
       club_id: @club.id, user_id: current_user.id, status: Sponsor.statuses[:pending]
   end
 
@@ -86,5 +90,17 @@ class SponsorsController < ApplicationController
         member: "#{params[:member][index]}", communication: "#{params[:communication][index]}"}})
     end
     experience
+  end
+
+  def replace_string_in_money
+    if params[:sponsor] && params[:sponsor][:sponsor]
+      params[:sponsor][:sponsor].gsub!(",", "")
+    end
+    if params[:sponsor] && params[:sponsor][:sponsor_details_attributes]
+      params[:sponsor][:sponsor_details_attributes].each do |key, value|
+        value[:money].gsub!(",", "") if value[:money]
+        value[:style] = value[:style].to_i if value[:style]
+      end
+    end
   end
 end

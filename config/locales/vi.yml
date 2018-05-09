@@ -1577,6 +1577,17 @@ vi:
     update_success: "Cập nhật thư mời tài trợ thành công"
     acceptsponsor: "chấp nhận"
     rejectsponsor: "từ chối"
+    form_sponsor:
+      pay_total: "Tổng chi: "
+      get_total: "Tổng thu: "
+    sponsor_details:
+      style: "Loại"
+      get: "Thu"
+      pay: "Chi"
+      description: "Mô tả"
+      money: "Số tiền"
+      total_pay: "Tổng chi: "
+      total_get: "Tổng thu: "
   social_share_button:
     share_to: "Chia sẽ"
   new_post: "Tạo bài viết"
@@ -1889,15 +1900,17 @@ vi:
       close: "Đóng"
       is_edit_report: "Cho phép báo cáo khi hết hạn"
     member_frequency:
-      avatar: "Ảnh"
-      name: "Họ tên"
-      email: "Email"
       close: "Đóng"
-      frequency: "Thành viên tham gia %{num} buổi"
     header_modal:
       title: "Đếm số người tham gia sinh hoạt"
       month: "tháng %{month}"
       year: "năm %{year}"
+    list_users_body:
+      frequency: "Thành viên tham gia >= %{num} buổi"
+      avatar: "Ảnh"
+      name: "Họ tên"
+      email: "Email"
+      member_join: "%{num} thành viên"
   frequencies:
     create_success: "Tạo mới thành công"
     create_errors: "Tạo mới thất bại"
@@ -1931,3 +1944,9 @@ vi:
   frequency_club: "Tần suất sinh hoạt / tháng"
   per_month: "buổi / tháng"
   no_album: "Câu lạc bộ này chưa có bộ sưu tập nào"
+  sponsor_details:
+    field_sponsor_detail:
+      pay: "Chi"
+      get: "Thu"
+      description: "Mô tả"
+      money: "Số tiền"

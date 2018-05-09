@@ -1,28 +1,62 @@
-<tr>
-  <% if @users.any? %>
-    <% @users.each do |user| %>
-      <tr>
-        <td></td>
-        <td>
-          <div class="col-md-1 avarta-memeber">
-            <%= link_to user_path(user.id) do %>
-              <%= image_tag user.avatar, class: "member-organization-view view-avt-member",
-                title: "#{user.full_name}" %>
-            <% end %>
-          </div>
-        </td>
-        <td>
-          <%= user.full_name %>
-        </td>
-        <td>
-          <%= user.email %>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
-  <tr class="text-center">
-    <td colspan="4">
-      <h3 class="center notifi-empty"><%= t "empty" %></h3>
-    </td>
-  </tr>
-<% end %>
+<div class="row <%= "hide-div" if @hide %>">
+  <div class="col-md-4 push-md-1">
+    <label for="contact-name"><%= t "month" %></label></br>
+    <%= select_tag "month", options_for_select(option_time_full(:monthly),
+      params[:time] || Date.current.month), class: "form-control select_custom select-month" %>
+  </div>
+  <div class="col-md-4 push-md-2">
+    <label for="contact-name"><%= t "year" %></label></br>
+    <%= select_year((params[:year]&.to_i || Date.current), {start_year: Settings.year_ago.year.ago.year,
+      end_year: Date.current.year}, {class: "select_custom form-control select-year"}) %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 <%= "hide-div" if @hide %>">
+    <strong class="pad-10"><%= t ".frequency", num: @club.frequency %>
+      : <%= t ".member_join", num: @users.size %>
+    </strong>
+  </div>
+</div>
+<div class="widget-simple list-scroll pad-top-10">
+  <div class="table-responsive">
+    <table class="table ui-block table-pricing">
+      <thead>
+        <tr>
+          <th></th>
+          <th><%= t ".avatar" %></th>
+          <th><%= t ".name" %></th>
+          <th><%= t ".email" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @users.any? %>
+          <% @users.each do |user| %>
+            <tr>
+              <td></td>
+              <td>
+                <div class="col-md-1 avarta-memeber">
+                  <%= link_to user_path(user.id) do %>
+                    <%= image_tag user.avatar, class: "member-organization-view view-avt-member",
+                      title: "#{user.full_name}" %>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <%= user.full_name %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4">
+              <h3 class="center notifi-empty"><%= t "empty" %></h3>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

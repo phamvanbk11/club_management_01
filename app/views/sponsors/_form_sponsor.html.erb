@@ -170,16 +170,34 @@
         placeholder: t("sponsors.regulations") %>
     </div>
   </div>
-  <div class="form-group">
-    <label class="col-md-3 control-label label-bold" for="example-textarea-input">
-      <%= t "sponsors.expense" %>
-      <span class="text-danger">*</span>
-    </label>
-    <div class="col-md-12">
-      <div class="col-md-12">
-        <div class="form-group row">
-          <%= f.number_field :expense, class: "form-control input-text white-bgr", required: true %>
-        </div>
+  <div class="form-money">
+    <div class="form-group col-md-12 is-empty" id="js-expense-details">
+      <div class="row">
+        <label class="col-md-3 control-label label-bold" for="example-textarea-input">
+          <%= t "sponsors.expense" %>
+          <span class="text-danger">*</span>
+        </label>
+        <%= link_to_add_association f, :sponsor_details,
+          partial: "sponsor_details/field_sponsor_detail", class: "btn btn-breez btn-sm button-add-detail col-md-1" do %>
+          <i class="fa fa-plus"></i>
+        <% end %>
+      </div>
+      <%= f.fields_for :sponsor_details do |detail| %>
+        <%= render partial: "sponsor_details/field_sponsor_detail", locals: {f: detail} %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label class="control-label label-bold" >
+          <%= t ".pay_total" %>
+        </label>
+        <label id="js-pay-total" class="color-red"><%= number_to_currency 0, locale: :vi %></label>
+      </div>
+      <div class="col-md-3">
+        <label class="control-label label-bold">
+          <%= t ".get_total" %>
+        </label>
+        <label id="js-get-total" class="color-red"><%= number_to_currency 0, locale: :vi %></label>
       </div>
     </div>
   </div>
@@ -191,7 +209,8 @@
     <div class="col-md-12">
       <div class="col-md-12">
         <div class="form-group row">
-          <%= f.number_field :sponsor, class: "form-control input-text white-bgr", required: true %>
+          <%= f.text_field :sponsor, class: "form-control input-text
+            js-input-money", required: true %>
         </div>
       </div>
     </div>

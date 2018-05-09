@@ -1,10 +1,12 @@
-<div class="col-md-12 col-md-offset-2">
+<div class="col-md-12">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content modal-report-detail">
+    <div class="modal-content">
       <div class="modal-header">
-        <h4 class="col-md-12 text-center">
-          <%= t "sponsors.sponsors" %>
+        <h4 class="modal-title text-center">
+          <%= t "sponsors.sponsors" %>&nbsp;
+          <%= t "club" %>&nbsp;<%= @sponsor.club_name %>
         </h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
         <div class="text-center col-md-12">
@@ -21,7 +23,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-10 col-sm-12 col-xs-12 offset-md-1">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="inline-items report-detail">
             <h6 class="title">
               <i class="fa fa-codepen"></i>
@@ -92,7 +94,8 @@
               <strong><%= t "sponsors.expense" %>:</strong>
             </h6><br/>
             <span class="sponsor-detail">
-              <%= number_to_currency(@sponsor.expense, locals: :vi) %>
+              <%= render partial: "sponsors/sponsor_details",
+                locals: {sponsor_details: @sponsor.sponsor_details} %>
             </span><br/>
           </div>
           <div class="inline-items report-detail">
@@ -101,7 +104,9 @@
               <strong><%= t "sponsors.sponsor" %>:</strong>
             </h6><br/>
             <span class="sponsor-detail">
-              <%= number_to_currency(@sponsor.sponsor, locals: :vi) %>
+              <label class="label-bold">
+                <%= number_to_currency(@sponsor.sponsor, locals: :vi) %>
+              </label>
             </span><br/>
           </div>
           <div class="inline-items report-detail">
