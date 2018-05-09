@@ -1,0 +1,34 @@
+<div class="table-responsive full-width">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="money-colums text-center"><%= t ".style" %></th>
+        <th class="money-colums text-center"><%= t ".money" %></th>
+        <th class="column-detail text-center"><%= t ".description" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% sponsor_details.each do |detail| %>
+        <tr>
+          <td>
+            <%= t ".#{detail.style}" %>
+          </td>
+          <td><%= number_to_currency detail.money, locale: :vi %></td>
+          <td><%= detail.description %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td class="label-bold"><%= t ".total_get" %></td>
+        <td colspan="2" class="label-bold">
+          <%= total_money sponsor_details, SponsorDetail.styles[:get] %>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-bold" ><%= t ".total_pay" %></td>
+        <td colspan="2" class="label-bold">
+          <%= total_money sponsor_details, SponsorDetail.styles[:pay] %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

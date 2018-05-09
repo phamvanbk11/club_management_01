@@ -30,8 +30,8 @@ jQuery(document).ready(function($) {
 
   $('.input-slider').slider();
 
-  $(document).on('keyup', '.js-input-money', function(){
-    $(this).val(format($(this).val()));
+  $(document).on('keyup', '.js-input-money', function(e){
+    convert_to_money(e, this);
   });
 
   $(document).on('click', '.datepicker', function(){
@@ -170,3 +170,45 @@ var format = function(num){
   }
   return(money);
 };
+function setSelectionRange(input, selectionStart, selectionEnd) {
+  if (input.setSelectionRange) {
+    input.focus();
+    input.setSelectionRange(selectionStart, selectionEnd);
+  } else if (input.createTextRange) {
+    var range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
+  }
+}
+
+function setCaretToPos(input, pos) {
+  setSelectionRange(input, pos, pos);
+}
+
+function convert_to_money(e, input) {
+  if ((e.keyCode <= 90 && e.keyCode >= 46) ||
+    (e.keyCode <= 123 && e.keyCode >= 96) || (e.keyCode === 8)){
+    $(input).val($(input).val().replace(/^0+/, ''));
+    var current_cusor = $(input).caret().begin;
+    var before_val = $(input).val();
+    $(input).val($(input).val().replace(/[^0-9\,]/g,''));
+    var money = $(input).val();
+    if (money.length > 3) {
+      $(input).val(format(money.slice(0, -4)));
+    }
+    else {
+      $(input).val(format($(input).val()));
+    }
+    if ($(input).val().length > 0) {
+      $(input).val($(input).val() + ',000');
+    }
+    if (before_val.length > 3 && before_val.length < $(input).val().length){
+      setCaretToPos($(input)[0], current_cusor + 1);
+    }
+    else{
+      setCaretToPos($(input)[0], current_cusor);
+    }
+  }
+}

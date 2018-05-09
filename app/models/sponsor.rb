@@ -10,6 +10,7 @@ class Sponsor < ApplicationRecord
   belongs_to :organization
   belongs_to :club
   belongs_to :user, ->{with_deleted}
+  has_many :sponsor_details, dependent: :destroy
 
   enum status: {pending: 0, accept: 1, rejected: 2}
 
@@ -17,4 +18,7 @@ class Sponsor < ApplicationRecord
 
   delegate :name, to: :club, prefix: true, allow_nil: :true
   delegate :name, to: :event, allow_nil: :true, prefix: true
+
+  accepts_nested_attributes_for :sponsor_details, allow_destroy: true,
+    reject_if: proc {|attributes| attributes[:description].blank?}
 end

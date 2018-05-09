@@ -1260,6 +1260,17 @@ en:
     update_success: "Update sponsor success"
     acceptsponsor: "accept"
     rejectsponsor: "reject"
+    form_sponsor:
+      pay_total: "Pay total: "
+      get_total: "Get total: "
+    sponsor_details:
+      style: "Style"
+      get: "Get"
+      pay: "Pay"
+      description: "Description"
+      money: "Money"
+      total_pay: "Pay total: "
+      total_get: "Get total: "
   social_share_button:
     share_to: "Share"
   new_post: "Create post"
@@ -1567,15 +1578,17 @@ en:
       close: "Close"
       is_edit_report: "Allow report when deadline"
     member_frequency:
-      avatar: "Avatar"
-      name: "Full name"
-      email: "Email"
       close: "Close"
-      frequency: "Member join %{num}"
     header_modal:
       title: "Caculator member join activity"
       month: "month %{month}"
       year: "year %{year}"
+    list_users_body:
+      avatar: "Avatar"
+      name: "Full name"
+      email: "Email"
+      frequency: "Member join >= %{num}"
+      member_join: "%{num} members"
   frequencies:
     create_success: "Create success"
     create_errors: "Create errors"
@@ -1609,3 +1622,9 @@ en:
   frequency_club: "Frequency / month"
   per_month: "per month"
   no_album: "No albums"
+  sponsor_details:
+    field_sponsor_detail:
+      pay: "Pay"
+      get: "Get"
+      description: "Description"
+      money: "Money"

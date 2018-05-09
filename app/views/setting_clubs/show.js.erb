@@ -1,8 +1,8 @@
-if ($('.js-check-modal').length === 0){
+if ($('#js-check-modal-users').length === 0){
   $('#config-club').html('<%= j render "member_frequency" %>');
 }
 else {
-  $('#js-list-users').html('<%= j render "list_users_body" %>');
+  $('#js-modal-body-users').html('<%= j render "list_users_body" %>');
   $('#js-header-users').html('<%= j render "header_modal" %>')
 }
 if (($("#config-club").data('bs.modal') || {})._isShown != true){

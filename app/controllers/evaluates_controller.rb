@@ -105,8 +105,8 @@ class EvaluatesController < ApplicationController
   end
 
   def save_money_supports
-    frequency = FrequencyClub.new @club, @evaluate.time, @evaluate.year
-    users = frequency.frequency_club_by_time
+    frequency = FrequencyClub.new @club, @evaluate.time, @evaluate.year, nil
+    users = frequency.users_frequency_club
     money_support = CaculatorMoneySupport.new @club, users.size, count_point
     money = money_support.caculator_money_support || Settings.default_money_support
     if @evaluate.money_support_club.present?

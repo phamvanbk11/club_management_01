@@ -18,10 +18,12 @@
     <%= evaluate.total_points %>
   </td>
   <td class="text-center">
-    <%= link_to setting_club_path(id: @club.slug, hide: true,
-      time: evaluate.time, year: evaluate.year), remote: true,
-      class: "btn btn-breez btn-bottom-0" do %>
-      <%= number_to_currency evaluate.money_support_club&.money, locale: :vi %>
+    <% if evaluate.money_support_club.present? %>
+      <%= link_to setting_club_path(id: @club.slug, hide: true,
+        time: evaluate.time, year: evaluate.year, user_ids: evaluate.money_support_club.user_ids),
+        remote: true, class: "btn btn-breez btn-bottom-0" do %>
+        <%= number_to_currency evaluate.money_support_club.money, locale: :vi %>
+      <% end %>
     <% end %>
   </td>
   <td class="text-center">
