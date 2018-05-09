@@ -2,7 +2,9 @@ class SettingClubsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_club
 
-  def edit; end
+  def edit
+    @club_types = @club.organization.club_types
+  end
 
   def update
     if @club && @club.update_attributes(club_setting_params)
@@ -28,6 +30,6 @@ class SettingClubsController < ApplicationController
   end
 
   def club_setting_params
-    params.require(:club).permit :frequency, :is_action_report
+    params.require(:club).permit :frequency, :is_action_report, :club_type_id
   end
 end

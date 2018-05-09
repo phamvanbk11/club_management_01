@@ -1900,6 +1900,7 @@ vi:
       update: "Cập nhật"
       close: "Đóng"
       is_edit_report: "Cho phép báo cáo khi hết hạn"
+      club_type: "Loại câu lạc bộ"
     member_frequency:
       close: "Đóng"
     header_modal:

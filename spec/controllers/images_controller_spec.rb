@@ -6,6 +6,9 @@ RSpec.describe ImagesController, type: :controller do
   let!(:club) do
     create :club, organization: organization
   end
+  let!(:user_club) do
+    create :user_club, club: club, user: user, is_manager: true
+  end
   let!(:album) do
     create :album, club: club
   end
