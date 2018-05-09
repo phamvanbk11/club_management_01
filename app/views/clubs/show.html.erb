@@ -11,18 +11,6 @@
       <div class="ui-block">
         <div class="ui-block-title custom_flex">
           <div class="item_club col-md-4">
-            <%= search_form_for @q, url: club_url, method: :get do |f| %>
-              <div class="w-search custom_medium">
-                <div class="form-group with-button">
-                <%= f.text_field :name_or_description_cont,
-                  id: "search-term", class: "form-control",
-                  placeholder: t("search") %>
-                <button>
-                  <svg class="olymp-magnifying-glass-icon"><use xlink:href="<%= url_to_asset("icons/icons.svg#olymp-magnifying-glass-icon") %>"></use></svg>
-                </button>
-                </div>
-              </div>
-            <% end %>
           </div>
           <div class="item_club col-md-4 text-center">
             <%= render "clubs/budget" %>

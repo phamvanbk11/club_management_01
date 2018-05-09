@@ -18,7 +18,7 @@ class FrequencyClub
 
   def get_users_by_frequency
     if @club.frequency <= Settings.default_frequency
-      user_ids = UserClub.users_join_in_time time_range
+      user_ids = @club.user_clubs.users_join_before_time(time_range.last).pluck(:user_id)
       User.done_by_ids user_ids
     else
       users_frequency_more_than_zero

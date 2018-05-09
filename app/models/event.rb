@@ -57,6 +57,7 @@ class Event < ApplicationRecord
     end", activity_money_id, ids
   end
   scope :event_public, ->{where is_public: true}
+  scope :in_clubs, ->club_ids{where club_id: club_ids}
 
   enum status: {inprocess: 0, finished: 1}
   enum event_category: {notification: 0, activity_money: 2,
@@ -131,6 +132,10 @@ class Event < ApplicationRecord
   def get_money_by_style style
     details_group = self.event_details.group_by(&:style)
     count_money_details details_group, style
+  end
+
+  def is_in_club? club
+    self.club == club
   end
 
   private

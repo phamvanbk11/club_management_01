@@ -383,3 +383,4 @@ rand_file_name:
 per_page_range: 10
 default_money_support: 0
 default_frequency: 0
+display_page_move: 2

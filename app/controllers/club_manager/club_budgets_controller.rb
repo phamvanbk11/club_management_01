@@ -40,7 +40,7 @@ class ClubManager::ClubBudgetsController < ApplicationController
   def load_event
     if @club
       @event = Event.find_by id: params[:event_id]
-      return if @event
+      return if @event && @event.is_in_club?(@club)
       flash.now[:danger] = t("event_not_found")
     end
   end

@@ -1,0 +1,14 @@
+<%= search_form_for @q, url: organization_events_path(id: @organization.slug), class: "w-search",
+  id: "organization_time_line_search" do |f| %>
+  <%= hidden_field_tag :organization_slug, @organization.slug %>
+  <div class="row">
+    <div class="form-group with-button col-md-10" >
+      <%= f.text_field :name_cont,
+        placeholder: t("search_name_club"),
+        class: "form-control", id: "input_search_timeline" %>
+      <span class="input-group-addon" id="basic-addon1">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </span>
+    </div>
+  </div>
+<% end %>

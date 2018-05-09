@@ -2,7 +2,7 @@
   <div class="dataTables_paginate paging_bootstrap"
     id="example-datatable_paginate">
     <ul class="pagination pagination-sm remove-margin">
-      <%= first_page_tag unless current_page.first? %>
+      <%= first_page_tag if is_display_first_page?(current_page, total_pages) %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| -%>
         <% if page.display_tag? -%>
@@ -13,7 +13,7 @@
       <% end -%>
       <% unless current_page.out_of_range? %>
         <%= next_page_tag unless current_page.last? %>
-        <%= last_page_tag unless current_page.last? %>
+        <%= last_page_tag if is_display_last_page?(current_page, total_pages) %>
       <% end %>
     </ul>
   </div>
