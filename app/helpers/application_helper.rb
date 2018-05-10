@@ -110,4 +110,14 @@ module ApplicationHelper
   def class_div boolean, class_div
     boolean ? class_div : ""
   end
+
+  def is_display_first_page? current_page, total_pages
+    total_pages > Settings.display_page_move &&
+      current_page.to_i > Settings.display_page_move
+  end
+
+  def is_display_last_page? current_page, total_pages
+    total_pages > Settings.display_page_move &&
+      current_page.to_i <= total_pages - Settings.display_page_move
+  end
 end

@@ -72,14 +72,14 @@ class EventsController < ApplicationController
   def load_club
     @club = Club.find_by slug: params[:club_id]
     return if @club
-    flash[:danger] = t "not_found"
+    flash[:danger] = t "not_found_club"
     redirect_back(fallback_location: root_path) unless request.xhr?
   end
 
   def load_event
     @event = Event.find_by id: params[:id]
-    return if @event
-    flash[:danger] = t "not_found"
+    return if @event && @event.is_in_club?(@club)
+    flash[:danger] = t "not_found_event"
     redirect_back(fallback_location: root_path) unless request.xhr?
   end
 

@@ -6,12 +6,7 @@
   </div>
   <div class="text-center">
     <% unless events.current_page == events.total_pages %>
-      <%= link_to organization_events_path(page: events.next_page, id: @organization.slug),
-        remote: true, id: "load-event-organization", class: "hide-div" do %>
-        <span>
-          <%= t("more") %>
-        </span>
-      <% end %>
+      <%= hidden_field_tag :next_page_time_line, events.next_page %>
     <% end %>
   </div>
 </div>

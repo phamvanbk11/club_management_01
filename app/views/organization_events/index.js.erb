@@ -1,8 +1,12 @@
-$('#list-events').append('<%= j render partial: "organizations/item_event",
-  collection: @organization_event, as: :event %>')
-<% if @organization_event.current_page == @organization_event.total_pages %>
-  $('#load-event-organization').remove();
+<% if params[:append] %>
+  $('#list-events').append('<%= j render partial: "organizations/item_event",
+    collection: @organization_event, as: :event %>')
 <% else %>
-  $('#load-event-organization').attr('href',
-    '<%= organization_events_path(page: @organization_event.next_page, id: @organization.slug) %>');
+  $('#list-events').html('<%= j render partial: "organizations/item_event",
+    collection: @organization_event, as: :event %>')
+<% end %>
+<% if @organization_event.current_page == @organization_event.total_pages %>
+  $('#next_page_time_line').remove();
+<% else %>
+  $('#next_page_time_line').val(<%= @organization_event.next_page %>);
 <% end %>

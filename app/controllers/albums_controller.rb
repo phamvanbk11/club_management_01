@@ -64,7 +64,7 @@ class AlbumsController < ApplicationController
   def load_album
     if @club
       @album = Album.includes(:images).find_by id: params[:id]
-      return if @album
+      return if @album && @album.is_in_club?(@club)
       if request.xhr?
         flash.now[:danger] = t "flash_not_found.album"
       else
@@ -72,7 +72,6 @@ class AlbumsController < ApplicationController
         redirect_to @club
       end
      end
-
   end
 
   def album_params
