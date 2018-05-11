@@ -108,7 +108,7 @@ class EvaluatesController < ApplicationController
     frequency = FrequencyClub.new @club, @evaluate.time, @evaluate.year, nil
     users = frequency.users_frequency_club
     money_support = CaculatorMoneySupport.new @club, users.size, count_point
-    money = money_support.caculator_money_support || Settings.default_money_support
+    money = money_support.caculator_money_support
     if @evaluate.money_support_club.present?
       @evaluate.money_support_club.update_attributes! money: money,
         year: @evaluate.year, time: @evaluate.time, user_ids: users.ids

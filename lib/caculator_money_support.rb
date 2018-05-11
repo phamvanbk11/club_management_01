@@ -13,8 +13,9 @@ class CaculatorMoneySupport
       @money_support = @club.organization.money_supports.select do |money_support|
                          money_support.arr_range == [range_member.id, range_point.id]
                        end&.first
-      return @money_support&.money
+      return @money_support.money if @money_support.present?
     end
+    Settings.default_money_support
   end
 
   def load_range_support_by_point range_supports

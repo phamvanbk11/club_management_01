@@ -1578,6 +1578,7 @@ en:
       update: "Update"
       close: "Close"
       is_edit_report: "Allow report when deadline"
+      club_type: "Club type"
     member_frequency:
       close: "Close"
     header_modal:
