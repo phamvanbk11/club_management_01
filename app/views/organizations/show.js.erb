@@ -1,5 +1,5 @@
 <% if @clubs %>
-  $('#organization_club').html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs.active} %>');
+  $('#organization_club').html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs} %>');
   if ($('#search-organization').find('#organization_club_form').length === 0){
     $('#search-organization').html('<%= j render "search_club" %>');
   }
