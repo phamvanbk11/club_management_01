@@ -11,7 +11,8 @@ class Support::ClubRequestSupport
   end
 
   def organizations
-    @user.user_organizations.includes(:organization).joined
+    organization_ids = @user.user_organizations.joined.pluck(:organization_id)
+    Organization.by_ids organization_ids
   end
 
   def frequencies
