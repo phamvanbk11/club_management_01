@@ -14,7 +14,7 @@
               <label for="contact-name"><%= t "organization_sign" %></label>
               <br>
               <%= f.select(:organization_id, @club_request_support
-                .organizations.collect {|org| [org.name, org.organization_id ]},
+                .organizations.collect {|org| [org.name, org.id ]},
                 {}, {class: "form-control select_custom", id: "select_orgzt"}) %>
               <label class="push-left"><%= t "organization_question" %></label>
               <%= link_to t("click_here"), new_user_organization_request_path(user_id: current_user.id) %>

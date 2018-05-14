@@ -37,6 +37,7 @@ class Organization < ApplicationRecord
   scope :by_user_organizations, ->user_organizations do
     where id: user_organizations.map(&:organization_id)
   end
+  scope :by_ids, ->ids{where id: ids}
 
   CROP_BACKGROUND = [:bgr_crop_x, :bgr_crop_y, :bgr_crop_w, :bgr_crop_h]
 
