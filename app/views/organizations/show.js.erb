@@ -1,3 +1,4 @@
+show_left_block_organization();
 <% if @clubs %>
   $('#organization_club').html('<%= j render partial: "clubs/clubs", locals: {clubs: @clubs} %>');
   if ($('#search-organization').find('#organization_club_form').length === 0){

@@ -1,3 +1,4 @@
+show_left_block_organization();
 <% if can? :manager, @organization %>
   $('#organization_club').html('<%= j render "new" %>');
 <% else %>

@@ -42,7 +42,7 @@
           <ul class="tab_my_account">
             <li><a href="#list_my_group" class="active"><%= t "profile_settings.list_club_joined" %></a></li>
             <% if current_user.is_user?@user %>
-              <li><a href="#my_settings"><%= t "profile_settings.settings" %></a></li>
+              <li><a href="#my_settings" class="my_settings"><%= t "profile_settings.settings" %></a></li>
             <% end %>
           </ul>
         </div>
@@ -169,6 +169,7 @@
             </div>
           <% else %>
             <%= t("please_select_tags") %>
+            <%= link_to t("click_here"), "javascript:void(0)", id: "select-tag" %>
           <% end %>
         </div>
       </div>

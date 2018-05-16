@@ -4,7 +4,7 @@
   $('#error-explanation-category').html('<%= j render partial: "shared/error_messages",
     locals: {object: @report_category} %>')
 <% else %>
-  $('#organization_club').html('<%= j render partial: "list_report_categories",
+  $('#js-list-data-setting').html('<%= j render partial: "list_report_categories",
     locals: {report_categories: @report_categories} %>');
   $('#new-category').collapse("show")
   $('.container').append('<%= j render partial: "shared/flash_warning" %>');

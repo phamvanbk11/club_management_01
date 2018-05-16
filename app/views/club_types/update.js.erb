@@ -2,7 +2,7 @@
   $('#errors-edit').html('<%= j render partial: "shared/error_messages",
     locals: {object: @club_type} %>')
 <% else %>
-  $('#organization_club').html('<%= j render partial: "list_types",
+  $('#js-list-data-setting').html('<%= j render partial: "list_types",
     locals: {club_types: @club_types} %>');
 <% end %>
 $('.container').append('<%= j render partial: "shared/flash_warning" %>');

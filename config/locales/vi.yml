@@ -1445,6 +1445,8 @@ vi:
       money_support: "Tiền hỗ trợ"
       range_support: "Loại tính hỗ trợ"
       frequencies: "Tần suất hoạt động"
+      report_categories: "Danh mục báo cáo"
+      setting: "Cài đặt"
   statistic_reports:
     show:
       pay_money: "Chi tiền"

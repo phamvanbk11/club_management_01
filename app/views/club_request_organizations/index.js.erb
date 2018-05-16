@@ -1,3 +1,4 @@
+show_left_block_organization();
 <% if @requests %>
   $('#organization_club').html('<%= j render partial: "club_request_organization",
     locals: {clubs_pending: @requests} %>');

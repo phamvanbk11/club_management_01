@@ -107,24 +107,8 @@
                         <% end %>
                       </li>
                       <li>
-                        <%= link_to organization_club_types_path(@organization), remote: :true do %>
-                          <%= t "manager_club_type" %>
-                        <% end %>
-                      </li>
-                      <li>
                         <%= link_to set_sponsor_events_path(organization_id: @organization.id), remote: :true do %>
                           <%= t "sponsors.sponsors" %>
-                        <% end %>
-                      </li>
-                      <li>
-                        <%= link_to report_categories_path(organization_slug: @organization.slug), remote: :true do %>
-                          <%= t "manager_report_category" %>
-                        <% end %>
-                      </li>
-                      <li>
-                        <%= link_to organization_rules_path(organization_id: @organization.slug),
-                          remote: :true do %>
-                          <%= t "rules_point.title_link" %>
                         <% end %>
                       </li>
                       <li>
@@ -147,7 +131,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xl-9 push-xl-3 col-lg-12 push-lg-0 col-sm-12 col-xs-12">
+    <div class="col-xl-9 push-xl-3 col-lg-12 push-lg-0 col-sm-12 col-xs-12" id="block-right-org">
       <div class="row" id="organization_club">
         <% if @clubs.present? %>
           <% unless current_user.user_organizations.joined.join?(@organization) %>
@@ -160,7 +144,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-xl-3 pull-xl-9 col-lg-6 pull-lg-0 col-md-6 col-sm-12 col-xs-12">
+    <div class="col-xl-3 pull-xl-9 col-lg-6 pull-lg-0 col-md-6 col-sm-12 col-xs-12" id="block-left-org">
       <div class="ui-block">
         <%= render "list_user_contten" %>
         <%= render "list_clubs_contten" %>

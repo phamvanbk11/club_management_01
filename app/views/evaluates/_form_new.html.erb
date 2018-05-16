@@ -16,11 +16,11 @@
             <div class="col-md-4 push-md-1 month">
               <label for="contact-name"><%= t "month" %></label></br>
               <%= select_tag "time", options_for_select(option_select(
-                StatisticReport.months), Date.current.month), class: "form-control select_custom" %>
+                StatisticReport.months), @evaluate.time || Date.current.month), class: "form-control select_custom" %>
             </div>
             <div class="col-md-4 push-md-2 year">
               <label for="contact-name"><%= t "year" %></label></br>
-              <%= select_year(Date.current, {start_year: Settings.year_ago.years.ago.year,
+              <%= select_year(@evaluate.year || Date.current, {start_year: Settings.year_ago.years.ago.year,
                 end_year: Date.current.year}, {class: "select_custom form-control stype-reports"}) %>
             </div>
           </div>
