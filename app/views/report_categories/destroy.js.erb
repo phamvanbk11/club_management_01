@@ -1,4 +1,4 @@
-$('#organization_club').html('<%= j render partial: "list_report_categories",
+$('#js-list-data-setting').html('<%= j render partial: "list_report_categories",
   locals: {report_categories: @report_categories} %>');
 $('.container').append('<%= j render partial: "shared/flash_warning" %>');
 $('.notify').delay(4000).slideUp(300);

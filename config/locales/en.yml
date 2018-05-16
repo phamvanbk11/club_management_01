@@ -1131,6 +1131,8 @@ en:
       money_support: "Money support"
       range_support: "Range support"
       frequencies: "Frequencies"
+      report_categories: "Report category"
+      setting: "Setting"
   statistic_reports:
     show:
       pay_money: "Pay money"

@@ -31,7 +31,7 @@
       </label>
       <div class="col-md-6">
         <%= f.collection_select :tag_ids, Tag.order(:name), :id, :name, {},
-          {multiple: true} %>
+          {multiple: true}, id: "tag_input" %>
       </div>
     </div>
     <div class="form-group">

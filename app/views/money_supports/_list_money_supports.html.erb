@@ -1,4 +1,13 @@
 <div class="ui-block col-md-12">
+  <div class="ui-block-title ui-block-title-small">
+    <div class="pull-right funtion-request">
+      <%= link_to organization_path(@organization), remote: :true,
+        class: "btn btn-primary btn-sm button-back" do %>
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <%= t "back" %>
+      <% end %>
+    </div>
+  </div>
   <div class="infor-request ui-block-title">
     <h6 class="title"><%= t ".title_money_support" %>
       &nbsp; -><%= t ".help" %>

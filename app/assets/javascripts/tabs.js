@@ -19,4 +19,17 @@ $(document).ready(function(){
       return false;
     };
   });
+
+  $('.tab-vertical-ct li a').click(function(){
+    scroll = $(document).scrollTop();
+    $('.list-tab-child .event-table').hide();
+    $('.tab-vertical-ct li a').removeClass('w3-border-blue');
+    $(this).addClass('w3-border-blue');
+    var id = $(this).attr('href');
+    if (id[0] == '#') {
+      $(id).show();
+      $(document).scrollTop(scroll);
+      return false;
+    };
+  });
 })

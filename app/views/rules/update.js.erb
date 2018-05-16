@@ -1,6 +1,6 @@
 <% if @organization && @rule %>
   $('#new-criteria').modal('hide');
-  $('#organization_club').html('<%= j render partial: "list_rules", locals: {rules: @rules} %>');
+  $('#js-list-data-setting').html('<%= j render partial: "list_rules", locals: {rules: @rules} %>');
   $('.modal-backdrop').remove()
   $('body').removeClass('modal-open');
 <% end %>

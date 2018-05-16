@@ -1,3 +1,6 @@
-$('#organization_club').html('<%= j render "tab_settings" %>')
+$('#block-left-org').hide();
+$('#block-right-org').removeClass();
+$('#block-right-org').addClass('col-md-12');
+$('#organization_club').html('<%= j render "tab_settings" %>');
 $('.container').append('<%= j render partial: "shared/flash_warning" %>');
 $('.notify').delay(4000).slideUp(300);

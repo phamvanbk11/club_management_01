@@ -34,7 +34,7 @@
             <div class="pull-right">
               <% case when @event.activity_money? %>
                 <% if can? :create, @event.user_events.build %>
-                  <div class="row">
+                  <div class="col-md-12">
                     <div id="join-toggle">
                       <%= render "user_events/join_event_toggle" %>
                     </div>
@@ -144,27 +144,25 @@
               </div>
             <% end %>
           <% end %>
-          <div class="comment-post">
-            <div class="row">
-              <div class="menu-bar">
-                <ul class="profile-menu tab_list_detail_club">
+          <div>
+            <div class="row tab-in-activity mrg-0">
+              <ul class="profile-menu">
+                <li>
+                  <%= link_to t("post"), "#post", class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red" %>
+                </li>
+                <li>
+                  <%= link_to t("comment"), "#comment", class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
+                </li>
+                <% if @event_support.load_albums.present? && @event.activity_money? %>
                   <li>
-                    <%= link_to t("post"), "#post", class: "active" %>
+                    <%= link_to t("gallery"), "#gallery", class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
                   </li>
-                  <li>
-                    <%= link_to t("comment"), "#comment" %>
-                  </li>
-                  <% if @event_support.load_albums.present? && @event.activity_money? %>
-                    <li>
-                      <%= link_to t("gallery"), "#gallery" %>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
+                <% end %>
+              </ul>
             </div>
           </div>
-          <div class = "tab_detail_club comment-post-event">
-            <div class="ui-block" id="post">
+          <div id="list-event-show-notification" class="ui-block mar-top-5">
+            <div class="event-table" id="post">
               <div class="ui-block-title ui-block-title-small">
                 <h6 class="title col-md-1"><%= t "post"%></h6>
                 <% if can? :create, @post %>
@@ -183,14 +181,12 @@
                 <%= render partial: "events/post", locals: {posts: @event_support.posts} %>
               </div>
             </div>
-            <div class="ui-block" id="comment">
+            <div class="event-table hide-div" id="comment">
               <%= render partial: "events/comment", locals: {
                 comments: @event_support.comments, event: @event} %>
             </div>
-          </div>
-          <% if @event_support.load_albums.present? && @event.activity_money? %>
-            <div class = "tab_detail_club comment-post-event">
-              <div class="ui-block" id="gallery">
+            <% if @event_support.load_albums.present? && @event.activity_money? %>
+              <div class="event-table hide-div" id="gallery">
                 <div class="ui-block-title ui-block-title-small">
                   <h6 class="title col-md-1"><%= t "gallery"%></h6>
                   <% if @club.is_admin? current_user %>
@@ -223,8 +219,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </article>
       </div>
     </div>
@@ -241,3 +237,4 @@
   </div>
 <% end %>
 <%= javascript_include_tag "add_member_join_event" %>
+<%= javascript_include_tag "tabs" %>

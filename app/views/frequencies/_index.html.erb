@@ -7,6 +7,11 @@
         <i class="fa fa-check-square-o" aria-hidden="true"></i>
         <%= t ".new_frequency" %>
       <% end %>
+      <%= link_to organization_path(@organization), remote: :true,
+        class: "btn btn-primary btn-sm button-back" do %>
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <%= t "back" %>
+      <% end %>
     </div>
   </div>
   <div id="js-new-frequency" class="modal fade" role="dialog">

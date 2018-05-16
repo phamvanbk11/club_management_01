@@ -1,3 +1,4 @@
+show_left_block_organization();
 <% if @organization && can?(:manager, @organization) %>
   $('#organization_club').html('<%= j render "index" %>');
   <% if params[:style_report] %>

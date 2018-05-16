@@ -1,49 +1,63 @@
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 tab_detail_club">
+<div class="col-md-3 col-sm-3">
   <div class="ui-block">
     <div class="ui-block-title ui-block-title-small">
-      <div class="tab-in-activity">
-        <div class="row">
-          <ul class="profile-menu">
-            <li>
-              <%= link_to t(".system"), "#settings-system",
-                class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red" %>
-            </li>
-            <li>
-              <%= link_to t(".money_support"), "#money-supports",
-                class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
-            </li>
-            <li>
-              <%= link_to t(".range_support"), "#range-supports",
-                class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
-            </li>
-            <li>
-              <%= link_to t(".frequencies"), "#frequencies",
-                class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" %>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="pull-right funtion-request">
-        <%= link_to organization_path(@organization), remote: :true,
-          class: "btn btn-primary btn-sm button-back" do %>
-          <i class="fa fa-arrow-left" aria-hidden="true"></i>
-          <%= t "back" %>
-        <% end %>
+      <h4><%= t ".setting" %></h4>
+    </div>
+    <div class="ui-block-content pad-top-10">
+      <div class="tab-vertical">
+        <ul class="left-menu pad-top-0 tab-vertical-ct">
+          <li>
+            <%= link_to t(".system"), "#settings-system",
+              class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding-custom w3-border-blue" %>
+          </li>
+          <li>
+            <%= link_to t(".money_support"), "#money-supports",
+              class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding-custom" %>
+          </li>
+          <li>
+            <%= link_to t(".range_support"), "#range-supports",
+              class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding-custom" %>
+          </li>
+          <li>
+            <%= link_to t(".frequencies"), "#frequencies",
+              class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding-custom" %>
+          </li>
+          <li>
+            <%= link_to report_categories_path(organization_slug: @organization.slug), remote: :true, class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding -custom" do %>
+              <%= t "manager_report_category" %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to organization_rules_path(organization_id: @organization.slug),
+              remote: :true, class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding-custom" do %>
+              <%= t "rules_point.title_link" %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to organization_club_types_path(@organization), remote: :true, class: "w3-third tablink w3-bottombar w3-hover-light-grey w3-padding" do %>
+              <%= t "manager_club_type" %>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
-    <div id="list-event-show-notification">
-      <div id="settings-system" class="event-table">
-        <%= render "settings_system" %>
-      </div>
-      <div id="money-supports" class="event-table hide-div">
-        <%= render "money_supports/list_money_supports" %>
-      </div>
-      <div id="range-supports" class="event-table hide-div">
-        <%= render "range_supports/list_range_supports" %>
-      </div>
-      <div id="frequencies" class="event-table hide-div">
-        <%= render "frequencies/index" %>
-      </div>
+  </div>
+</div>
+<div class="col-md-9 col-sm-9 tab_detail_club">
+  <div class="list-tab-child">
+    <div id="settings-system" class="event-table">
+      <%= render "settings_system" %>
+    </div>
+    <div id="money-supports" class="event-table hide-div">
+      <%= render "money_supports/list_money_supports" %>
+    </div>
+    <div id="range-supports" class="event-table hide-div">
+      <%= render "range_supports/list_range_supports" %>
+    </div>
+    <div id="frequencies" class="event-table hide-div">
+      <%= render "frequencies/index" %>
+    </div>
+    <div id="js-list-data-setting" class="event-table hide-div">
     </div>
   </div>
 </div>

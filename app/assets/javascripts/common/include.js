@@ -212,3 +212,8 @@ function convert_to_money(e, input) {
     }
   }
 }
+function show_left_block_organization(){
+  $('#block-left-org').show();
+  $('#block-right-org').removeClass();
+  $('#block-right-org').addClass('col-xl-9 push-xl-3 col-lg-12 push-lg-0 col-sm-12 col-xs-12');
+}
