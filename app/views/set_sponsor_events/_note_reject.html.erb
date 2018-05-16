@@ -13,7 +13,7 @@
             status: Sponsor.statuses[:rejected], organization_id: @organization.id), method: :patch,
             remote: true, class: "reason-reject-report" do |f| %>
             <div class="form-group col-md-12">
-              <%= f.label t "reason_reject" %>
+              <%= f.label t "sponsors.reason_reject" %>
               <%= f.text_area :note, required: true,
                 class: "form-control input-text" %>
             </div>

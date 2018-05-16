@@ -3,6 +3,7 @@ class OrganizationEventsController < ApplicationController
   before_action :load_organization, only: [:index]
 
   def index
+    return unless @organization
     if params[:q]
       @q = @organization.clubs.search(params[:q])
       club_ids = @q.result.ids
@@ -19,6 +20,5 @@ class OrganizationEventsController < ApplicationController
     @organization = Organization.includes(:events).friendly.find_by slug: params[:id]
     return if @organization
     flash[:danger] = t("organization_not_found")
-    redirect_back fallback_location: root_path
   end
 end

@@ -40,12 +40,12 @@ class SponsorsController < ApplicationController
         redirect_to club_path @club
       else
         flash_error sponsor
-        redirect_back fallback_location: edit_club_sponsor_path(@club)
+        redirect_back fallback_location: edit_club_sponsor_path(@club, @sponsor)
       end
     end
   rescue
     flash.now[:danger] = t ".errors_process"
-    redirect_back fallback_location: edit_club_sponsor_path(@club)
+    redirect_back fallback_location: edit_club_sponsor_path(@club, @sponsor)
   end
 
   def destroy
@@ -68,22 +68,21 @@ class SponsorsController < ApplicationController
   end
 
   def load_club
-    @club = Club.friendly.find params[:club_id]
-    unless @club
-      flash[:danger] = t "not_found"
-      redirect_to root_url
-    end
+    @club = Club.find_by slug: params[:club_id]
+    return if @club
+    flash[:danger] = t "not_found"
+    redirect_to root_url
   end
 
   def load_sponsor
     @sponsor = Sponsor.find_by id: params[:id]
-    unless @sponsor
-      flash[:danger] = t "not_found"
-      redirect_to club_path @club
-    end
+    return if @sponsor
+    flash[:danger] = t "not_found"
+    redirect_to club_path @club
   end
 
   def experience_params params
+    return unless params[:event]
     experience = {}
     params[:event].each.with_index do |event, index|
       experience.merge!({index.to_s.to_sym => {event: "#{event}", time_and_place: "#{params[:time][index]}",

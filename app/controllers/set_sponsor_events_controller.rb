@@ -56,18 +56,18 @@ class SetSponsorEventsController < ApplicationController
   def approve_sponsor
     if @sponsor.accept!
       SendMailSponsorJob.perform_now @sponsor
-      flash.now[:success] = t "approve_success"
+      flash.now[:success] = t ".approve_success"
     else
-      flash.now[:danger] = t "approve_error"
+      flash.now[:danger] = t ".approve_error"
     end
   end
 
   def reject_sponsor
     if @sponsor.update_attributes reject_sponsor_params
       SendMailSponsorJob.perform_now @sponsor
-      flash.now[:success] = t "reject_success"
+      flash.now[:success] = t ".reject_success"
     else
-      flash.now[:danger] = t "reject_error"
+      flash.now[:danger] = t ".reject_error"
     end
   end
 

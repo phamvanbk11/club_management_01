@@ -28,16 +28,16 @@
               </span>
             </td>
             <td class="text-center">
-              <%= link_to club_sponsor_path(@club.id, sponsor.id), remote: true,
+              <%= link_to club_sponsor_path(@club.slug, sponsor.id), remote: true,
                 title: t("info"), class: "btn btn-warning btn-info-report" do %>
                 <i class="fa fa-info"></i>
               <% end %>
               <% if sponsor.pending? || sponsor.rejected? %>
-                <%= link_to edit_club_sponsor_path(@club.id, sponsor.id),
+                <%= link_to edit_club_sponsor_path(@club.slug, sponsor.id),
                   title: t("edit"), class: "btn btn-primary btn-info-report" do %>
                   <i class="fa fa-edit"></i>
                 <% end %>
-                <%= link_to club_sponsor_path(@club.id, sponsor.id), remote: true, method: :delete,
+                <%= link_to club_sponsor_path(@club.slug, sponsor.id), remote: true, method: :delete,
                   title: t("delete"), class: "btn btn-danger btn-info-report" do %>
                   <i class="fa fa-remove"></i>
                 <% end %>

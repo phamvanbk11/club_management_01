@@ -1953,3 +1953,8 @@ vi:
       description: "Mô tả"
       money: "Số tiền"
   search_name_club: "Nhập tên câu lạc bộ"
+  set_sponsor_events:
+    approve_success: "Chấp nhận thư mời thành công"
+    approve_error: "Chấp nhận thư mời thất bại"
+    reject_success: "Từ chối thư mời thành công"
+    reject_error: "Từ chối thư mời thất bại"

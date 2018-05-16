@@ -1631,3 +1631,8 @@ en:
       description: "Description"
       money: "Money"
   search_name_club: "Input name club"
+  set_sponsor_events:
+    approve_success: "Approve success"
+    approve_error: "Approve errors"
+    reject_success: "Reject success"
+    reject_error: "Reject errors"
