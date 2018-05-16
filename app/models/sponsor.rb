@@ -12,6 +12,13 @@ class Sponsor < ApplicationRecord
   belongs_to :user, ->{with_deleted}
   has_many :sponsor_details, dependent: :destroy
 
+  validates :purpose, presence: true
+  validates :time, presence: true
+  validates :place, presence: true
+  validates :organizational_units, presence: true
+  validates :participating_units, presence: true
+  validates :sponsor, presence: true
+
   enum status: {pending: 0, accept: 1, rejected: 2}
 
   scope :newest, ->{order created_at: :desc}

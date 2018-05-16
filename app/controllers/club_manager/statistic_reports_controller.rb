@@ -35,6 +35,7 @@ class ClubManager::StatisticReportsController < ApplicationController
   end
 
   def update
+    return unless @report
     ActiveRecord::Base.transaction do
       @report.report_details.delete_all
       @report.update_attributes! report_params

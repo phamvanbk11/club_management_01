@@ -4,10 +4,13 @@ RSpec.describe ClubManager::StatisticReportsController, type: :controller do
   let!(:user){create :user}
   let!(:organization){create :organization}
   let!(:club) do
-    create :club, organization: organization
+    create :club, organization: organization, is_action_report: true
   end
   let!(:user_club) do
     create :user_club, user: user, club: club, is_manager: true
+  end
+  let!(:organization_setting) do
+    create :organization_setting, organization: organization, key: Settings.key_dealine_report
   end
 
   before do
@@ -134,7 +137,7 @@ RSpec.describe ClubManager::StatisticReportsController, type: :controller do
         put :update, xhr: true, params: {statistic_report: report_params, month: "5",
           club_id: club.slug, id: statistic_report.id}
         expect(response).to be_ok
-        expect(flash[:danger]).to eq I18n.t("update_report_error")
+        expect(flash[:danger]).to eq I18n.t("club_manager.statistic_reports.error_process")
       end
     end
   end

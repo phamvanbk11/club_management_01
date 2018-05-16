@@ -54,7 +54,7 @@ RSpec.describe EventsController, type: :controller do
     end
     context "when params not present" do
       before{get :show, params: {club_id: club, id: 0}}
-      it{expect(flash[:danger]).to eq I18n.t("not_found")}
+      it{expect(flash[:danger]).to eq I18n.t("not_found_event")}
     end
   end
   describe "PATCH #update" do
@@ -86,7 +86,7 @@ RSpec.describe EventsController, type: :controller do
     end
     context "when params[:organization_id] present" do
       before{get :update, params: {id: 0, club_id: club, event: nil}}
-      it{expect(flash[:danger]).to eq I18n.t "not_found"}
+      it{expect(flash[:danger]).to eq I18n.t "not_found_event"}
     end
   end
 
