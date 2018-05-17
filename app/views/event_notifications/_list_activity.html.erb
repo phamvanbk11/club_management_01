@@ -20,6 +20,8 @@
               <%= link_to club_event_url(event.club, event) do %>
                 <% if event.albums.present? && event.albums.first.images.present? %>
                   <%= image_tag event.albums.first.images.first.url, class: "img-responsive centered-and-cropped" %>
+                <% elsif event.image.thumb.present? %>
+                  <%= image_tag event.image.thumb, class: "img-responsive centered-and-cropped" %>
                 <% else %>
                   <%= image_tag event.image, class: "img-responsive centered-and-cropped" %>
                 <% end %>

@@ -1181,6 +1181,7 @@ en:
       name_notification: "Name notification"
       name_activity: "Name activity"
       image: "Image"
+      image_event: "Image background"
     auto_create:
       auto_create: "Auto create every week"
     list_activity:

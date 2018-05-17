@@ -1496,6 +1496,7 @@ vi:
       name_notification: "Tên thông báo"
       name_activity: "Tên hoạt động"
       image: "Hình ảnh"
+      image_event: "Ảnh nền sự kiện"
     auto_create:
       auto_create: "Tự động tạo hàng tuần"
     list_activity:

@@ -103,6 +103,7 @@
     </div>
   </div>
   <% if @event.activity_money? %>
+    <%= render partial: "event_notifications/image_event", locals: {event: @event, f: f} %>
     <div class="form-group images_album">
       <label class="col-md-3 control-label label-bold" id="js-lb-image">
         <%= t ".image" %>
@@ -133,3 +134,4 @@
 <% end %>
 <%= javascript_include_tag "check_box" %>
 <%= javascript_include_tag "option_event_activity" %>
+<%= javascript_include_tag "crop_image_event" %>

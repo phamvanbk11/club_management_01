@@ -1,0 +1,29 @@
+<div class="form-group">
+  <%= link_to "#js-collapse-image", data: {toggle: :collapse},
+    class: "control-label label-bold col-md-3" do %>
+    <%= t "event_notifications.form_club_event_noti.image_event" %>&nbsp;
+    <i class="fa fa-caret-square-o-down" id="js-icon-open-image"></i>
+  <% end %>
+</div>
+<div class="collapse" id="js-collapse-image">
+  <div class="block">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= f.file_field :image, accept: Settings.file_uploader,
+            id: "js-input-image-event" %>
+        </div>
+        <% if event.image.thumb.present? %>
+          <%= image_tag event.image.thumb, class: "background-club",
+            id: "js-image-tag-event" %><hr/>
+        <% else %>
+          <%= image_tag event.image, class: "background-club",
+            id: "js-image-tag-event" %><hr/>
+        <% end %>
+      </div>
+      <% Event::CROP_IMAGE.each do |attr| %>
+        <%= f.hidden_field attr.to_sym, id: "event_#{attr}" %>
+      <% end %>
+    </div>
+  </div>
+</div>
