@@ -27,6 +27,7 @@ class EventNotificationsController < ApplicationController
 
   def create
     event = @club.events.new params_option
+    set_crop event
     event.amount = @club.money if event.activity_money?
     service_money = UpdateClubMoneyService.new event, @club, params_option
     ActiveRecord::Base.transaction do
@@ -47,6 +48,7 @@ class EventNotificationsController < ApplicationController
   end
 
   def update
+    set_crop @event
     service_money = UpdateClubMoneyService.new @event, @club, params_option
     ActiveRecord::Base.transaction do
       create_acivity @event, Settings.update, @event.club, current_user,
@@ -123,12 +125,12 @@ class EventNotificationsController < ApplicationController
     count_money = CountMoney.new params[:event][:event_details_attributes]
     if is_present_params_attributes?
       params.require(:event).permit(:club_id, :name, :date_start, :status,
-        :date_end, :location, :description, :image, :user_id, :is_public,
+        :date_end, :location, :description, :user_id, :is_public,
         event_details_attributes: [:description, :money, :id, :_destroy, :style, :spent_at])
         .merge! event_category: event_category, expense: count_money.money
     else
       params.require(:event).permit(:club_id, :name, :date_start, :status,
-        :date_end, :location, :description, :image, :user_id, :is_public, :is_auto_create)
+        :date_end, :location, :description, :user_id, :is_public, :is_auto_create)
         .merge! event_category: event_category
     end
   end
@@ -198,6 +200,17 @@ class EventNotificationsController < ApplicationController
       params[:images][:urls].each do |img|
         event.albums.first.images.create! url: img
       end
+    end
+    if params[:event][:image].present?
+      event.albums.first.images.create! url: params[:event][:image]
+    end
+  end
+
+  def set_crop event
+    if params[:event][:image_crop_x]
+      event.set_attr_crop_image params[:event][:image_crop_x], params[:event][:image_crop_y],
+        params[:event][:image_crop_h], params[:event][:image_crop_w]
+      event.image = params[:event][:image]
     end
   end
 end

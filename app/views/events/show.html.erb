@@ -59,7 +59,9 @@
           </div>
           <div class="row">
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-              <% if @event.albums.present? && @event.albums.first.images.present? %>
+              <% if @event.image.thumb.present? %>
+                <%= image_tag @event.image.thumb, class: "img-responsive full_image event-image centered-and-cropped" %>
+              <% elsif @event.albums.present? && @event.albums.first.images.present? %>
                 <%= image_tag @event.albums.first.images.first.url, class: "img-responsive full_image event-image centered-and-cropped" %>
               <% else %>
                 <%= image_tag @event.image, class: "img-responsive full_image event-image centered-and-cropped" %>

@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+  attr_accessor :image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h
+  CROP_IMAGE = [:image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h]
+
   acts_as_paranoid
   serialize :description
 
@@ -22,7 +25,7 @@ class Event < ApplicationRecord
   belongs_to :organization
 
   after_destroy :update_money
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageEventUploader
 
   validates :name, presence: true, length: {minimum: Settings.min_name}
   validates :expense, length: {maximum: Settings.max_exspene}
@@ -119,6 +122,13 @@ class Event < ApplicationRecord
       [Event.event_categories[:money], Event.event_categories[:get_money_member],
         Event.event_categories[:donate], Event.event_categories[:subsidy]]
     end
+  end
+
+  def set_attr_crop_image x, y, h, w
+    self.image_crop_x = x
+    self.image_crop_y = y
+    self.image_crop_h = h
+    self.image_crop_w = w
   end
 
   def update_money
