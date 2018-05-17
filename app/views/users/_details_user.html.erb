@@ -143,36 +143,38 @@
           </ul>
         </div>
       </div>
-      <div class="ui-block">
-        <div class="ui-block-title">
-          <h6 class="title"><%= t "profile_settings.club_suggest" %></h6>
-          <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="<%= url_to_asset("icons/icons.svg#olymp-three-dots-icon") %>"></use></svg></a>
-        </div>
-        <div class="ui-block-content">
-          <% if (current_user.tag_list.any?) && (current_user.is_user?@user) %>
-            <div>
-              <% if current_user.tags_clubs.any? %>
-                <% sort_suggest(current_user.tags_clubs).each do |club, s| %>
-                  <% unless current_user.user_clubs.of_club(club) %>
-                    <%= link_to club_path(club.id), target: "_blank" do %>
-                      <i class="gi gi-brightness_reduce"></i>
-                      <%= club.name %></br>
+      <% if current_user.is_user? @user %>
+        <div class="ui-block">
+          <div class="ui-block-title">
+            <h6 class="title"><%= t "profile_settings.club_suggest" %></h6>
+            <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="<%= url_to_asset("icons/icons.svg#olymp-three-dots-icon") %>"></use></svg></a>
+          </div>
+          <div class="ui-block-content">
+            <% if (current_user.tag_list.any?) && (current_user.is_user?@user) %>
+              <div>
+                <% if current_user.tags_clubs.any? %>
+                  <% sort_suggest(current_user.tags_clubs).each do |club, s| %>
+                    <% unless current_user.user_clubs.of_club(club) %>
+                      <%= link_to club_path(club.id), target: "_blank" do %>
+                        <i class="gi gi-brightness_reduce"></i>
+                        <%= club.name %></br>
+                      <% end %>
                     <% end %>
                   <% end %>
+                <% else %>
+                  <i class="fa fa-hand-o-right"></i>
+                  <strong>
+                    <%= t("not_club_conformity") %>
+                  </strong>
                 <% end %>
-              <% else %>
-                <i class="fa fa-hand-o-right"></i>
-                <strong>
-                  <%= t("not_club_conformity") %>
-                </strong>
-              <% end %>
-            </div>
-          <% else %>
-            <%= t("please_select_tags") %>
-            <%= link_to t("click_here"), "javascript:void(0)", id: "select-tag" %>
-          <% end %>
+              </div>
+            <% else %>
+              <%= t("please_select_tags") %>
+              <%= link_to t("click_here"), "javascript:void(0)", id: "select-tag" %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -98,3 +98,12 @@
 .height-350 {
   height: 350px !important;
 }
+.mrg-left-15 {
+  margin-left: 15px;
+}
+.pad-5 {
+  padding: 5px;
+}
+.results tr[visible='false'], .no-result {
+  display: none;
+}

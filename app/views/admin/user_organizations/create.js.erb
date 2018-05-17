@@ -1,0 +1,5 @@
+<% unless flash[:danger] %>
+  $('.member-<%= @member.id %>').remove();
+<% end %>
+$('#main-container').append('<%= j render partial: "shared/flash_warning" %>');
+$('.notify').slideUp(3000);

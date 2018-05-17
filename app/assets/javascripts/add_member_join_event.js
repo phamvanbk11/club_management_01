@@ -14,4 +14,8 @@ $(document).ready(function () {
     $('#modal-list-member').show();
     $('#modal-add-member').hide();
   });
+
+  $(document).on('click', '#js-btn-delete-members', function(){
+    $('#form-delete-member-event').submit();
+  })
 });

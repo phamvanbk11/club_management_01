@@ -1,6 +1,17 @@
 class Admin::UserOrganizationsController < Admin::AdminController
   before_action :load_organization
-  before_action :load_user_organization, only: [:update, :destroy]
+  before_action :load_user_organization, only: [:update, :destroy, :create]
+
+  def create
+    if params[:user_ids]
+      import_member
+    elsif @member
+      load_user_organization
+      unless @member.joined!
+        flash.now[:danger] = t "namespace_admin.errors_in_process"
+      end
+    end
+  end
 
   def index
     @q = User.search params[:q]
@@ -38,5 +49,19 @@ class Admin::UserOrganizationsController < Admin::AdminController
 
   def status_params_add_admin?
     params[:add_admin] == Settings.string_true
+  end
+
+  def import_member
+    user_organization = []
+    params[:user_ids].each do |user_id|
+      user_org = @organization.user_organizations.new user_id: user_id, status: :joined, is_admin: false
+      user_organization << user_org
+    end
+    if UserOrganization.import user_organization
+      flash[:success] = t "import_success"
+    else
+      flash[:success] = t "namespace_admin.errors_in_process"
+    end
+    redirect_to admin_organization_path(@organization)
   end
 end

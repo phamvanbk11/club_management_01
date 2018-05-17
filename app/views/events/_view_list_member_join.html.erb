@@ -12,31 +12,37 @@
         <table class="table ui-block table-pricing results">
           <tbody>
             <% if @members.any? %>
-              <% @members.each do |member| %>
-                <tr class="add-user-member">
-                  <td>
-                    <div class="col-md-1 avarta-memeber">
-                      <%= link_to user_path(member.id) do %>
-                        <%= image_tag member.avatar, class: "member-organization-view view-avt-member",
-                          title: "#{member.full_name}" %>
-                      <% end %>
-                    </div>
-                  </td>
-                  <td>
-                    <%= member.full_name %>
-                  </td>
-                  <td>
-                    <%= member.email %>
-                  </td>
-                  <% if @club.is_admin? current_user %>
+              <%= form_tag club_event_user_event_path(
+                event_id: @event.id, id: @members.first.id), method: :delete, id: "form-delete-member-event" do %>
+                <% @members.each do |member| %>
+                  <tr class="member-<%= member.id %>">
                     <td>
-                      <%= link_to club_event_user_event_path(event_id: @event.id, member_id: member.id), method: :delete, remote: true, title: t("delete_member"),
-                        data: {confirm: t("answer_delete_member")} do %>
-                        <i class="fa fa-remove"></i>
-                      <% end %>
+                      <div class="col-md-1 avarta-memeber">
+                        <%= link_to user_path(member.id) do %>
+                          <%= image_tag member.avatar, class: "member-organization-view view-avt-member",
+                            title: "#{member.full_name}" %>
+                        <% end %>
+                      </div>
                     </td>
-                  <% end %>
-                </tr>
+                    <td>
+                      <%= member.full_name %>
+                    </td>
+                    <td>
+                      <%= member.email %>
+                    </td>
+                    <% if @club.is_admin? current_user %>
+                      <td class="check-user">
+                        <%= check_box_tag("member_ids[]", member.id, false, class: "checkbox") %>
+                      </td>
+                      <td>
+                        <%= link_to club_event_user_event_path(event_id: @event.id, member_id: member.id), method: :delete, remote: true, title: t("delete_member"),
+                          data: {confirm: t("answer_delete_member")} do %>
+                          <i class="fa fa-remove"></i>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
               <% end %>
             <% else %>
               <tr class="text-center">
@@ -58,6 +64,9 @@
           <i class="fa fa-pencil-square-o"></i><%= t "add_member_join" %>
         <% end %>
       </strong>
+      <button type="button" class="btn btn-sm btn-breez" id="js-btn-delete-members">
+        <%= t "delete" %>
+      </button>
     <% end %>
     <button type="button" class="btn btn-sm button-more" data-dismiss="modal">
       <%= t "close" %>

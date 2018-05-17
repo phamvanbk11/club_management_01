@@ -20,12 +20,21 @@ class UserEventsController < ApplicationController
 
   def destroy
     @club = @event.club
-    if @user_event && @user_event.destroy
-      flash.now[:success] = t ".success"
-    elsif @user_event
-      flash.now[:danger] = t ".error_in_process"
+    if params[:member_ids]
+      if @event.user_events.where(user_id: params[:member_ids]).delete_all > Settings.default_number_field
+        flash[:success] = t ".success"
+      else
+        flash[:danger] = t ".error_in_process"
+      end
+      redirect_back fallback_location: club_event_path(@event.club, @event)
+    else
+      if @user_event && @user_event.destroy
+        flash.now[:success] = t ".success"
+      elsif @user_event
+        flash.now[:danger] = t ".error_in_process"
+      end
+      load_member_not_join
     end
-    load_member_not_join
   end
 
   private

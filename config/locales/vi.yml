@@ -1960,3 +1960,12 @@ vi:
     approve_error: "Chấp nhận thư mời thất bại"
     reject_success: "Từ chối thư mời thành công"
     reject_error: "Từ chối thư mời thất bại"
+  namespace_admin:
+    add_member: "Thêm thành viên"
+    submit: "Xác nhận"
+    check_all: "Chọn tất cả"
+    user_request: "Yêu cầu gia nhập"
+    confirm_rq: "Xác nhận thành viên"
+    errors_in_process: "Đã xảy ra lỗi"
+    not_found_club: "Không tìm thấy câu lạc bộ"
+    not_found_user_club: "Không tìm thấy thành viên"

@@ -8,7 +8,9 @@ class Admin::ClubsController < Admin::AdminController
       .newest.page(params[:page]).per Settings.club_per_page
   end
 
-  def show; end
+  def show
+    @support = Support::ClubSupport.new @club, params[:page], @organization
+  end
 
   def update
     @club_update = @club.update_attributes club_params
