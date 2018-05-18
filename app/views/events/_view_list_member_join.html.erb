@@ -1,11 +1,9 @@
 <div class="modal-dialog ui-block window-popup private-event user-event-join"
   id="modal-list-member">
-  <div class="row">
-    <h4 class="title col-md-11 text-center"><%= t "member_has_join" %></h4>
-    <%= button_tag type: "button", class: "close push-md-1 close-modal", data: {dismiss: "modal"} do %>
-      &times;
-    <% end %>
-  </div>
+  <h4 class="title text-center"><%= t "member_has_join" %></h4>
+  <%= button_tag type: "button", class: "close close-modal", data: {dismiss: "modal"} do %>
+    &times;
+  <% end %>
   <div class="content-list modal-body row load-member">
     <div class="widget-simple list-scroll">
       <div class="table-responsive">
