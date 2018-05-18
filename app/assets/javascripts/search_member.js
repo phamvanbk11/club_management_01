@@ -16,6 +16,14 @@ $(document).ready(function() {
       $(this).attr('visible','true');
     });
   });
+
+  $('.check-all-cb').change(function(){
+    if(this.checked) {
+      $('.checkbox').prop('checked', true);
+    } else {
+      $('.checkbox').prop('checked', false);
+    }
+  })
 });
 
 $(document).ready(function() {

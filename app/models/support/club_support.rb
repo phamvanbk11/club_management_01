@@ -58,7 +58,23 @@ class Support::ClubSupport
     @club_value.user_clubs.includes(:user).joined.are_member.newest
   end
 
+  def members_paginate
+    @club_value.user_clubs.includes(:user).joined.are_member.newest
+      .page(@page).per Settings.per_page_user
+  end
+
+  def managers_paginate
+    @club_value.user_clubs.includes(:user).manager.newest
+      .page(@page).per Settings.per_page_user
+  end
+
   def messages
     @club_value.messages
+  end
+
+  def user_not_join
+    user_ids = @organization.user_organizations.user_not_joined(@club_value
+      .user_clubs.pluck(:user_id)).pluck(:user_id)
+    User.done_by_ids(user_ids)
   end
  end

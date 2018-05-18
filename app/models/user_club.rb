@@ -24,6 +24,8 @@ class UserClub < ApplicationRecord
   scope :users_join_in_time, ->time_range{where created_at: time_range}
   scope :users_join_before_time, ->time{where "created_at <= ?", time}
 
+  delegate :full_name, :avatar, :email, :phone, to: :user, prefix: :user, allow_nil: :true
+
   class << self
     def of_club club
       find_by club: club

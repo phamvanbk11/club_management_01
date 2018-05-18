@@ -1,0 +1,7 @@
+<% if params[:tab_admin].== Settings.string_true %>
+  $('#content-tab-managers').html('<%= j render partial: "list_member",
+    locals: {members: @support.managers_paginate, tab_admin: true} %>');
+<% else %>
+  $('#content-tab-members').html('<%= j render partial: "list_member",
+    locals: {members: @support.members_paginate, tab_admin: false} %>');
+<% end %>

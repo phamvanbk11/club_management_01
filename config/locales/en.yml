@@ -1639,3 +1639,12 @@ en:
     approve_error: "Approve errors"
     reject_success: "Reject success"
     reject_error: "Reject errors"
+  namespace_admin:
+    add_member: "New member"
+    submit: "Confirm"
+    check_all: "Check all"
+    user_request: "Request"
+    confirm_rq: "Accept request"
+    errors_in_process: "Errors in process"
+    not_found_club: "Not found club"
+    not_found_user_club: "Not found member"

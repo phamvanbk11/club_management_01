@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def admin_signed_in
     unless admin_signed_in?
       flash[:danger] = t("admin_require")
-      redirect_to new_admin_sessions_path
+      redirect_to new_admin_session_path
     end
   end
 

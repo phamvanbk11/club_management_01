@@ -1,0 +1,21 @@
+<% if members.present? %>
+  <div class="table-responsive">
+    <table class="table table-vcenter table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center"><i class="fa fa-user-o"></i></th>
+          <th class="text-center"><%= t "full_name" %></th>
+          <th class="text-center"><%= t "email" %></th>
+          <th class="text-center"><%= t "admin_manage.member.date_join" %></th>
+          <th class="text-center"><%= t "phone" %></th>
+          <th class="text-center"><%= t "action" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "admin/user_clubs/user_request", collection: members, as: :member %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <h4 class="center"><%= t "no_data" %></h4>
+<% end %>

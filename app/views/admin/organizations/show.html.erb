@@ -61,6 +61,15 @@
         </span>
       <% end %>
     </li>
+    <li role="presentation">
+      <%= link_to "#user_request", data: {toggle: "tab"} do %>
+        <%= t("namespace_admin.user_request") %>
+        <span class="label label-primary label-indicator
+          animation-floating" id="size-admins">
+          <%= @support.user_request.size %>
+        </span>
+      <% end %>
+    </li>
   </ul>
 </div>
 <div id="page-content">
@@ -82,6 +91,12 @@
           <div class="row block" id="content-tab-admins">
             <%= render partial: "admin/user_organizations/list_member",
               locals: {members: @support.admins, tab_admin: true} %>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade in" id="user_request">
+          <div class="row block" id="content-tab-requests">
+            <%= render partial: "admin/user_organizations/list_request",
+              locals: {members: @support.user_request} %>
           </div>
         </div>
       </div>

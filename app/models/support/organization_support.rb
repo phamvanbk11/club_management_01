@@ -30,4 +30,12 @@ class Support::OrganizationSupport
   def size_admins
     @organization.user_organizations.are_admin.size
   end
+
+  def user_not_join
+    User.without_user_ids(@organization.user_organizations.pluck :user_id)
+  end
+
+  def user_request
+    @organization.user_organizations.pending
+  end
 end

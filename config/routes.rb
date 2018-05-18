@@ -18,16 +18,17 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks"}
   devise_for :admin, controllers: {sessions: "admin/sessions"}
 
-  devise_scope :admin do
-    get "/admin/sign_in" => "admin/sessions#new", as: :new_admin_sessions
-    delete "/admin/sign_out" => "admin/sessions#destroy", as: :destroy_admin_sessions
-  end
+  # devise_scope :admin do
+  #   get "/admin/sign_in" => "admin/sessions#new", as: :new_admin_sessions
+  #   delete "/admin/sign_out" => "admin/sessions#destroy", as: :destroy_admin_sessions
+  # end
 
   namespace :admin do
     get "/" => "static_pages#index"
     resources :users
     resources :organizations do
       resources :user_organizations
+      resources :user_clubs
       resources :clubs
     end
     resources :feed_backs, only: :index

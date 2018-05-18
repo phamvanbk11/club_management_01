@@ -1,5 +1,5 @@
 <% if params[:member_id] %>
-  $('#view_list_member_join').html('<%= j render partial: "events/view_list_member_join" %>');
+  $('.member-<%= @user_event.user_id %>').fadeOut();
   $('#list_member_join').html('<%= j render partial: "events/list_member_join",
     locals: {users: @member_not_join} %>');
   $('#modal-list-member').show();
