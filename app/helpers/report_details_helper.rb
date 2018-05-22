@@ -9,7 +9,8 @@ module ReportDetailsHelper
       report_detail.detail.each do |key, value|
         total += value[:money].to_i if value[:style] == style
       end
-    elsif report_detail.money
+    elsif is_report_detail_money_and_style_get_money?(style, report_detail)
+      style == EventDetail.styles.key(Settings.style_event_detail.value_enum_get)
       total = report_detail.money
     end
     t("sum_label") + number_to_currency(total, locale: :vi).to_s
@@ -102,5 +103,10 @@ module ReportDetailsHelper
     else
       ""
     end
+  end
+
+  def is_report_detail_money_and_style_get_money? style, report_detail
+    report_detail.money? && style == EventDetail.styles.key(
+      Settings.style_event_detail.value_enum_get)
   end
 end
