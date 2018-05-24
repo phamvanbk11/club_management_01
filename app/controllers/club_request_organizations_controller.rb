@@ -5,7 +5,7 @@ class ClubRequestOrganizationsController < ApplicationController
   before_action :load_request, only: [:update, :edit]
 
   def index
-    @requests = @organization.club_requests.pending.order_date_desc if @organization
+    @requests = @organization.club_requests.order_status_asc.order_date_desc if @organization
   end
 
   def edit; end

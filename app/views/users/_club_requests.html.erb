@@ -1,0 +1,24 @@
+<ul>
+  <% club_requests.each do |club| %>
+    <li>
+      <div class="author-thumb">
+        <%= image_tag club.logo, class: "avatar-club" %>
+      </div>
+      <div class="notification-event">
+        <%= link_to club.name, "#modal-club-request-#{club.id}", data: {toggle: :modal},
+          class: "h6 notification-friend" %>
+        <span class="chat-message-item"><%= club.organization.name %></span>
+      </div>
+      <span class="notification-icon">
+        <%= link_to t("profile_settings.read_more"), "#modal-club-request-#{club.id}", data: {toggle: :modal},
+          class: "btn btn-sm bg-blue" %>
+      </span>
+    </li>
+    <div id="modal-club-request-<%= club.id %>" class="modal fade" role="dialog" aria-hidden="true">
+      <%= render partial: "infor_club", locals: {request: club} %>
+    </div>
+  <% end %>
+</ul>
+<nav aria-label="Page navigation example">
+  <%= paginate club_requests, remote: true, params: {tab: :club_requests} %>
+</nav>

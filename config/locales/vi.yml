@@ -1128,6 +1128,7 @@ vi:
     settings: "Cài đặt"
     list_club_joined: "Câu lạc bộ tham gia"
     club_suggest: "Câu lạc bộ gợi ý cho bạn"
+    club_request: "Yêu cầu mở CLB"
   comments:
     press_enter: "Ấn Enter để chỉnh sửa"
     comment: "Bình luận"
@@ -1970,3 +1971,8 @@ vi:
     errors_in_process: "Đã xảy ra lỗi"
     not_found_club: "Không tìm thấy câu lạc bộ"
     not_found_user_club: "Không tìm thấy thành viên"
+  club_request_status:
+    status: "Trạng thái"
+    pending: "Đang chờ"
+    joined: "Đã duyệt"
+    reject: "Từ chối"

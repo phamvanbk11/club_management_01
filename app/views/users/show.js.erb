@@ -1,1 +1,5 @@
-$(".notification-list.friend-requests").html('<%= j render "user_club", collection: @clubs %>');
+<% if params[:tab] == "club_requests" %>
+  $(".club-requests").html('<%= j render "club_requests", club_requests: @club_requests %>');
+<% else %>
+  $(".clubs-list").html('<%= j render "user_club", clubs: @clubs %>');
+<% end %>
