@@ -1380,3 +1380,21 @@ li .w3-padding-custom {
 .pad-top-10 {
   padding-top: 10px;
 }
+.status-request-pending {
+  background-color: $bk-pending;
+  padding: 4px;
+  border-radius: 5px;
+  color: $white;
+}
+.status-request-joined {
+  background-color: $breez;
+  padding: 4px;
+  border-radius: 5px;
+  color: $white;
+}
+.status-request-reject {
+  background-color: $bk-reject;
+  padding: 4px;
+  border-radius: 5px;
+  color: $white;
+}

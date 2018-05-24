@@ -1,0 +1,26 @@
+<tr class="add-user-member" id="request-<%= club.id %>">
+  <td>
+    <%= link_to user_path(club.user_id) do %>
+      <%= image_tag club.logo,
+        class: "member-avatar-request" %>
+    <% end %>
+  </td>
+  <td>
+    <%= club.name %>
+  </td>
+  <td>
+    <%= l club.created_at, format: :short %>
+  </td>
+  <td>
+    <%= club.full_name %>
+  </td>
+  <td class="status">
+    <span class="status-request-<%= club.status %>">
+      <%= t "club_request_status.#{club.status}" %>
+    </span>
+  </td>
+  <td class="show-request">
+    <%= link_to t("view_detail"), edit_club_request_organization_path(club, organization_id: @organization.slug),
+      class: "btn btn-primary btn-sm pull-right", remote: :true %>
+  </td>
+</tr>

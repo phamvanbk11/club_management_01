@@ -43,12 +43,13 @@
             <li><a href="#list_my_group" class="active"><%= t "profile_settings.list_club_joined" %></a></li>
             <% if current_user.is_user?@user %>
               <li><a href="#my_settings" class="my_settings"><%= t "profile_settings.settings" %></a></li>
+              <li><a href="#club_requests" class="my_settings"><%= t "profile_settings.club_request" %></a></li>
             <% end %>
           </ul>
         </div>
         <div class="tab_content_account">
           <div id="list_my_group" class="tab_account_content">
-            <div class="notification-list friend-requests">
+            <div class="notification-list friend-requests clubs-list">
               <%= render "user_club", clubs: @clubs %>
             </div>
           </div>
@@ -107,6 +108,11 @@
                     </div>
                   </div>
                 <% end %>
+              </div>
+            </div>
+            <div id="club_requests" class="tab_account_content">
+              <div class="notification-list friend-requests club-requests">
+                <%= render "club_requests", club_requests: @club_requests %>
               </div>
             </div>
           <% end %>

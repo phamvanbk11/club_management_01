@@ -823,6 +823,7 @@ en:
     settings: "Settings"
     list_club_joined: "List club joined"
     club_suggest: "Club suggested for you"
+    club_request: "Club request"
   comments:
     press_enter: "Press Enter to update"
     comment: "Comment"
@@ -1648,3 +1649,8 @@ en:
     errors_in_process: "Errors in process"
     not_found_club: "Not found club"
     not_found_user_club: "Not found member"
+  club_request_status:
+    status: "Status"
+    pending: "Pending"
+    joined: "Accepted"
+    reject: "Rejected"

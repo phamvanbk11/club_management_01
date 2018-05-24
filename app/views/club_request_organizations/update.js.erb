@@ -1,6 +1,6 @@
 <% if @request && flash[:success] %>
   $('#modal-club-request').modal('hide');
-  $('#request-<%= @request.id %>').remove();
+  $('#request-<%= @request.id %>').replaceWith('<%= j render partial: "request", locals: {club: @request} %>');
 <% end %>
 $('.container').append('<%= j render "shared/flash_warning" %>');
 $('.notify').delay(4000).slideUp(300);

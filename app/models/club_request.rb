@@ -28,6 +28,7 @@ class ClubRequest < ApplicationRecord
   delegate :full_name, to: :user, allow_nil: :true
 
   scope :order_date_desc, ->{order created_at: :desc}
+  scope :order_status_asc, ->{order status: :asc}
 
   delegate :full_name, to: :user, allow_nil: :true
 

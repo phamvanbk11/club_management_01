@@ -5,14 +5,6 @@
         <div class="block">
           <div class="row club-request-organization">
             <h4 class="col-md-9"><%= t "detail_request" %></h4>
-              <% if @request.pending? || @request.reject? %>
-                <%= url_approve_club_organization(id: @request.id,
-                  status: ClubRequest.statuses[:joined], organization_id: @request.organization.slug,
-                  name: t("active"), button: :breez, confirm: t("answer_active_club")) %>
-                <%= url_approve_club_organization(id: @request.id,
-                  status: ClubRequest.statuses[:reject], organization_id: @request.organization.slug,
-                  name: t("reject"), button: :danger, confirm: t("answer_reject_club")) %>
-              <% end %>
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <%= image_tag request.logo, class: "circle-profile logo-club col-md-12" %>
@@ -101,16 +93,6 @@
                   <%= request.rules %>
                 </span>
               </div><br/>
-              <div class="inline-items">
-                <% if @request.pending? || @request.reject? %>
-                  <%= url_approve_club_organization(id: @request.id,
-                    status: ClubRequest.statuses[:reject], organization_id: @request.organization.slug,
-                    name: t("reject"), button: :danger, confirm: t("answer_reject_club")) %>
-                  <%= url_approve_club_organization(id: @request.id,
-                    status: ClubRequest.statuses[:joined], organization_id: @request.organization.slug,
-                    name: t("active"), button: :breez, confirm: t("answer_active_club")) %>
-                <% end %>
-              </div>
             </div>
           </div>
         </div>
