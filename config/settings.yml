@@ -369,6 +369,7 @@ day_of_week: 7
 second_sleep_retry_task: 1200
 date_report_default: 30
 request_club: "RequestOpenClub"
+update_request_club: "UpdateRequestOpenClub"
 export_full_report_members:
   merge_cell_head: "A1:E2"
   width_colums:

@@ -8,7 +8,7 @@
             <strong><%= t "request" %></strong> <%= t "club" %>
           </h3>
           <div class="hr-center-line-div"></div>
-          <%= form_for [:user, @club_request_support.new_club_request],
+          <%= form_for [:user, @club_request],
             html: {id: "form-contact"} do |f|%>
             <div class="col-md-12 new-organization">
               <label for="contact-name"><%= t "organization_sign" %></label>
@@ -53,7 +53,7 @@
               <% end %>
               <div id="user_club_request">
                 <%= render partial: "add_user", locals: {user_clubs:
-                  @club_request_support.user_organizations, club_request: []} %>
+                  @club_request_support.user_organizations, club_request: @club_request.user_club_requests.pluck(:user_id)} %>
               </div>
             </div>
             <div class = "col-md-12 list-member">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="spacing"></div>
                 <div class="col-md-4">
-                  <%= image_tag "flogo.png", class: "img-wh-150 centered-and-cropped", id: "img-upload" %>
+                  <%= image_tag (@club_request.logo ? @club_request.logo : "flogo.png"), class: "img-wh-150 centered-and-cropped", id: "img-upload" %>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                   <% for day in I18n.t("date.day_names") %>
                     <div class="checkbox time-active">
                       <label>
-                        <%= check_box_tag "club_request[time_activity][]", day %>
+                        <%= check_box_tag "club_request[time_activity][]", day, @club_request.time_activity.include?(day) %>
                         <%= day %>
                       </label>
                     </div>

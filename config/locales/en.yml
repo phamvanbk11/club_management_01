@@ -243,6 +243,7 @@ en:
   request_to_manager: "Request To Manager"
   close: "Close"
   success_create: "Success for Create!"
+  success_update: "Success for Update!"
   error_create: "Error for Create!"
   event_request: "Send Request Create A Event"
   club_request: "Send Request Create A Club"
@@ -1493,6 +1494,7 @@ en:
     success_un_permit: "Unactive permission create. edit reports"
     errors: "Errors inprocess, please try again!"
   requestopenclub: "send request open club"
+  updaterequestopenclub: "updated request open club"
   export_report_members:
     month: "month %{time}"
     quarter: "quarter %{time}"
@@ -1654,3 +1656,4 @@ en:
     pending: "Pending"
     joined: "Accepted"
     reject: "Rejected"
+  club_request_not_found: "Không tìm thấy yêu cầu mở câu lạc bộ!"

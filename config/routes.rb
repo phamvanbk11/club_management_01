@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :club_requests, only: [:new, :create, :index]
+    resources :club_requests, expect: [:show, :destroy]
     resources :organization_requests, only: [:new, :create, :index]
     resources :other_clubs, only: :index
     resources :feed_backs, only: [:new, :create]

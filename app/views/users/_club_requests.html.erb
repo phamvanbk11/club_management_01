@@ -13,6 +13,11 @@
         <%= link_to t("profile_settings.read_more"), "#modal-club-request-#{club.id}", data: {toggle: :modal},
           class: "btn btn-sm bg-blue" %>
       </span>
+      <% if can? :edit, club %>
+        <span class="notification-icon">
+          <%= link_to t("edit"), edit_user_club_request_path(current_user, club), class: "btn btn-sm btn-primary" %>
+        </span>
+      <% end %>
     </li>
     <div id="modal-club-request-<%= club.id %>" class="modal fade" role="dialog" aria-hidden="true">
       <%= render partial: "infor_club", locals: {request: club} %>

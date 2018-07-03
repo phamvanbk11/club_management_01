@@ -227,6 +227,7 @@ jp:
   request_to_manager: "Request To Manager"
   close: "Close"
   success_create: "Success for Create!"
+  success_update: "Success for Update!"
   error_create: "Error for Create!"
   event_request: "Send Request Create A Event"
   club_request: "Send Request Create A Club"
@@ -688,3 +689,4 @@ jp:
   please_select_tags: "Please choose tags for you!"
   login_with_wsm: "Login with WSM's account"
   auth_failure: "Authenticated fail"
+  club_request_not_found: "Không tìm thấy yêu cầu mở câu lạc bộ!"
