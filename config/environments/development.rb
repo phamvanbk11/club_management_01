@@ -7,7 +7,7 @@ Rails.application.configure do
   config.cache_classes = false
   # config.middleware.use I18n::JS::Middleware
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -44,6 +44,7 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  config.public_file_server.enabled = true
   config.action_mailer.default_url_options = {host: "localhost:3000"}
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

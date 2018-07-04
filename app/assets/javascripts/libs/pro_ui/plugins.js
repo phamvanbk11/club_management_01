@@ -22655,7 +22655,7 @@ function(t) {
       options: {
         replaceSrc: function(a) {
           return a.src.replace(/\.\w+$/, function(a) {
-            return "@2x" + a
+            return a
           })
         },
         ratio: 1
@@ -23840,7 +23840,7 @@ Prism.languages.markup && Prism.languages.insertBefore("php", "comment", {
 
   function e(t, e) {
     this.path = t, "undefined" != typeof e && null !== e ? (this.at_2x_path = e, this.perform_check = !1) : (this.at_2x_path = t.replace(/\.\w+$/, function(t) {
-      return "@2x" + t
+      return t
     }), this.perform_check = !0)
   }
 

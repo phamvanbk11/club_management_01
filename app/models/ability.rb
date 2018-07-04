@@ -206,6 +206,10 @@ class Ability
       can :manage, MoneySupport do |money_support|
         money_support.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
       end
+
+      can [:edit, :update], ClubRequest do |club_request|
+        user.id == club_request.user_id && club_request.pending?
+      end
     end
   end
 

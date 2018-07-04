@@ -27,7 +27,7 @@
                 <% user_clubs.each do |user_club| %>
                   <tr class="add-user-member user-<%= user_club.user_id %>">
                     <td class="check-user">
-                      <%= check_box_tag "user_club_request[user_ids][]",user_club.user_id %>
+                      <%= check_box_tag "user_club_request[user_ids][]", user_club.user_id, club_request.include?(user_club.user_id) %>
                     </td>
                     <td>
                       <%= user_club.user_full_name %>

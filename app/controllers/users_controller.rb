@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @clubs = Club.of_user_clubs(@user.user_clubs.joined)
       .page(params[:page]).per Settings.user.club_per_page
     @club_time_lines = current_user.clubs
-    @club_requests = @user.club_requests.page(params[:page]).per Settings.user.club_per_page
+    @club_requests = @user.club_requests.includes(:organization, :frequency).page(params[:page]).per Settings.user.club_per_page
   end
 
   def edit

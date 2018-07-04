@@ -232,6 +232,7 @@ vi:
   close: "Đóng"
   you_have_msg: "Bạn có tin nhắn!"
   success_create: "Bạn đã tạo yêu cầu câu lạc bộ thành công,vui lòng đợi phê duyệt!"
+  success_update: "Cập nhật thành công!"
   error_create: "Lỗi khi tạo!"
   event_request: "Gửi yêu cầu tạo một sự kiện"
   club_request: "Yêu cầu tạo một câu lạc bộ"
@@ -1815,6 +1816,7 @@ vi:
     success_un_permit: "Đã tắt quyền tạo, sửa báo cáo"
     errors: "Đã có lỗi xảy ra, vui lòng thử lại!"
   requestopenclub: "gửi yêu cầu thành lập câu lạc bộ"
+  updaterequestopenclub: "cập nhật yêu cầu thành lập câu lạc bộ"
   export_report_members:
     month: "tháng %{time}"
     quarter: "quý %{time}"
@@ -1976,3 +1978,4 @@ vi:
     pending: "Đang chờ"
     joined: "Đã duyệt"
     reject: "Từ chối"
+  club_request_not_found: "Không tìm thấy yêu cầu mở câu lạc bộ!"

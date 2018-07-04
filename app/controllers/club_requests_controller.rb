@@ -1,5 +1,6 @@
 class ClubRequestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_club_request, only: [:update, :edit]
   protect_from_forgery except: :index
 
   def index
@@ -39,7 +40,33 @@ class ClubRequestsController < ApplicationController
     end
   end
 
+  def edit
+    @club_request_support = Support::ClubRequestSupport.new current_user, params
+    authorize! :edit, @club_request
+  end
+
+  def update
+    authorize! :update, @club_request
+    if @club_request.update request_params
+      save_user_club_request @club_request
+      create_acivity @club_request, Settings.update_request_club,
+        @club_request.organization, current_user, Activity.type_receives[:organization_manager]
+      flash[:success] = t "success_update"
+      redirect_to edit_user_club_request_path(user_id: current_user.id)
+    else
+      flash_error @club_request
+      redirect_back fallback_location: edit_user_club_request_path(user_id: current_user.id)
+    end
+  end
+
   private
+
+  def set_club_request
+    @club_request = ClubRequest.find_by id: params[:id]
+    return if @club_request
+    flash[:error] = t "club_request_not_found"
+    redirect_to root_path
+  end
 
   def request_params
     params.require(:club_request).permit(:name, :logo, :action,
@@ -52,14 +79,15 @@ class ClubRequestsController < ApplicationController
   def save_user_club_request request
     organizations = Organization.find_by id: request_params[:organization_id]
     msg = ""
+    user_add = [];
+    user_remove = [];
     if params[:user_club_request] && params[:user_club_request][:user_ids]
-      params[:user_club_request][:user_ids].each do |user_id|
-        unless user_id && request.user_club_requests.create(user_id: user_id)
-          user = organizations.users.find_by id: user_id
-          msg += "#{user.full_name}, " if user
-        end
+      (params[:user_club_request][:user_ids] - request.user_club_requests.pluck(:user_id)).each do |user_id|
+        user_add << {club_request_id: request.id, user_id: user_id}
       end
-      flash[:warning] = t "add_member_error", msg: msg if msg.present?
+      user_remove = request.user_club_requests.pluck(:user_id) - params[:user_club_request][:user_ids]
+      request.user_club_requests.by_user(user_remove).destroy_all
+      UserClubRequest.import user_add
     end
   end
 end
