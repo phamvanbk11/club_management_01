@@ -23,12 +23,7 @@
       <div class="ui-block-content">
         <div class="w-select">
           <fieldset class="form-group">
-            <%= select_tag :stype_organizations,
-              options_for_select(@organizations.map{|organization|
-                [organization.name, organization.id]}
-              .unshift([t("organization_filter"), nil]),
-               include_blank: true),
-              {class: "select_custom form-control stype-organizations-other-clubs"} %>
+            <%= select_stype_organizations %>
           </fieldset>
         </div>
       </div>
@@ -40,11 +35,7 @@
       <div class="ui-block-content">
         <div class="w-select">
           <fieldset class="form-group">
-            <%= select_tag :stype_clubs, options_for_select(
-              @club_types.map{|u| ["#{u.name}"+" (#{u.organization_name})", u.id]}
-                .unshift([t("style_filter"), nil]),
-              include_blank: true),
-              {class: "select_custom form-control stype-other-clubs"} %>
+            <%= select_stype_club %>
           </fieldset>
         </div>
       </div>
@@ -62,11 +53,15 @@
         <h6 class="title"><%= t "page_my_clubs.oderby_time" %></h6>
       </div>
       <div class="ui-block-content">
-        <%= select_tag :sort_clubs, options_for_select(
-          Settings.sort_clubs.map{|k, v| [t("#{k}"), v]}
-            .unshift([t("sort_clubs"), nil]),
-          include_blank: true),
-          {class: "select_custom form-control sort-other-clubs"} %>
+        <%= select_sort %>
+      </div>
+    </div>
+    <div class="ui-block">
+      <div class="ui-block-title">
+        <h6 class="title"><%= t "page_my_clubs.filters_active" %></h6>
+      </div>
+      <div class="ui-block-content">
+        <%= select_active %>
       </div>
     </div>
   <% end %>

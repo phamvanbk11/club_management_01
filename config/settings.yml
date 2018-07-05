@@ -160,6 +160,7 @@ days:
   satuday: "Satuday"
   sunday: "Sunday"
 sort_clubs: {name_club: "name asc", for_rating: "rating desc", created_at: "created_at desc"}
+filters_active: {active: 1, inactive: 0}
 max_display_image_club: 15
 professed: "professed"
 hide: "hide"
