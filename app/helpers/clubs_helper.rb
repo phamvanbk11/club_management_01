@@ -76,4 +76,36 @@ module ClubsHelper
   def is_manager_organization? club, user
     club.organization.user_organizations.are_admin.pluck(:user_id).include?(user.id)
   end
+
+  def select_active
+    array_option = Settings.filters_active.map{|k, v| [t("page_my_clubs.#{k}"), v]}
+        .unshift([t("page_my_clubs.filters_active_temp"), nil])
+    filter_left_sidebar 'is_active', array_option, "active_clubs"
+  end
+
+  def select_sort
+    array_option = Settings.sort_clubs.map{|k, v| [t("#{k}"), v]}
+      .unshift([t("sort_clubs"), nil])
+    filter_left_sidebar 'sort_clubs', array_option, "sort-other-clubs"
+  end
+
+  def select_stype_club
+    array_option = @club_types.map{|u|
+      ["#{u.name}"+" (#{u.organization_name})", u.id]}
+      .unshift([t("style_filter"), nil])
+    filter_left_sidebar 'stype_clubs', array_option, "stype-other-clubs"
+  end
+
+  def select_stype_organizations
+    array_option = @organizations.map{|organization|
+      [organization.name, organization.id]}
+      .unshift([t("organization_filter"), nil])
+    filter_left_sidebar 'stype_organizations', array_option, "stype-organizations-other-clubs"
+  end
+
+  def filter_left_sidebar tag, options, className
+    select_tag tag,
+      options_for_select(options, include_blank: true),
+      {class: "select_custom form-control #{className}"}
+  end
 end

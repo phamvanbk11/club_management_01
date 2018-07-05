@@ -18,6 +18,10 @@ jQuery(document).ready(function($) {
   $('.sort-other-clubs').on('change',function(e) {
     SearchOtherClub();
   });
+
+  $('.active_clubs').on('change',function(e) {
+    SearchOtherClub();
+  });
 });
 
 function SearchOtherClub() {
@@ -25,6 +29,7 @@ function SearchOtherClub() {
   var sort_params = LoadSortParam(sort_club);
   var search = $('.form-search-other-clubs').val();
   var stype_clubs = $('.stype-other-clubs').val();
+  var active_clubs = $('.active_clubs').val();
   var rate_value = $( ".range-slider-demo" ).val();
   var rate = rate_value.split(",");
   var rate_gteq = rate[0];
@@ -32,7 +37,7 @@ function SearchOtherClub() {
   var stype_organizations = $('.stype-organizations-other-clubs').val();
   var data = {q: {s: [sort_params, sort_club], name_or_content_cont: search,
     club_type_id_eq: stype_clubs,organization_id_eq: stype_organizations,
-    rating_gteq: rate_gteq, rating_lteq: rate_lteq}}
+    rating_gteq: rate_gteq, rating_lteq: rate_lteq, is_active_eq: active_clubs}}
   $.get('/clubs', data , null, 'script');
   return false;
 }

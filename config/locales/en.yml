@@ -811,6 +811,10 @@ en:
     filters_rating: "Filters by rating"
     oderby_asc: "Oder by Asc"
     oderby_time: "Arrangement view"
+    filters_active: "Active status"
+    active: "Active"
+    inactive: "Inactive"
+    filters_active_temp: "Status view"
   profile_settings:
     title: "Your Account Dashboard"
     description: "Welcome to your account dashboard! Here you’ll find everything you need to change your profile information, settings, read notifications and requests, view your latest messages, change your pasword and much more! Also you can create or manage your own favourite page, have fun!"

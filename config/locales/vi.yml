@@ -1116,6 +1116,10 @@ vi:
     filters_rating: "Lọc theo đánh giá"
     oderby_asc: "Sắp xếp tăng dần"
     oderby_time: "Tùy chọn sắp xếp"
+    filters_active: "Trạng thái hoạt động"
+    active: "Đang hoạt động"
+    inactive: "Tạm ngừng hoạt động"
+    filters_active_temp: "Tùy chọn trạng thái"
   profile_settings:
     title: "Quản lý tài khoản của bạn"
     description: "Chào mừng bạn đến với trang tổng quan tài khoản của bạn! Ở đây bạn sẽ thấy mọi thứ bạn cần để thay đổi thông tin hồ sơ, cài đặt, đọc thông báo và yêu cầu, xem tin nhắn mới nhất, thay đổi mật khẩu và nhiều hơn nữa!"
