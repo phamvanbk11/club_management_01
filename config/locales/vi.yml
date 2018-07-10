@@ -1691,12 +1691,17 @@ vi:
       no_evaluate: "Chưa có đánh giá nào"
       created_at: "Ngày đánh giá"
       create_evaluate: "Tạo đánh giá"
+      quick_evaluate: "Tạo đánh giá nhanh"
+      quick_new_message: "Tạo đánh giá nhanh từ đánh giá tháng %{month}/%{year}"
       owner: "Người đánh giá"
       money_support: "Tiền hỗ trợ"
     form_new:
       new_evaluate: "Đánh giá hoạt động"
       submit: "Tạo đánh giá"
       update: "Cập nhật"
+    form_quick_new:
+      new_evaluate: "Đánh giá hoạt động"
+      submit: "Tạo đánh giá"
     rule_fields:
       mark: "Điểm"
       note: "Ghi chú"

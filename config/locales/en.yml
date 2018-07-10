@@ -1372,12 +1372,17 @@ en:
       no_evaluate: "No evaluate"
       created_at: "Date evaluate"
       create_evaluate: "Create evaluate"
+      quick_evaluate: "Quick create evaluate"
+      quick_new_message: "Quick create evaluate from evaluate %{month}/%{year}"
       owner: "Owner"
       money_support: "Money support"
     form_new:
       new_evaluate: "Evaluate"
       submit: "Create"
       update: "Update"
+    form_quick_new:
+      new_evaluate: "Đánh giá hoạt động"
+      submit: "Tạo đánh giá"
     rule_fields:
       mark: "Point"
       note: "Note"

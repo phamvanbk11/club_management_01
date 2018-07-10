@@ -1,0 +1,8 @@
+<% if @evaluate %>
+  $('#detail-evaluate').html('');
+  $('#new-evaluate').html('<%= j render "form_quick_new" %>')
+  $('#new-evaluate').modal('show');
+<% else %>
+  $('.container').append('<%= j render partial: "shared/flash_warning" %>');
+  $('.notify').slideUp(3000);
+<% end %>

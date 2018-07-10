@@ -3,6 +3,13 @@
     <h6 class="title"><%= t ".list_evaluates", name: @club.name %></h6>
     <div class="pull-right funtion-request">
       <% if can? :create, @club.evaluates.build %>
+        <%= link_to quick_new_club_evaluates_path(club_id: @club.slug), remote: true,
+          class: "btn btn-breez btn-sm" do %>
+          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          <%= t ".quick_evaluate" %>
+        <% end %>
+      <% end %>
+      <% if can? :create, @club.evaluates.build %>
         <%= link_to new_club_evaluate_path(club_id: @club.slug), remote: true,
           class: "btn btn-breez btn-sm" do %>
           <i class="fa fa-check-square-o" aria-hidden="true"></i>

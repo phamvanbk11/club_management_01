@@ -3,12 +3,19 @@ class EvaluatesController < ApplicationController
   before_action :load_club
   before_action :load_evaluate, except: [:new, :index, :create]
   before_action :all_evaluates, only: :index
-  before_action :load_rules, only: [:new, :edit]
+  before_action :load_rules, only: [:new, :edit, :quick_new]
   authorize_resource
 
   def new
     if @club
       @evaluate = @club.evaluates.build
+    end
+  end
+
+  def quick_new
+    if @club
+      @evaluate = @club.evaluates.order_year_desc.order_month_desc.first
+      @quick = true if @evaluate
     end
   end
 
