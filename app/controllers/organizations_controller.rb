@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
     @user_organization = current_user.user_organizations
       .find_by organization_id: @organization.id
     @q = @organization.clubs.search(params[:q])
-    @clubs = @q.result.page(params[:page]).per Settings.club_per_page
+    @clubs = @q.result.order_active.page(params[:page]).per Settings.club_per_page
     @add_user_club = User.without_user_ids(@organization.user_organizations.pluck :user_id)
     @organization_event = @organization.events.includes(:club).status_public(true)
       .newest.page(params[:page]).per Settings.club_per_page
