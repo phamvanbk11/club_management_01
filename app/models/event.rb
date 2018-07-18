@@ -37,6 +37,8 @@ class Event < ApplicationRecord
   scope :top_like, ->{order num_like: :desc}
   scope :of_month_payment, ->month_payment{where month_of_payment: month_payment}
   scope :newest, ->{order created_at: :desc}
+  scope :date_start_order_desc, -> {order date_start: :desc}
+  scope :date_start_order_asc, -> {order date_start: :asc}
   scope :periodic, ->{where event_category: Settings.periodic_category}
   scope :by_current_year, ->{where "year(date_end) = ?", Time.zone.now.year}
   scope :by_quarter, ->months{where("month(date_end) in (?)", months)}

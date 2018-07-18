@@ -190,10 +190,11 @@ class ClubsController < ApplicationController
 
   def load_event_tab_activity
     if is_in_club? @club, current_user
-      @events_activity = @club.events.includes(:user).newest.in_categories(Event.money_event_keys)
+      @events_activity = @club.events.includes(:user).date_start_order_desc
+        .in_categories(Event.money_event_keys)
         .page(params[:page]).per Settings.per_page
     else
-      @events_activity = @club.events.includes(:user).event_public.newest
+      @events_activity = @club.events.includes(:user).event_public.date_start_order_desc
         .in_categories(Event.money_event_keys)
         .page(params[:page]).per Settings.per_page
     end
