@@ -39,11 +39,11 @@ class LoadEventsService
 
   def get_hash_events_by_event_category_report_month id, event_category_ids, time_range, category
     if category.money?
-      {id => @club.events.by_event(event_category_ids).where(date_end: time_range)
+      {id => @club.events.by_event(event_category_ids).where(date_end: time_range).date_start_order_asc
         .event_category_activity_money(Event.array_style_event_money_except_activity,
         Event.event_categories[:activity_money]), category: category}
     else
-      {id => @club.events.by_event(event_category_ids).where(date_end: time_range)}
+      {id => @club.events.by_event(event_category_ids).where(date_end: time_range).date_start_order_asc}
     end
   end
 end

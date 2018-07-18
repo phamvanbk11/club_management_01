@@ -14,7 +14,7 @@
       <% events.each do |event| %>
         <tr>
           <% if events.first.date_end %>
-            <td><%= l event.date_end, format: :short %></td>
+            <td><%= l event.date_start, format: :short %></td>
           <% else %>
             <td><%= l event.created_at, format: :short %></td>
           <% end %>
